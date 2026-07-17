@@ -420,6 +420,91 @@ COORD_MIEMBRO = {
 "p5_etnia_palenquero": (211, 144),
 "p5_etnia_ninguna": (390, 144),
 
+
+# -------------------------------------------------------------
+# PÁGINA 6: SITUACIÓN DE SALUD, ACCESO A SERVICIOS Y CUIDADO
+# -------------------------------------------------------------
+"p6_anc_proteger": (64, 693),
+"p6_anc_transicion": (64, 680),
+"p6_anc_tradicionales": (64, 665),
+"p6_anc_armonizacion": (64, 649),
+"p6_anc_partera": (64, 634),
+"p6_anc_cuidado_entorno": (64, 620),
+"p6_anc_ninguna": (329, 620),
+"p6_disc_fisica": (260, 603),
+"p6_disc_auditiva": (315, 603),
+"p6_disc_visual": (381, 603),
+"p6_disc_sordoceguera": (439, 603),
+"p6_disc_intelectual": (64, 589),
+"p6_disc_psicosocial": (150, 589),
+"p6_disc_multiple": (257, 589),
+"p6_disc_ninguna": (322, 589),
+"p6_cert_disc_si": (330, 571),
+"p6_cert_disc_no": (426, 571),
+"p6_cert_disc_no_aplica": (499, 572),
+"p6_intencion_reproductiva_si": (225, 554),
+"p6_intencion_reproductiva_no": (271, 554),
+"p6_gestacion_si": (486, 554),
+"p6_gestacion_no": (538, 554),
+"p6_rut_alimentos": (64, 522),
+"p6_rut_actividad": (339, 522),
+"p6_rut_higiene": (64, 509),
+"p6_rut_lavado": (64, 493),
+"p6_rut_duerme": (64, 471),
+"p6_rut_control": (64, 456),
+"p6_rut_ocio": (64, 442),
+"p6_rut_cultural": (64, 427),
+"p6_rut_ninguna": (502, 427),
+"p6_maint_pymes": (64, 395),
+"p6_maint_bucal": (228, 395),
+"p6_maint_lactancia": (64, 382),
+"p6_maint_fluor": (242, 381),
+"p6_maint_profilaxis": (344, 381),
+"p6_maint_vacunas": (64, 367),
+"p6_maint_fortificacion": (241, 367),
+"p6_maint_suplementos": (64, 351),
+"p6_maint_desparasitacion": (232, 353),
+"p6_maint_anemia": (64, 338),
+"p6_maint_asesoria": (323, 338),
+"p6_maint_sum_anticonceptivos": (64, 323),
+"p6_maint_cardiovascular": (410, 323),
+"p6_maint_treponemica": (64, 309),
+"p6_maint_vih": (197, 309),
+"p6_maint_hepatitis": (64, 294),
+"p6_maint_embarazo_prueba": (64, 279),
+"p6_maint_cuello_uterino": (64, 265),
+"p6_maint_colposcopia": (334, 265),
+"p6_maint_mama": (64, 251),
+"p6_maint_prostata": (210, 251),
+"p6_maint_colon": (366, 251),
+"p6_maint_educacion": (63, 237),
+"p6_maint_ninguna": (196, 237),
+"p6_mat_preconcepcional": (64, 205),
+"p6_mat_ive": (340, 204),
+"p6_mat_prenatal": (64, 191),
+"p6_mat_preparacion": (340, 191),
+"p6_mat_puerperio": (64, 176),
+"p6_mat_metodo_post_parto": (202, 176),
+"p6_mat_recien_nacido": (64, 161),
+"p6_mat_educacion": (284, 161),
+"p6_mat_ninguna": (426, 161),
+"p6_mot_no_afiliado": (62, 127),
+"p6_mot_desconocimiento_derecho": (136, 127),
+"p6_mot_desconocimiento_gratuito": (352, 127),
+"p6_mot_lejos": (63, 115),
+"p6_mot_no_personal": (288, 113),
+"p6_mot_tramites": (63, 99),
+"p6_mot_no_agenda": (247, 99),
+"p6_mot_no_sabe": (414, 99),
+"p6_mot_horario": (63, 86),
+"p6_mot_tiempos": (218, 85),
+"p6_mot_no_comodo": (346, 85),
+"p6_mot_enfermo": (63, 72),
+"p6_mot_falta_tiempo": (274, 71),
+"p6_mot_falta_adecuacion": (64, 57),
+"p6_mot_ninguna": (262, 57),
+
+
 }
 
 app = Flask(__name__)
@@ -692,17 +777,38 @@ def generar_overlay_miembro(idx, form, width, height):
     can.showPage() 
     can.setFont("Helvetica-Bold", 9)
 
-    # Intención Reproductiva
-    rep = form.get(f"m_{idx}_p6_intencion_reproductiva")
-    key_rep = f"p6_intencion_reproductiva_{str(rep).lower()}"
-    if key_rep in COORD_MIEMBRO: can.drawString(*COORD_MIEMBRO[key_rep], "X")
+    # 1. Procesar Selección Única (Desplegables / Radios de Página 6)
+    radio_mappings_p6 = {
+        "p6_cert_disc": "p6_cert_disc",
+        "p6_intencion_reproductiva": "p6_intencion_reproductiva",
+        "p6_gestacion": "p6_gestacion"
+    }
+    for key_html, coord_prefix in radio_mappings_p6.items():
+        val = form.get(f"m_{idx}_{key_html}")
+        if val:
+            key_coord = f"{coord_prefix}_{str(val).lower()}"
+            if key_coord in COORD_MIEMBRO:
+                can.drawString(*COORD_MIEMBRO[key_coord], "X")
 
-    # --- CAMBIO AQUÍ: Extraemos las discapacidades usando el helper seguro ---
-    discapacidades = obtener_lista_segura(form, f"m_{idx}_p6_discapacidad[]")
-    for disc in discapacidades:
-        key_disc = f"p6_disc_{disc.lower()}" # Ajustado al nombre del diccionario COORD_MIEMBRO
-        if key_disc in COORD_MIEMBRO: 
-            can.drawString(*COORD_MIEMBRO[key_disc], "X")
+    # 2. Procesar Checkboxes Grupales (Listas múltiples de Página 6)
+    # Asocia el nombre del array del HTML con el prefijo en tu diccionario COORD_MIEMBRO
+    checkbox_groups_p6 = {
+        "p6_ancestrales[]": "p6_anc",
+        "p6_discapacidad[]": "p6_disc",
+        "p6_rutinarias[]": "p6_rut",
+        "p6_maint[]": "p6_maint",
+        "p6_materno[]": "p6_mat",
+        "p6_motivos[]": "p6_mot"
+    }
+    
+    for key_html, coord_prefix in checkbox_groups_p6.items():
+        # Usamos el helper seguro para extraer la lista sin provocar errores de tipo 'dict'
+        seleccionados = obtener_lista_segura(form, f"m_{idx}_{key_html}")
+        for item in seleccionados:
+            key_coord = f"{coord_prefix}_{str(item).lower()}"
+            if key_coord in COORD_MIEMBRO:
+                can.drawString(*COORD_MIEMBRO[key_coord], "X")
+
 
     # ---------------------------------------------
     # PÁGINA 7 (Familiar pág 3)

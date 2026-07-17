@@ -873,30 +873,160 @@
 </details>
 
             <!-- ACORDEÓN: PÁGINA 6 (SITUACIÓN DE SALUD Y ATENCIONES) -->
-            <details class="group border rounded-md mb-3">
-                <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
-                    <span>Página 6: Prácticas de Cuidado y Atenciones Pendientes (Campos 81 - 89)</span>
-                    <span class="transition group-open:rotate-180">▼</span>
-                </summary>
-                <div class="p-4 bg-white space-y-4 text-xs">
-                    <div>
-                        <label class="block font-bold text-gray-500 mb-2">82. ¿Se reconoce como persona con discapacidad?</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <label><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="Fisica"> Física</label>
-                            <label><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="Auditiva"> Auditiva</label>
-                            <label><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="Visual"> Visual</label>
-                            <label><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="Sin_discapacidad"> Sin discapacidad</label>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block font-bold text-gray-500 mb-2">84. Intención reproductiva a corto plazo</label>
-                        <div class="flex gap-4">
-                            <label><input type="radio" name="m___IDX___p6_intencion_reproductiva" value="Si"> Sí</label>
-                            <label><input type="radio" name="m___IDX___p6_intencion_reproductiva" value="No"> No</label>
-                        </div>
-                    </div>
+            <!-- ACORDEÓN COMPACTO: PÁGINA 6 (SITUACIÓN DE SALUD Y ATENCIONES) -->
+<details class="group border rounded-md mb-3">
+    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+        <span>Página 6: Prácticas de Cuidado y Atenciones Pendientes (Campos 81 - 89)</span>
+        <span class="transition group-open:rotate-180">▼</span>
+    </summary>
+    <div class="p-4 bg-white space-y-5 text-xs">
+        
+        <!-- Campo 81 (Saberes Ancestrales) -->
+        <div>
+            <label class="block font-bold text-gray-700 mb-2">81. Prácticas de cuidado de la salud desde sus saberes ancestrales / tradicionales:</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="proteger"> Prácticas para proteger ante posibles daños (aseguranzas, rituales)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="transicion"> Prácticas en momentos de transición (arrullos, cantos, ritos de paso)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="tradicionales"> Prácticas tradicionales (baile, danza, música, plantas, masajes)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="armonizacion"> Prácticas de armonización o bienestar (consejería de sabedor/a)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="partera"> Acompañamiento de partera, sabedor o médico tradicional</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="cuidado_entorno"> Prácticas de cuidado con el entorno, alimentos u otros</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 82 y 83 (Discapacidad) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-3">
+            <div class="md:col-span-2">
+                <label class="block font-bold text-gray-700 mb-2">82. ¿Se reconoce como persona con discapacidad?</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[11px]">
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="fisica"> Física</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="auditiva"> Auditiva</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="visual"> Visual</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="sordoceguera"> Sordoceguera</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="intelectual"> Intelectual</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="psicosocial"> Psicosocial</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="multiple"> Múltiple</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="ninguna"> Sin discapacidad</label>
                 </div>
-            </details>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">83. Registro de discapacidad (RLCPD)</label>
+                <select name="m___IDX___p6_cert_disc" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                    <option value="No_aplica">No aplica</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo 84 y 85 (Planificación y Gestación) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">84. Intención reproductiva a corto plazo</label>
+                <select name="m___IDX___p6_intencion_reproductiva" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">85. Gestación actual confirmada</label>
+                <select name="m___IDX___p6_gestacion" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo 86 (Prácticas Rutinarias) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">86. ¿Realiza rutinariamente las siguientes prácticas de cuidado?</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="alimentos"> Consume alimentos en cantidad y calidad suficiente</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="actividad"> Realiza actividad física, ejercicio o deporte</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="higiene"> Higiene oral diaria (mínimo 2 veces al día)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="lavado"> Lavado de manos antes de comer / después de ir al baño</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="duerme"> Duerme suficiente para tener energía (6 a 8 horas diarias)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="control"> Controla tiempo en pantallas/televisión (menos de 2 horas)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="ocio"> Realiza actividades recreativas o de ocio</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="cultural"> Participa en actividades culturales o comunitarias</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 87 (Atenciones Pendientes Promoción) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">87. Atenciones pendientes de promoción y mantenimiento (Marcar pendientes):</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 text-[10px] max-h-52 overflow-y-auto p-2 border rounded bg-slate-50">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="pymes"> Valoración Integral para la PYMS</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="bucal"> Valoración integral en salud bucal</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="lactancia"> Promoción y apoyo a lactancia materna</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="fluor"> Aplicación de flúor</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="profilaxis"> Profilaxis y remoción de placa bacteriana</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="vacunas"> Vacunación de acuerdo con el esquema</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="fortificacion"> Fortificación casera con micronutrientes en polvo</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="suplementos"> Suplementación con micronutrientes</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="desparasitacion"> Desparasitación intestinal antihelmíntica</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="anemia"> Tamizaje para anemia (Hemoglobina y Hematocrito)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="asesoria"> Asesoría en anticoncepción (Planificación)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="sum_anticonceptivos"> Suministro de anticonceptivos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="cardiovascular"> Tamizaje de riesgo cardiovascular</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="treponemica"> Prueba rápida treponémica</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="vih"> Prueba rápida y asesoría pre y postest VIH</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="hepatitis"> Prueba rápida para Hepatitis B y C</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="embarazo_prueba"> Prueba de embarazo por retraso o síntomas</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="cuello_uterino"> Tamizaje para cáncer de cuello uterino</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="colposcopia"> Colposcopia y biopsia cérvico uterina</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="mama"> Tamizaje para cáncer de mama</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="prostata"> Tamizaje para cáncer de próstata</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="colon"> Tamizaje para cáncer de colon y recto</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="educacion"> Educación para la salud</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 88 (Ruta Materno Perinatal) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">88. Atenciones pendientes de la ruta materno perinatal:</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[10px]">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="preconcepcional"> Atención para el cuidado preconcepcional</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="ive"> Interrupción Voluntaria del Embarazo -IVE-</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="prenatal"> Atención para el cuidado prenatal (Controles)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="preparacion"> Preparación para la maternidad y paternidad</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="puerperio"> Atención del puerperio</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="metodo_post_parto"> Provisión de método anticonceptivo post-parto</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="recien_nacido"> Atención para el seguimiento del recién nacido</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="educacion"> Educación para la salud</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 89 (Motivo No Atención) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">89. Motivo por el cual no ha recibido las atenciones de salud:</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 text-[10px] max-h-40 overflow-y-auto p-2 border rounded bg-slate-50">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="no_afiliado"> No afiliado</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="desconocimiento_derecho"> Desconocimiento del derecho a las intervenciones</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="desconocimiento_gratuito"> Desconocimiento que las intervenciones son gratuitas</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="lejos"> El servicio de salud está lejos del lugar de residencia</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="no_personal"> No hay personal de salud en el centro cercano</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="tramites"> Dificultades con trámites administrativos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="no_agenda"> "No hay agenda" para esta atención</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="no_sabe"> No sabe cómo solicitar la cita</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="horario"> Horarios de atención restringidos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="tiempos"> Largos tiempos de espera</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="no_comodo"> No se siente cómodo/a con el personal de salud</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="enfermo"> Persona enferma que no puede acudir al servicio</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="falta_tiempo"> Falta de tiempo del cuidador</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="falta_adecuacion"> Falta de adecuación sociocultural del servicio</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+    </div>
+</details>
 
             <!-- ACORDEÓN: PÁGINA 7 (VALORACIÓN FÍSICA E INFECCIOSAS) -->
             <details class="group border rounded-md mb-3">
