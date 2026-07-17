@@ -107,20 +107,218 @@
             </div>
 
             <!-- SECCIÓN 2: INTEGRANTES DINÁMICOS -->
-            <div id="tab1" class="tab-content">
-                <div class="flex justify-between mb-4">
-                    <h3 class="font-bold text-lg">Integrantes de la Familia</h3>
-                    <button type="button" onclick="addMember()" class="bg-blue-600 text-white px-3 py-1 rounded text-sm">+ Agregar</button>
-                </div>
+            
+                <!-- PESTAÑA 2: PERSONAL Y VIVIENDA -->
+            <div id="tab1" class="tab-content space-y-6">
                 
-                <div id="membersContainer">
-                    <!-- Aquí se insertan los familiares -->
+                <!-- 2.4 DETALLE PERSONAL -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">2.4 Detalle de personal del Equipo de Salud</h3>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">12. Tipo de identificación del responsable</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                            <label class="flex items-center gap-2"><input type="radio" name="p2_id_tipo" value="CC"> CC. Cédula Ciudadanía</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="p2_id_tipo" value="CD"> CD. Carné Diplomático</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="p2_id_tipo" value="CE"> CE. Cédula Extranjería</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="p2_id_tipo" value="PT"> PT. Permiso Protección</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">13. Número de identificación del responsable</label>
+                            <input type="text" name="p2_id_numero" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">14. Perfil profesional</label>
+                            <input type="text" name="p2_perfil_profesional" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">15. Código de la ficha</label>
+                            <input type="text" name="p2_codigo_ficha" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">16. Fecha diligenciamiento</label>
+                            <input type="date" name="p2_fecha_ficha" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2.4.1 DATOS DE ABORDAJE -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">2.4.1 Datos de abordaje</h3>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">17. Entorno donde se realiza la identificación</label>
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
+                            <label><input type="radio" name="p2_entorno" value="Hogar"> Hogar</label>
+                            <label><input type="radio" name="p2_entorno" value="Comunitario"> Comunitario</label>
+                            <label><input type="radio" name="p2_entorno" value="Institucional"> Institucional</label>
+                            <label><input type="radio" name="p2_entorno" value="Educativo"> Educativo</label>
+                            <label><input type="radio" name="p2_entorno" value="Laboral"> Laboral</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-500">18. Nombre de la institución, entidad, organización, etc.</label>
+                        <input type="text" name="p2_nombre_institucion" class="w-full border p-2 rounded">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-500">19. Cabeza de familia / Líder / Representante legal</label>
+                        <input type="text" name="p2_cabeza_familia" class="w-full border p-2 rounded">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2">20. ¿Pertenece al Programa Jóvenes en Paz?</label>
+                        <div class="flex gap-4 text-sm">
+                            <label><input type="radio" name="p2_jovenes_paz" value="Si"> Sí</label>
+                            <label><input type="radio" name="p2_jovenes_paz" value="No"> No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2.5 DATOS DE LA VIVIENDA -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">2.5 Datos generales de la vivienda</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="md:col-span-3">
+                            <label class="block text-xs font-bold text-gray-500">21. Dirección</label>
+                            <input type="text" name="p2_direccion" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">22. Latitud</label>
+                            <input type="text" name="p2_latitud" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">23. Longitud</label>
+                            <input type="text" name="p2_longitud" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">24. Punto de referencia</label>
+                            <input type="text" name="p2_punto_referencia" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">25. N.° de Identificación del hogar</label>
+                            <input type="text" name="p2_id_hogar" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">26. N.° de Identificación de la familia</label>
+                            <input type="text" name="p2_id_familia" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">27. Estrato socioeconómico de la vivienda</label>
+                        <div class="grid grid-cols-3 md:grid-cols-6 gap-2 text-sm">
+                            <label><input type="radio" name="p2_estrato" value="Bajo-Bajo"> Bajo-Bajo</label>
+                            <label><input type="radio" name="p2_estrato" value="Bajo"> Bajo</label>
+                            <label><input type="radio" name="p2_estrato" value="Medio-Bajo"> Medio-Bajo</label>
+                            <label><input type="radio" name="p2_estrato" value="Medio"> Medio</label>
+                            <label><input type="radio" name="p2_estrato" value="Medio-Alto"> Medio-Alto</label>
+                            <label><input type="radio" name="p2_estrato" value="Alto"> Alto</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">28. N.° de hogares</label>
+                            <input type="number" name="p2_num_hogares" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">29. N.° de personas</label>
+                            <input type="number" name="p2_num_personas" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">30. N.° de habitaciones</label>
+                            <input type="number" name="p2_num_habitaciones" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">32. Personas x habitación</label>
+                            <input type="number" name="p2_personas_habitacion" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">31. Elementos para dormir (camas, hamacas...)</label>
+                            <input type="number" name="p2_elementos_dormir" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-2">33. Hacinamiento</label>
+                            <div class="flex gap-4 text-sm mt-2">
+                                <label><input type="radio" name="p2_hacinamiento" value="Si"> Sí</label>
+                                <label><input type="radio" name="p2_hacinamiento" value="No"> No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3.1 CARACTERÍSTICAS Y CONDICIONES -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">3.1 Características del entorno y vivienda</h3>
+                    
+                    <!-- Campo 34 (Tipo de vivienda) -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">34. Tipo de vivienda</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Casa"> Casa</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Apartamento"> Apartamento</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Cuarto"> Tipo "Cuarto"</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Tradicional_Indigena"> Tradicional Indígena</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Carpa"> Carpa</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Tradicional_Etnica"> Tradicional Étnica</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Contenedor"> Contenedor</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Embarcacion"> Embarcación</label>
+                        </div>
+                    </div>
+
+                    <!-- Campo 35 (Material de cubierta) -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">35. Material predominante de la cubierta o techo</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                            <label><input type="radio" name="p2_techo" value="Concreto"> Concreto</label>
+                            <label><input type="radio" name="p2_techo" value="Tejas_barro"> Tejas de barro</label>
+                            <label><input type="radio" name="p2_techo" value="Fibrocemento_sin_asbesto"> Fibrocemento sin asbesto</label>
+                            <label><input type="radio" name="p2_techo" value="Zinc"> Zinc</label>
+                            <label><input type="radio" name="p2_techo" value="Plastico"> Plástico</label>
+                            <label><input type="radio" name="p2_techo" value="Fibrocemento_con_asbesto"> Fibrocemento con asbesto</label>
+                            <label><input type="radio" name="p2_techo" value="Palma"> Palma o paja</label>
+                            <label><input type="radio" name="p2_techo" value="Desechos"> Desechos</label>
+                        </div>
+                    </div>
+
+                    <!-- Campo 36 (Escenarios de riesgo) -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-3">36. ¿Se identifica algunos de los siguientes escenarios de riesgo de accidente?</label>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Cortantes"> Objetos cortantes o punzantes al alcance de los niños</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Quimicos"> Sustancias químicas al alcance de los niños o envasadas incorrectamente</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Medicamentos"> Medicamentos al alcance de los niños</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Velas"> Velas, velones o incienso encendidos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Electricas"> Conexiones eléctricas en mal estado o sobrecargadas</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Botones"> Botones, canicas u objetos pequeños al alcance de los niños</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Pasillos"> Pasillos obstruidos con juguetes u otros objetos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Superficies"> Superficies resbaladizas, suelos con agua, grasa, aceites, etc.</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Tanques"> Tanques o recipientes de almacenamiento de agua sin tapa</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Escaleras"> Escaleras sin protección</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Ninguno"> Ninguno</label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="mt-8 pt-4 border-t flex justify-end">
                 <button type="submit" class="bg-teal-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-teal-700 transition">
-                    Generar PDF Oficial
+                    Generar PDF
                 </button>
             </div>
         </form>

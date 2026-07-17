@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calibrador APS de Precisión Vectorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cargamos PDF.js desde CDN oficial -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <style>
+        #canvas-container { position: relative; cursor: crosshair; overflow: auto; background: #334155; height: 80vh; }
+        canvas { display: block; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body class="bg-slate-900 text-white p-6">
+
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-2xl font-bold mb-4 text-teal-400">Calibrador de Precisión APS (Carga Directa de PDF)</h1>
+        
+        <div class="grid grid-cols-4 gap-6">
+            <!-- PANEL LATERAL -->
+            <div class="col-span-1 bg-slate-800 p-4 rounded-lg shadow-lg flex flex-col justify-between h-[80vh]">
+                <div>
+                    <label class="block mb-2 font-bold text-sm text-slate-300">1. Selecciona el PDF original:</label>
+                    <input type="file" id="pdfFile" accept=".pdf" class="block w-full text-xs mb-4 file:mr-4 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-teal-600 file:text-white hover:file:bg-teal-700">
+                    
+                    <!-- Controles de navegación de página -->
+                    <div class="flex items-center justify-between mb-4 bg-slate-700 p-2 rounded">
+                        <button id="prevPage" class="bg-slate-600 hover:bg-slate-500 text-xs px-3 py-1 rounded font-bold">◄ Ant</button>
+                        <span class="text-xs">Pág: <span id="pageNum" class="font-bold text-teal-300">0</span> / <span id="pageCount">0</span></span>
+                        <button id="nextPage" class="bg-slate-600 hover:bg-slate-500 text-xs px-3 py-1 rounded font-bold">Sig ►</button>
+                    </div>
+
+                    <!-- Escala / Zoom de visualización -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-slate-400 mb-1">Zoom de visualización:</label>
+                        <select id="scaleSelect" class="w-full bg-slate-700 p-1 rounded text-xs">
+                            <option value="1.0">100%</option>
+                            <option value="1.5" selected>150% (Recomendado)</option>
+                            <option value="2.0">200%</option>
+                        </select>
+                    </div>
+
+                    <label class="block mb-1 font-bold text-sm text-slate-300">2. Nombre del campo:</label>
+                    <input type="text" id="fieldName" placeholder="ej: p2_direccion" class="w-full p-2 rounded bg-slate-700 mb-2 text-sm outline-none border border-teal-600">
+                    <p class="text-[10px] text-slate-400 mb-4">Presiona Enter tras nombrar y haz clic.</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-orange-400 text-sm mb-1">Código Python Generado:</h3>
+                    <textarea id="output" class="w-full h-44 bg-black text-green-400 p-2 text-xs font-mono rounded" readonly></textarea>
+                    <button onclick="copyToClipboard()" class="w-full mt-2 bg-teal-600 hover:bg-teal-700 p-2 rounded font-bold uppercase text-xs transition">Copiar Diccionario</button>
+                </div>
+            </div>
+
+            <!-- CONTENEDOR DEL PDF -->
+            <div class="col-span-3">
+                <p class="text-xs mb-2 text-slate-400 italic">Haz clic exactamente donde deba iniciar el texto. La conversión matemática a coordenadas de ReportLab se calcula al instante.</p>
+                <div id="canvas-container" class="rounded-lg border border-slate-700">
+                    <canvas id="pdfCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de PDF.js
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        let pdfDoc = null;
+        let pageNum = 1;
+        let scale = 1.5; // Escala de renderizado en pantalla
+        const canvas = document.getElementById('pdfCanvas');
+        const ctx = canvas.getContext('2d');
+        const output = document.getElementById('output');
+        const fieldInput = document.getElementById('fieldName');
+
+        // Cargar el documento PDF seleccionado
+        document.getElementById('pdfFile').onchange = function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const fileReader = new FileReader();
+            fileReader.onload = function() {
+                const typedarray = new Uint8Array(this.result);
+                pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
+                    pdfDoc = pdf;
+                    document.getElementById('pageCount').textContent = pdf.numPages;
+                    pageNum = 1;
+                    renderPage(pageNum);
+                });
+            };
+            fileReader.readAsArrayBuffer(file);
+        };
+
+        // Renderizar la página en el canvas
+        function renderPage(num) {
+            if (!pdfDoc) return;
+            document.getElementById('pageNum').textContent = num;
+
+            pdfDoc.getPage(num).then(function(page) {
+                const viewport = page.getViewport({ scale: scale });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        }
+
+        // Navegación
+        document.getElementById('prevPage').onclick = function() {
+            if (pageNum <= 1) return;
+            pageNum--;
+            renderPage(pageNum);
+        };
+
+        document.getElementById('nextPage').onclick = function() {
+            if (pageNum >= pdfDoc.numPages) return;
+            pageNum++;
+            renderPage(pageNum);
+        };
+
+        document.getElementById('scaleSelect').onchange = function(e) {
+            scale = parseFloat(e.target.value);
+            renderPage(pageNum);
+        };
+
+        // Capturar clics y realizar la conversión de coordenadas
+        canvas.addEventListener('mousedown', function(e) {
+            if (!pdfDoc) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const x_canvas = e.clientX - rect.left;
+            const y_canvas = e.clientY - rect.top;
+
+            // MATEMÁTICA EXACTA:
+            // 1. Dividimos por la escala de pantalla para volver a la dimensión de "puntos" nativa del PDF.
+            const pdf_x = Math.round(x_canvas / scale);
+            
+            // 2. Invertimos el eje Y (PDF empieza abajo, canvas arriba).
+            // canvas.height / scale nos da la altura nativa real del PDF en puntos (normalmente 792 para tamaño carta).
+            const pdf_height_points = canvas.height / scale;
+            const pdf_y = Math.round(pdf_height_points - (y_canvas / scale));
+
+            const name = fieldInput.value.trim() || "campo_sin_nombre";
+            
+            // Formatear salida para pegar en Python
+            const entry = `"${name}": (${pdf_x}, ${pdf_y}),\n`;
+            output.value += entry;
+
+            // Dibujar punto de confirmación visual en la pantalla
+            ctx.fillStyle = "rgba(239, 68, 68, 0.85)"; // Rojo semitransparente
+            ctx.beginPath();
+            ctx.arc(x_canvas, y_canvas, 4, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Reiniciar caja de texto
+            fieldInput.value = "";
+            fieldInput.focus();
+        });
+
+        function copyToClipboard() {
+            output.select();
+            document.execCommand('copy');
+            alert("Coordenadas copiadas al portapapeles.");
+        }
+    </script>
+</body>
+</html>
