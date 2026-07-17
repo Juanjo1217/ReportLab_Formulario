@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario APS - Ministerio de Salud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-btn.active { border-bottom: 4px solid #0d9488; color: #0d9488; font-weight: bold; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-teal-700 text-white p-4 shadow-md">
+        <h1 class="text-center text-xl font-bold">Identificación APS – Equipos Básicos de Salud</h1>
+    </header>
+
+    <main class="max-w-4xl mx-auto mt-6 p-4">
+        <!-- Navegación -->
+        <nav class="flex border-b bg-white mb-4 rounded-t-lg shadow-sm">
+            <button type="button" onclick="showTab(0)" class="tab-btn px-6 py-3 active">1. General</button>
+            <button type="button" onclick="showTab(1)" class="tab-btn px-6 py-3">2. Integrantes</button>
+        </nav>
+
+        <!-- FORMULARIO HACIA PYTHON -->
+        <form action="/generar" method="POST" class="bg-white p-8 shadow-lg rounded-b-lg">
+            
+            <!-- SECCIÓN 1: GENERAL -->
+            <div id="tab0" class="tab-content active">
+                    <!-- 1. POLÍTICA DE DATOS -->
+                    <div class="bg-teal-50 p-4 rounded-lg border border-teal-200">
+                        <h3 class="font-bold text-teal-800 mb-2">1.1 Tratamiento y uso de datos</h3>
+                        <p class="text-xs mb-3 text-gray-600">Autorizo al Ministerio de Salud para el tratamiento de mis datos personales (Ley 1581 de 2012).</p>
+                        <div class="flex gap-4">
+                            <label class="flex items-center gap-2"><input type="radio" name="tratamiento_datos" value="SI"> SI</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="tratamiento_datos" value="NO"> NO</label>
+                        </div>
+                    </div>
+
+                    <!-- 2.1 SITUACIONES INMINENTES -->
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-bold text-gray-800 mb-3 text-sm">2.1 Identificación de situaciones inminentes que ponen en peligro la vida:</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                            <label class="flex items-center gap-2"><input type="radio" name="situacion_vida" value="Fisica"> Física (urgencia vital)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="situacion_vida" value="Psicologica"> Psicológica (salud mental)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="situacion_vida" value="Emergencia"> Situación de emergencia o desastre</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="situacion_vida" value="No_aplica"> No aplica</label>
+                        </div>
+                    </div>
+
+                    <!-- 2.2 DATOS GENERALES -->
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-bold text-gray-800 mb-4 text-sm border-b pb-2">2.2 Datos generales del escenario</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-500">3. Departamento</label>
+                                <input type="text" name="departamento" class="w-full border p-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-500">4. UZPE</label>
+                                <input type="text" name="uzpe" class="w-full border p-2 rounded">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-xs font-bold uppercase text-gray-500">5. Municipio / Área no municipalizada</label>
+                            <input type="text" name="municipio" class="w-full border p-2 rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-2">6. Área de ubicación de la vivienda</label>
+                            <div class="flex gap-6 text-sm">
+                                <label><input type="radio" name="area_ubicacion" value="Urbana"> Área Urbana</label>
+                                <label><input type="radio" name="area_ubicacion" value="Rural"> Área rural</label>
+                                <label><input type="radio" name="area_ubicacion" value="Centro_poblado"> Centro poblado</label>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-500">7. Territorio</label>
+                                <input type="text" name="territorio" class="w-full border p-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-500">8. Microterritorio</label>
+                                <input type="text" name="microterritorio" class="w-full border p-2 rounded">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500">9. Corregimiento / Vereda / Barrio / Resguardo</label>
+                            <input type="text" name="corregimiento_barrio" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+
+                    <!-- 2.3 DETALLES DEL EQUIPO -->
+                    <div class="bg-gray-50 p-4 rounded-lg border">
+                        <h3 class="font-bold text-gray-800 mb-3 text-sm">2.3 Detalles del Equipo de Salud</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500">10. Número de identificación del Equipo de Salud</label>
+                                <input type="text" name="id_equipo" class="w-full border p-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500">11. Prestador primario / Organismo de adscripción</label>
+                                <input type="text" name="prestador_primario" class="w-full border p-2 rounded">
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <!-- SECCIÓN 2: INTEGRANTES DINÁMICOS -->
+            <div id="tab1" class="tab-content">
+                <div class="flex justify-between mb-4">
+                    <h3 class="font-bold text-lg">Integrantes de la Familia</h3>
+                    <button type="button" onclick="addMember()" class="bg-blue-600 text-white px-3 py-1 rounded text-sm">+ Agregar</button>
+                </div>
+                
+                <div id="membersContainer">
+                    <!-- Aquí se insertan los familiares -->
+                </div>
+            </div>
+
+            <div class="mt-8 pt-4 border-t flex justify-end">
+                <button type="submit" class="bg-teal-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-teal-700 transition">
+                    Generar PDF Oficial
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Template para familiares -->
+    <template id="memberTemplate">
+        <div class="bg-gray-50 p-4 border rounded-lg mb-4 relative">
+            <div class="grid grid-cols-2 gap-3">
+                <input type="text" name="m_nombre[]" placeholder="Nombre" class="border p-2 rounded">
+                <input type="text" name="m_apellido[]" placeholder="Apellido" class="border p-2 rounded">
+                <input type="text" name="m_id[]" placeholder="Documento" class="border p-2 rounded">
+                <select name="m_sexo[]" class="border p-2 rounded">
+                    <option>Hombre</option>
+                    <option>Mujer</option>
+                </select>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        function showTab(i) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab'+i).classList.add('active');
+            document.querySelectorAll('.tab-btn')[i].classList.add('active');
+        }
+
+        function addMember() {
+            const container = document.getElementById('membersContainer');
+            const template = document.getElementById('memberTemplate');
+            container.appendChild(template.content.cloneNode(true));
+        }
+
+        // Agregar el primero por defecto
+        window.onload = addMember;
+    </script>
+</body>
+</html>
