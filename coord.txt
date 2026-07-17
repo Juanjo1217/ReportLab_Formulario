@@ -1,0 +1,386 @@
+COORD_MIEMBRO = {
+    
+    # -------------------------------------------------------------
+    # PÁGINA 5: IDENTIFICACIÓN Y DATOS SOCIOECONÓMICOS
+    # -------------------------------------------------------------
+    # Campos de Texto / Números (Página 5)
+    "p5_primer_nombre": (0, 0),
+    "p5_segundo_nombre": (0, 0),
+    "p5_primer_apellido": (0, 0),
+    "p5_segundo_apellido": (0, 0),
+    "p5_id_numero": (0, 0),
+    "p5_fecha_nacimiento": (0, 0),
+    "p5_nacionalidad": (0, 0),
+    "p5_telefono_1": (0, 0),
+    "p5_telefono_2": (0, 0),
+    "p5_ocupacion": (0, 0),
+    "p5_eapb": (0, 0),
+    "p5_pueblo_etnico": (0, 0),
+    "p5_identidad_otro_cual": (0, 0),
+    "p5_orientacion_otro_cual": (0, 0),
+    "p5_prot_otro_cual": (0, 0),
+
+    # 62. Tipo de identificación (Marcas de selección 'X')
+    "p5_id_tipo_as": (0, 0),
+    "p5_id_tipo_cc": (0, 0),
+    "p5_id_tipo_cd": (0, 0),
+    "p5_id_tipo_ce": (0, 0),
+    "p5_id_tipo_ms": (0, 0),
+    "p5_id_tipo_nv": (0, 0),
+    "p5_id_tipo_pe": (0, 0),
+    "p5_id_tipo_pt": (0, 0),
+    "p5_id_tipo_rc": (0, 0),
+    "p5_id_tipo_ti": (0, 0),
+
+    # 66. Sexo (Marcas 'X')
+    "p5_sexo_hombre": (0, 0),
+    "p5_sexo_mujer": (0, 0),
+    "p5_sexo_intersexual": (0, 0),
+
+    # 67. Género (Marcas 'X')
+    "p5_genero_femenino": (0, 0),
+    "p5_genero_masculino": (0, 0),
+
+    # 68. Identidad de Género (Marcas 'X')
+    "p5_identidad_femenino": (0, 0),
+    "p5_identidad_masculino": (0, 0),
+    "p5_identidad_transexual": (0, 0),
+    "p5_identidad_transgenero": (0, 0),
+    "p5_identidad_no_responde": (0, 0),
+    "p5_identidad_otro": (0, 0),
+
+    # 69. Orientación Sexual (Marcas 'X')
+    "p5_orientacion_hetero": (0, 0),
+    "p5_orientacion_lesbiana": (0, 0),
+    "p5_orientacion_gay": (0, 0),
+    "p5_orientacion_bisexual": (0, 0),
+    "p5_orientacion_no_responde": (0, 0),
+    "p5_orientacion_otro": (0, 0),
+
+    # 72. Rol familiar (Marcas 'X')
+    "p5_rol_resp_economico": (0, 0),
+    "p5_rol_conyuge": (0, 0),
+    "p5_rol_hijo": (0, 0),
+    "p5_rol_hermano": (0, 0),
+    "p5_rol_padre_madre": (0, 0),
+    "p5_rol_otros": (0, 0),
+
+    # 74. Nivel Educativo (Marcas 'X')
+    "p5_educacion_preescolar": (0, 0),
+    "p5_educacion_primaria": (0, 0),
+    "p5_educacion_secundaria": (0, 0),
+    "p5_educacion_media": (0, 0),
+    "p5_educacion_media_tecnica": (0, 0),
+    "p5_educacion_normalista": (0, 0),
+    "p5_educacion_tecnica_prof": (0, 0),
+    "p5_educacion_tecnologica": (0, 0),
+    "p5_educacion_profesional": (0, 0),
+    "p5_educacion_especializacion": (0, 0),
+    "p5_educacion_maestria": (0, 0),
+    "p5_educacion_doctorado": (0, 0),
+    "p5_educacion_ninguno": (0, 0),
+    "p5_educacion_tecnica_lab": (0, 0),
+
+    # 75. Régimen de Afiliación (Marcas 'X')
+    "p5_regimen_subsidiado": (0, 0),
+    "p5_regimen_contributivo": (0, 0),
+    "p5_regimen_especial": (0, 0),
+    "p5_regimen_excepcion": (0, 0),
+    "p5_regimen_no_afiliado": (0, 0),
+
+    # 77. Sujeto de Especial Protección (Checkboxes - Marcas 'X')
+    "p5_prot_ninos": (0, 0),
+    "p5_prot_gestante": (0, 0),
+    "p5_prot_adulto_mayor": (0, 0),
+    "p5_prot_diversa": (0, 0),
+    "p5_prot_campesino": (0, 0),
+    "p5_prot_migrante": (0, 0),
+    "p5_prot_madre_cabeza": (0, 0),
+    "p5_prot_enf_huerfana": (0, 0),
+    "p5_prot_conflicto": (0, 0),
+    "p5_prot_violencia_genero": (0, 0),
+    "p5_prot_violencia_interpersonal": (0, 0),
+    "p5_prot_privada_libertad": (0, 0),
+    "p5_prot_penal_adolescente": (0, 0),
+    "p5_prot_otro": (0, 0),
+    "p5_prot_ninguna": (0, 0),
+
+    # 78. Modalidad de Violencia (Marcas 'X')
+    "p5_violencia_fisica": (0, 0),
+    "p5_violencia_psicologica": (0, 0),
+    "p5_violencia_negligencia": (0, 0),
+    "p5_violencia_sexual": (0, 0),
+    "p5_violencia_patrimonial": (0, 0),
+
+    # 79. Pertenencia Étnica (Marcas 'X')
+    "p5_etnia_indigena": (0, 0),
+    "p5_etnia_rrom": (0, 0),
+    "p5_etnia_negro": (0, 0),
+    "p5_etnia_afro": (0, 0),
+    "p5_etnia_raizal": (0, 0),
+    "p5_etnia_palenquero": (0, 0),
+    "p5_etnia_ninguna": (0, 0),
+
+
+    # -------------------------------------------------------------
+    # PÁGINA 6: SITUACIÓN DE SALUD, ACCESO A SERVICIOS Y CUIDADO
+    # -------------------------------------------------------------
+    # 81. Prácticas de Cuidado Ancestrales (Checkboxes - Marcas 'X')
+    "p6_anc_proteger": (0, 0),
+    "p6_anc_transicion": (0, 0),
+    "p6_anc_tradicionales": (0, 0),
+    "p6_anc_armonizacion": (0, 0),
+    "p6_anc_partera": (0, 0),
+    "p6_anc_cuidado_entorno": (0, 0),
+    "p6_anc_ninguna": (0, 0),
+
+    # 82. Reconocimiento de Discapacidad (Checkboxes - Marcas 'X')
+    "p6_disc_fisica": (0, 0),
+    "p6_disc_auditiva": (0, 0),
+    "p6_disc_visual": (0, 0),
+    "p6_disc_sordoceguera": (0, 0),
+    "p6_disc_intelectual": (0, 0),
+    "p6_disc_psicosocial": (0, 0),
+    "p6_disc_multiple": (0, 0),
+    "p6_disc_ninguna": (0, 0),
+
+    # 83. Certificación de Discapacidad (Radios - Marcas 'X')
+    "p6_cert_disc_si": (0, 0),
+    "p6_cert_disc_no": (0, 0),
+    "p6_cert_disc_no_aplica": (0, 0),
+
+    # 84 & 85. Reproductiva y Gestación (Radios - Marcas 'X')
+    "p6_intencion_reproductiva_si": (0, 0),
+    "p6_intencion_reproductiva_no": (0, 0),
+    "p6_gestacion_si": (0, 0),
+    "p6_gestacion_no": (0, 0),
+
+    # 86. Prácticas Rutinarias de Cuidado (Checkboxes - Marcas 'X')
+    "p6_rut_alimentos": (0, 0),
+    "p6_rut_actividad": (0, 0),
+    "p6_rut_higiene": (0, 0),
+    "p6_rut_lavado": (0, 0),
+    "p6_rut_duerme": (0, 0),
+    "p6_rut_control": (0, 0),
+    "p6_rut_ocio": (0, 0),
+    "p6_rut_cultural": (0, 0),
+    "p6_rut_ninguna": (0, 0),
+
+    # 87. Atenciones Pendientes Promoción (Checkboxes - Marcas 'X')
+    "p6_maint_pymes": (0, 0),
+    "p6_maint_bucal": (0, 0),
+    "p6_maint_lactancia": (0, 0),
+    "p6_maint_fluor": (0, 0),
+    "p6_maint_profilaxis": (0, 0),
+    "p6_maint_vacunas": (0, 0),
+    "p6_maint_fortificacion": (0, 0),
+    "p6_maint_suplementos": (0, 0),
+    "p6_maint_desparasitacion": (0, 0),
+    "p6_maint_anemia": (0, 0),
+    "p6_maint_asesoria": (0, 0),
+    "p6_maint_sum_anticonceptivos": (0, 0),
+    "p6_maint_cardiovascular": (0, 0),
+    "p6_maint_treponemica": (0, 0),
+    "p6_maint_vih": (0, 0),
+    "p6_maint_hepatitis": (0, 0),
+    "p6_maint_embarazo_prueba": (0, 0),
+    "p6_maint_cuello_uterino": (0, 0),
+    "p6_maint_colposcopia": (0, 0),
+    "p6_maint_mama": (0, 0),
+    "p6_maint_prostata": (0, 0),
+    "p6_maint_colon": (0, 0),
+    "p6_maint_educacion": (0, 0),
+    "p6_maint_ninguna": (0, 0),
+
+    # 88. Atenciones Ruta Materno Perinatal (Checkboxes - Marcas 'X')
+    "p6_mat_preconcepcional": (0, 0),
+    "p6_mat_ive": (0, 0),
+    "p6_mat_prenatal": (0, 0),
+    "p6_mat_preparacion": (0, 0),
+    "p6_mat_puerperio": (0, 0),
+    "p6_mat_metodo_post_parto": (0, 0),
+    "p6_mat_recien_nacido": (0, 0),
+    "p6_mat_educacion": (0, 0),
+    "p6_mat_ninguna": (0, 0),
+
+    # 89. Motivos de No Atención (Checkboxes - Marcas 'X')
+    "p6_mot_no_afiliado": (0, 0),
+    "p6_mot_desconocimiento_derecho": (0, 0),
+    "p6_mot_desconocimiento_gratuito": (0, 0),
+    "p6_mot_lejos": (0, 0),
+    "p6_mot_no_personal": (0, 0),
+    "p6_mot_tramites": (0, 0),
+    "p6_mot_no_agenda": (0, 0),
+    "p6_mot_no_sabe": (0, 0),
+    "p6_mot_horario": (0, 0),
+    "p6_mot_tiempos": (0, 0),
+    "p6_mot_no_comodo": (0, 0),
+    "p6_mot_enfermo": (0, 0),
+    "p6_mot_falta_tiempo": (0, 0),
+    "p6_mot_falta_adecuacion": (0, 0),
+    "p6_mot_ninguna": (0, 0),
+
+
+    # -------------------------------------------------------------
+    # PÁGINA 7: VALORACIÓN NUTRICIONAL, TENSIÓN E INFECCIOSAS
+    # -------------------------------------------------------------
+    # Campos de Texto / Números (Página 7)
+    "p7_peso": (0, 0),
+    "p7_talla": (0, 0),
+    "p7_circunferencia_cintura": (0, 0),
+    "p7_imc": (0, 0),
+    "p7_tension_sistolica": (0, 0),
+    "p7_tension_diastolica": (0, 0),
+
+    # 90. Derechos en Salud (Checkboxes - Marcas 'X')
+    "p7_der_conoce": (0, 0),
+    "p7_der_info": (0, 0),
+    "p7_der_lugares": (0, 0),
+    "p7_der_resolver": (0, 0),
+
+    # 91. Menor de 6 meses (Radios - Marcas 'X')
+    "p7_lactancia_si": (0, 0),
+    "p7_lactancia_no": (0, 0),
+    "p7_lactancia_no_aplica": (0, 0),
+
+    # 96. Clasificación Nutricional (Radios - Marcas 'X')
+    "p7_ant_obesidad": (0, 0),
+    "p7_ant_sobrepeso": (0, 0),
+    "p7_ant_riesgo_sobrepeso": (0, 0),
+    "p7_ant_peso_adecuado": (0, 0),
+    "p7_ant_riesgo_desnutricion": (0, 0),
+    "p7_ant_desnutricion_moderada": (0, 0),
+    "p7_ant_desnutricion_severa": (0, 0),
+    "p7_ant_riesgo_delgadez": (0, 0),
+    "p7_ant_delgadez": (0, 0),
+    "p7_ant_bajo_peso_gestacional": (0, 0),
+    "p7_ant_normal": (0, 0),
+
+    # 97. Signos Físicos de Desnutrición (Checkboxes - Marcas 'X')
+    "p7_desn_cabeza": (0, 0),
+    "p7_desn_cara": (0, 0),
+    "p7_desn_piel": (0, 0),
+    "p7_desn_torax": (0, 0),
+    "p7_desn_extremidades": (0, 0),
+    "p7_desn_comportamiento": (0, 0),
+    "p7_desn_edema": (0, 0),
+    "p7_desn_ninguna": (0, 0),
+    "p7_desn_no_aplica": (0, 0),
+
+    # 99. Clasificación de Tensión Arterial (Radios - Marcas 'X')
+    "p7_ten_crisis": (0, 0),
+    "p7_ten_alta_2": (0, 0),
+    "p7_ten_alta_1": (0, 0),
+    "p7_ten_elevada": (0, 0),
+    "p7_ten_normal": (0, 0),
+    "p7_ten_no_aplica": (0, 0),
+
+    # 100. Enfermedades Crónicas / No Transmisibles (Checkboxes - Marcas 'X')
+    "p7_ent_obstetrica": (0, 0),
+    "p7_ent_cardiovascular": (0, 0),
+    "p7_ent_diabetes": (0, 0),
+    "p7_ent_cancer": (0, 0),
+    "p7_ent_epoc": (0, 0),
+    "p7_ent_raras": (0, 0),
+    "p7_ent_trastorno": (0, 0),
+    "p7_ent_epilepsia": (0, 0),
+    "p7_ent_secuelas": (0, 0),
+    "p7_ent_ninguna": (0, 0),
+
+    # 101. Enfermedades Transmisibles (Checkboxes - Marcas 'X')
+    "p7_tra_infancia": (0, 0),
+    "p7_tra_tuberculosis": (0, 0),
+    "p7_tra_lepra": (0, 0),
+    "p7_tra_rabia": (0, 0),
+    "p7_tra_dengue": (0, 0),
+    "p7_tra_chikungunya": (0, 0),
+    "p7_tra_zika": (0, 0),
+    "p7_tra_chagas": (0, 0),
+    "p7_tra_visceral": (0, 0),
+    "p7_tra_cutanea": (0, 0),
+    "p7_tra_tungiasis": (0, 0),
+    "p7_tra_alimentos": (0, 0),
+    "p7_tra_era": (0, 0),
+    "p7_tra_eda": (0, 0),
+    "p7_tra_ninguna": (0, 0),
+
+    # 102. Zona Endémica (Checkboxes - Marcas 'X')
+    "p7_end_geohelmintiasis": (0, 0),
+    "p7_end_teniasis": (0, 0),
+    "p7_end_tracoma": (0, 0),
+    "p7_end_escabiosis": (0, 0),
+    "p7_end_pian": (0, 0),
+    "p7_end_malaria": (0, 0),
+    "p7_end_ninguna": (0, 0),
+
+    # 103. Tratamiento Actual (Radios - Marcas 'X')
+    "p7_tratamiento_si": (0, 0),
+    "p7_tratamiento_no": (0, 0),
+    "p7_tratamiento_no_aplica": (0, 0),
+
+    # 104. Motivo No Atención (Checkboxes - Marcas 'X')
+    "p7_mot_no_afiliado": (0, 0),
+    "p7_mot_lejos": (0, 0),
+    "p7_mot_tramites": (0, 0),
+    "p7_mot_no_agenda": (0, 0),
+    "p7_mot_no_sabe": (0, 0),
+    "p7_mot_no_pagar": (0, 0),
+    "p7_mot_horarios": (0, 0),
+    "p7_mot_tiempos": (0, 0),
+    "p7_mot_no_comodo": (0, 0),
+    "p7_mot_enfermo": (0, 0),
+    "p7_mot_no_adherencia": (0, 0),
+    "p7_mot_no_disponibilidad": (0, 0),
+    "p7_mot_falta_tiempo": (0, 0),
+    "p7_mot_falta_adecuacion": (0, 0),
+    "p7_mot_no_aplica": (0, 0),
+
+
+    # -------------------------------------------------------------
+    # PÁGINA 8: SALUD MENTAL Y CONSUMO DE SUSTANCIAS
+    # -------------------------------------------------------------
+    # Campos de Texto / Números (Página 8)
+    "p8_puntaje_assist": (0, 0),
+    "p8_puntaje_audit": (0, 0),
+    "p8_puntaje_crafft": (0, 0),
+
+    # 105. Situaciones de Riesgo de 14 a 28 años (Checkboxes - Marcas 'X')
+    "p8_riesgo_convivencia": (0, 0),
+    "p8_riesgo_nuevo_integrante": (0, 0),
+    "p8_riesgo_ingreso_estudiar": (0, 0),
+    "p8_riesgo_perdida_ano": (0, 0),
+    "p8_riesgo_embarazo": (0, 0),
+    "p8_riesgo_independencia": (0, 0),
+    "p8_riesgo_separacion": (0, 0),
+    "p8_riesgo_duelo": (0, 0),
+    "p8_riesgo_desempleo": (0, 0),
+    "p8_riesgo_crisis": (0, 0),
+    "p8_riesgo_conflictos": (0, 0),
+    "p8_riesgo_abandono": (0, 0),
+    "p8_riesgo_no_cuenta_redes": (0, 0),
+    "p8_riesgo_estigma": (0, 0),
+    "p8_riesgo_conflictos_orientacion": (0, 0),
+    "p8_riesgo_trastorno": (0, 0),
+    "p8_riesgo_ninguna": (0, 0),
+
+    # 106. Durante más de dos semanas (Checkboxes - Marcas 'X')
+    "p8_triste_dos_semanas": (0, 0),
+    "p8_perdida_interes": (0, 0),
+    "p8_inquieto_nervioso": (0, 0),
+    "p8_salud_mental_ninguno": (0, 0),
+    "p8_salud_mental_no_aplica": (0, 0),
+
+    # 107. Pensado en autolesión (Radios - Marcas 'X')
+    "p8_autolesion_si": (0, 0),
+    "p8_autolesion_ninguno": (0, 0),
+    "p8_autolesion_no_aplica": (0, 0),
+
+    # 108. Consumo de Sustancias (Radios - Marcas 'X')
+    "p8_consumo_si": (0, 0),
+    "p8_consumo_no": (0, 0),
+    "p8_consumo_no_aplica": (0, 0),
+
+    # 110. Otra situación que limita sus actividades (Radios - Marcas 'X')
+    "p8_limita_si": (0, 0),
+    "p8_limita_no": (0, 0)
+}

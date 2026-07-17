@@ -45,10 +45,19 @@
                     <p class="text-[10px] text-slate-400 mb-4">Presiona Enter tras nombrar y haz clic.</p>
                 </div>
                 
-                <div>
+                <div class="space-y-2">
                     <h3 class="font-bold text-orange-400 text-sm mb-1">Código Python Generado:</h3>
-                    <textarea id="output" class="w-full h-44 bg-black text-green-400 p-2 text-xs font-mono rounded" readonly></textarea>
-                    <button onclick="copyToClipboard()" class="w-full mt-2 bg-teal-600 hover:bg-teal-700 p-2 rounded font-bold uppercase text-xs transition">Copiar Diccionario</button>
+                    <textarea id="output" class="w-full h-40 bg-black text-green-400 p-2 text-xs font-mono rounded" readonly></textarea>
+                    
+                    <!-- Botón para copiar -->
+                    <button onclick="copyToClipboard()" class="w-full bg-teal-600 hover:bg-teal-700 p-2 rounded font-bold uppercase text-xs transition">
+                        Copiar Diccionario
+                    </button>
+                    
+                    <!-- NUEVO: Botón para borrar diccionario y limpiar marcas -->
+                    <button onclick="clearOutput()" class="w-full bg-red-600 hover:bg-red-700 p-2 rounded font-bold uppercase text-xs transition">
+                        Borrar Diccionario
+                    </button>
                 </div>
             </div>
 
@@ -141,7 +150,6 @@
             const pdf_x = Math.round(x_canvas / scale);
             
             // 2. Invertimos el eje Y (PDF empieza abajo, canvas arriba).
-            // canvas.height / scale nos da la altura nativa real del PDF en puntos (normalmente 792 para tamaño carta).
             const pdf_height_points = canvas.height / scale;
             const pdf_y = Math.round(pdf_height_points - (y_canvas / scale));
 
@@ -162,10 +170,19 @@
             fieldInput.focus();
         });
 
+        // Copiar texto generado
         function copyToClipboard() {
             output.select();
             document.execCommand('copy');
             alert("Coordenadas copiadas al portapapeles.");
+        }
+
+        // NUEVO: Borrar lo generado y limpiar las marcas rojas del PDF
+        function clearOutput() {
+            if (confirm("¿Estás seguro de que deseas borrar todo el diccionario actual de esta sesión?")) {
+                output.value = "";
+                renderPage(pageNum); // Vuelve a dibujar el PDF original eliminando las marcas rojas
+            }
         }
     </script>
 </body>

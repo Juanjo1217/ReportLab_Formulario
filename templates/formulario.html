@@ -20,7 +20,10 @@
         <!-- Navegación -->
         <nav class="flex border-b bg-white mb-4 rounded-t-lg shadow-sm">
             <button type="button" onclick="showTab(0)" class="tab-btn px-6 py-3 active">1. General</button>
-            <button type="button" onclick="showTab(1)" class="tab-btn px-6 py-3">2. Integrantes</button>
+            <button type="button" onclick="showTab(1)" class="tab-btn px-6 py-3">2. Vivienda</button>
+            <button type="button" onclick="showTab(2)" class="tab-btn px-6 py-3">3. Entorno</button>
+            <button type="button" onclick="showTab(3)" class="tab-btn px-6 py-3">4. Riesgos</button>
+            <button type="button" onclick="showTab(4)" class="tab-btn px-6 py-3">5. Integrantes</button>
         </nav>
 
         <!-- FORMULARIO HACIA PYTHON -->
@@ -106,9 +109,11 @@
                     </div>
             </div>
 
-            <!-- SECCIÓN 2: INTEGRANTES DINÁMICOS -->
+
+
+           
             
-                <!-- PESTAÑA 2: PERSONAL Y VIVIENDA -->
+            <!-- PESTAÑA 2: PERSONAL Y VIVIENDA -->
             <div id="tab1" class="tab-content space-y-6">
                 
                 <!-- 2.4 DETALLE PERSONAL -->
@@ -316,6 +321,305 @@
                 </div>
             </div>
 
+
+
+
+
+            <!-- PESTAÑA 3: ENTORNO Y FAMILIA -->
+            <div id="tab2" class="tab-content space-y-6">
+
+                <!-- SECCIÓN 3.1 y 3.2: ENTORNO PERIDOMICILIO -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">3.1 / 3.2 Entorno y Peri-domicilio</h3>
+                    
+                    <!-- Campo 37 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">37. ¿Se observan criaderos o reservorios de vectores transmisores de enfermedades?</label>
+                        <div class="flex gap-4 text-sm">
+                            <label><input type="radio" name="p3_criaderos" value="Si"> Sí</label>
+                            <label><input type="radio" name="p3_criaderos" value="No"> No</label>
+                            <label><input type="radio" name="p3_criaderos" value="No_aplica"> No aplica</label>
+                        </div>
+                    </div>
+
+                    <!-- Campo 38 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-3">38. Observe e indague si cerca de la vivienda hay alguno de los siguientes:</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Cultivos"> Cultivos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Apriscos"> Apriscos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Porquerizas"> Porquerizas</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Galpones"> Galpones</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Baldios"> Terrenos baldíos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Plagas"> Presencia de Plagas (roedores, zancudos...)</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Olores"> Malos olores</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Ruidos"> Ruido o sonidos desagradables</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Excretas"> Sitios satélites de disposición de excretas</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Rellenos"> Rellenos sanitarios/botaderos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Contaminacion"> Contaminación visual</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Rio"> Río o quebrada</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Planta"> Planta de tratamiento de agua residual</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Mineria"> Extracción minera</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Industrias"> Industrias Contaminantes</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Canales"> Canales de agua lluvia</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Vias"> Vías de alto tráfico vehicular</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Quemas"> Quemas a cielo abierto</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Alta_Tension"> Fuentes de energía de alta tensión</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Agroquimicos"> Almacenamiento de agroquímicos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Asbesto"> Talleres o industrias que dispongan de asbesto</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Ninguno"> Ninguno</label>
+                        </div>
+                    </div>
+
+                    <!-- Campo 39 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">39. ¿Al interior de la vivienda se realiza alguna actividad económica?</label>
+                        <div class="flex gap-4 text-sm">
+                            <label><input type="radio" name="p3_act_economica" value="Si"> Sí</label>
+                            <label><input type="radio" name="p3_act_economica" value="No"> No</label>
+                        </div>
+                    </div>
+
+                    <!-- Campo 40 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-3">40. Señale los animales que conviven con la familia:</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                            <label><input type="checkbox" name="p3_animales[]" value="Perros"> Perros</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Gatos"> Gatos</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Porcinos"> Porcinos</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Bovinos"> Bovinos (Vacas/Toros)</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Equinos"> Equinos</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Ovinos"> Ovinos / Caprinos</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Aves_Prod"> Aves de producción</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Aves_Orn"> Aves ornamentales</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Peces"> Peces ornamentales / Hamster</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Cobayos"> Cobayos / Conejos</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Silvestres"> Animales silvestres</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Otro"> Otro</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Ninguno"> Ninguno</label>
+                        </div>
+                    </div>
+
+                    <!-- Campos 41 - 44 -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">41. N.° de perros</label>
+                            <input type="number" name="p3_num_perros" class="w-full border p-2 rounded text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">42. Perros vacunados</label>
+                            <input type="number" name="p3_num_perros_vacuna" class="w-full border p-2 rounded text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">43. N.° de gatos</label>
+                            <input type="number" name="p3_num_gatos" class="w-full border p-2 rounded text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">44. Gatos vacunados</label>
+                            <input type="number" name="p3_num_gatos_vacuna" class="w-full border p-2 rounded text-xs">
+                        </div>
+                    </div>
+
+                    <!-- Campo 45 -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2">45. ¿Cuentan con carnet de vacunación vigente (< 3 años)?</label>
+                        <div class="flex gap-4 text-sm">
+                            <label><input type="radio" name="p3_carnet" value="Si"> Sí</label>
+                            <label><input type="radio" name="p3_carnet" value="No"> No</label>
+                            <label><input type="radio" name="p3_carnet" value="No_aplica"> No aplica</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 3.3: AGUA Y SANEAMIENTO -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">3.3 Saneamiento Básico</h3>
+                    
+                    <!-- Campo 46 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">46. Principal fuente de abastecimiento de agua para consumo</label>
+                        <select name="p3_agua" class="w-full border p-2 rounded text-xs">
+                            <option value="Esp">Acueducto administrado por empresa prestadora (ESP)</option>
+                            <option value="Veredal">Acueducto veredal o comunitario</option>
+                            <option value="Pila">Pila pública</option>
+                            <option value="Carro">Carro tanque</option>
+                            <option value="Comunitaria">Abasto con distribución comunitaria</option>
+                            <option value="Pozo_Bomba">Pozo con bomba</option>
+                            <option value="Pozo_Sin_Bomba">Pozo sin bomba / aljibe / jagüey</option>
+                            <option value="Laguna">Laguna / río / quebrada</option>
+                            <option value="Lluvias">Aguas lluvias</option>
+                            <option value="Botella">Agua embotellada o en bolsa</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo 47 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">47. Sistema de disposición de excretas en la vivienda</label>
+                        <select name="p3_exc" class="w-full border p-2 rounded text-xs">
+                            <option value="Alcantarillado">Sanitario conectado al alcantarillado</option>
+                            <option value="Letrina">Sanitario y letrina</option>
+                            <option value="Septico">Sanitario conectado a pozo séptico</option>
+                            <option value="Seco">Sanitario ecológico seco</option>
+                            <option value="Sin_Conexion">Sanitario sin conexión</option>
+                            <option value="Fuente">Sanitario con disposición a fuente hídrica</option>
+                            <option value="Abierto">Campo abierto</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo 48 y 49 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-2">48. Disposición de aguas residuales</label>
+                            <select name="p3_res" class="w-full border p-2 rounded text-xs">
+                                <option value="Alcantarillado">Alcantarillado</option>
+                                <option value="Septico">Pozo séptico</option>
+                                <option value="Oxidacion">Campo de oxidación</option>
+                                <option value="Biofiltro">Biofiltro</option>
+                                <option value="Abierto">Campo abierto</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-2">49. Disposición final de residuos sólidos</label>
+                            <select name="p3_sol" class="w-full border p-2 rounded text-xs">
+                                <option value="Recoleccion">Recolección de servicio de aseo</option>
+                                <option value="Enterramiento">Enterramiento</option>
+                                <option value="Quema">Quema a campo abierto</option>
+                                <option value="Abierto">Disposición a campo abierto</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 4.1: CONTEXTO FAMILIAR -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">4. Identificación de Procesos en la Familia</h3>
+                    
+                    <!-- Campo 50 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">50. Tipo de familia</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                            <label><input type="radio" name="p3_tipo_familia" value="Nuclear_Biparental"> Nuclear biparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Nuclear_Monoparental"> Nuclear monoparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Extenso_Biparental"> Extenso biparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Extenso_Monoparental"> Extenso monoparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Compuesto_Biparental"> Compuesto biparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Compuesto_Monoparental"> Compuesto monoparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Unipersonal"> Unipersonal</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">51. N.° de personas que conforman la familia</label>
+                            <input type="number" name="p3_fam_personas" class="w-full border p-2 rounded text-xs mt-1">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-2">52. ¿Se identifica un cuidador principal?</label>
+                            <div class="flex gap-4 text-sm mt-2">
+                                <label><input type="radio" name="p3_cuidador" value="Si"> Sí</label>
+                                <label><input type="radio" name="p3_cuidador" value="No"> No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campo 53 -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2">53. Escala ZARIT (si se cuenta con cuidador principal)</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                            <label><input type="radio" name="p3_zarit" value="Ausencia"> Ausencia de sobrecarga (≤ 46)</label>
+                            <label><input type="radio" name="p3_zarit" value="Ligera"> Sobrecarga ligera (47-55)</label>
+                            <label><input type="radio" name="p3_zarit" value="Intensa"> Sobrecarga intensa (≥ 56)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- SECCIÓN 4.1 (Campo 54): SITUACIONES DE RIESGO -->
+            <div id="tab3" class="tab-content space-y-6">
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">54. Situaciones o condiciones que pueden alterar o generar riesgo para la salud (física o mental)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Convivencia"> Inicio de la convivencia en pareja</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Nuevo_Integrante"> Llegada de un nuevo integrante</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Ingreso_Estudiar"> Ingreso a estudiar</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Perdida_Ano"> Pérdida del año escolar</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Embarazo_Adolescente"> Embarazo temprano o adolescente</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Independencia_Hijos"> Independencia de los hijos-hijas</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Separacion"> Separación</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Jubilacion"> Jubilación</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Duelo"> Duelo</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Desempleo"> Desempleo o pérdida abrupta del trabajo</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Crisis_Economica"> Pérdidas o crisis económicas</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Muerte_Inesperada"> Muerte inesperada</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Migracion"> Migración</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Enfermedad_Terminal"> Enfermedad terminal o huérfana/rara en la familia</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Accidente_Discapacidad"> Accidente o situación que genera discapacidad</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Antecedentes_Suicidio"> Antecedentes de intento o muerte por suicidio</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Violencia"> Vivencia de alguna forma de violencia</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Abandono"> Persona en situación de abandono</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Consumo_Sustancias"> Consumo problemático de sustancias, incluyendo alcohol</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Trastorno_Mental"> Trastorno de salud mental</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Ninguna"> Ninguna</label>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 4.2 (Campo 55): PRÁCTICAS VÍNCULOS FAMILIARES -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">55. Prácticas que favorecen los vínculos familiares</h3>
+                    <div class="space-y-2 text-xs">
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Tension" class="mt-0.5"> Cuando hay tensión o estrés en la familia lo reconoce y encuentran la forma de manejarlas de manera pacífica</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Decisiones" class="mt-0.5"> Las decisiones familiares son concertadas teniendo en cuenta a todos sus integrantes</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Conflictos" class="mt-0.5"> La familia resuelve los conflictos buscando el bienestar de todos sus integrantes</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Comunicacion" class="mt-0.5"> La comunicación en la familia está basada en la escucha activa, el respeto y la negociación</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Ninos" class="mt-0.5"> Si en la familia hay niños, niñas y adolescentes los padres y cuidadores comparten, apoyan y supervisan sus actividades con respeto y límites</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Adultos_Mayores" class="mt-0.5"> En familias con personas adultas mayores los demás integrantes de la familia tienen en cuenta sus intereses, opiniones y preferencias</label>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 4.2 (Campo 56): REDES DE APOYO -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">56. Redes de apoyo social</h3>
+                    <div class="space-y-3 text-xs">
+                        <label class="flex items-center gap-2"><input type="radio" name="p4_red_apoyo" value="Protectoras"> Cuenta con redes de apoyo sociales protectoras para el cuidado de su salud</label>
+                        <label class="flex items-center gap-2"><input type="radio" name="p4_red_apoyo" value="Ampliables"> Cuenta con redes de apoyo sociales para el cuidado de su salud, pero podría ampliarlas para fortalecerse</label>
+                        <label class="flex items-center gap-2"><input type="radio" name="p4_red_apoyo" value="Ninguna"> No identifica / no cuenta con redes de apoyo sociales protectoras</label>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 4.2 (Campo 57): PROTECCIÓN EN EL HOGAR -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">57. Prácticas para el cuidado de su salud y protección en el entorno hogar</h3>
+                    <div class="space-y-2 text-xs">
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Tratamiento_Agua" class="mt-0.5"> Tratamiento casero al agua antes del consumo humano y almacenamiento adecuado</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Ventilacion" class="mt-0.5"> Facilita la circulación del aire en la vivienda a través de la ventilación natural o artificial</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Evita_Humo" class="mt-0.5"> Evita el consumo de tabaco, el encendido de carros al interior de la vivienda y el uso de leña para cocinar</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Residuos" class="mt-0.5"> Los residuos sólidos se almacenan en recipientes con tapa, se separan en la fuente, no se queman, no se tiran a campo abierto o en fuentes de agua</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Limpieza" class="mt-0.5"> Los pisos y paredes de la vivienda están limpios</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Toldillos" class="mt-0.5"> Usa toldillos, angeos y trampas caseras para la protección contra vectores y roedores</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Limpieza_Entorno" class="mt-0.5"> Al interior de la vivienda o el peri-domicilio, jardín o espacios de la vivienda como patio o azotea están limpios</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Quimicos_Seguros" class="mt-0.5"> El lugar donde se almacenan los productos químicos para el uso en el hogar se encuentra ventilado, cerrado y separado de comida, alimentos para animales o medicamentos y fuera del alcance de los niños, niñas y mascotas.</label>
+                    </div>
+                </div>
+            </div>
+            <div id="tab4" class="tab-content space-y-6">
+                <div class="flex justify-between items-center border-b pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-teal-800">5. Identificación de Integrantes de la Familia</h2>
+                        <p class="text-xs text-gray-500">Se generará un bloque de 4 páginas en el PDF final por cada integrante que agregues.</p>
+                    </div>
+                    <button type="button" onclick="agregarMiembro()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-2 rounded shadow-md transition text-sm">
+                        + Agregar Integrante
+                    </button>
+                </div>
+
+                <!-- Contenedor donde se insertarán los miembros dinámicamente -->
+                <div id="miembrosContainer" class="space-y-6"></div>
+            </div>
+
+
+
             <div class="mt-8 pt-4 border-t flex justify-end">
                 <button type="submit" class="bg-teal-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-teal-700 transition">
                     Generar PDF
@@ -324,20 +628,324 @@
         </form>
     </main>
 
-    <!-- Template para familiares -->
-    <template id="memberTemplate">
-        <div class="bg-gray-50 p-4 border rounded-lg mb-4 relative">
-            <div class="grid grid-cols-2 gap-3">
-                <input type="text" name="m_nombre[]" placeholder="Nombre" class="border p-2 rounded">
-                <input type="text" name="m_apellido[]" placeholder="Apellido" class="border p-2 rounded">
-                <input type="text" name="m_id[]" placeholder="Documento" class="border p-2 rounded">
-                <select name="m_sexo[]" class="border p-2 rounded">
-                    <option>Hombre</option>
-                    <option>Mujer</option>
+
+    <template id="miembroTemplate">
+        <div class="miembro-card bg-white border border-gray-300 rounded-lg shadow-md p-6 relative" data-index="__IDX__">
+            <!-- Campo oculto para enviar los índices activos a Python -->
+            <input type="hidden" name="member_indices[]" value="__IDX__">
+
+            <!-- Botón de eliminación -->
+            <button type="button" onclick="eliminarMiembro(this)" class="absolute top-4 right-4 bg-red-100 hover:bg-red-200 text-red-600 font-bold px-3 py-1 rounded text-xs transition">
+                Eliminar Integrante
+            </button>
+
+            <h3 class="text-lg font-bold text-teal-700 mb-4 border-b pb-1">Integrante #<span class="miembro-numero"></span></h3>
+
+            <!-- ACORDEÓN: PÁGINA 5 (IDENTIFICACIÓN Y SOCIOECONÓMICOS) -->
+            <details class="group border rounded-md mb-3" open>
+    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+        <span>Página 5: Datos de Identificación y Socioeconómicos (Campos 58 - 80)</span>
+        <span class="transition group-open:rotate-180">▼</span>
+    </summary>
+    <div class="p-4 bg-white space-y-4 text-xs">
+        
+        <!-- 5.1 Nombres Completos -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+                <label class="block font-semibold mb-1">58. Primer Nombre</label>
+                <input type="text" name="m___IDX___p5_primer_nombre" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">59. Segundo Nombre</label>
+                <input type="text" name="m___IDX___p5_segundo_nombre" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">60. Primer Apellido</label>
+                <input type="text" name="m___IDX___p5_primer_apellido" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">61. Segundo Apellido</label>
+                <input type="text" name="m___IDX___p5_segundo_apellido" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+        </div>
+
+        <!-- Identificaciones -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-semibold mb-1">62. Tipo de Identificación</label>
+                <select name="m___IDX___p5_id_tipo" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="AS">AS. Adulto sin Identificación</option>
+                    <option value="CC">CC. Cédula Ciudadanía</option>
+                    <option value="CD">CD. Carné Diplomático</option>
+                    <option value="CE">CE. Cédula de Extranjería</option>
+                    <option value="MS">MS. Menor sin Identificación</option>
+                    <option value="NV">NV. Nacido Vivo</option>
+                    <option value="PE">PE. Permiso Especial</option>
+                    <option value="PT">PT. Permiso Protección</option>
+                    <option value="RC">RC. Registro Civil</option>
+                    <option value="TI">TI. Tarjeta Identidad</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">63. Número de Identificación</label>
+                <input type="text" name="m___IDX___p5_id_numero" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">64. Fecha de Nacimiento</label>
+                <input type="date" name="m___IDX___p5_fecha_nacimiento" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">65. Nacionalidad</label>
+                <input type="text" name="m___IDX___p5_nacionalidad" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+        </div>
+
+        <!-- Demografía Básica -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-semibold mb-1">66. Sexo</label>
+                <select name="m___IDX___p5_sexo" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                    <option value="Intersexual">Intersexual</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">67. Género</label>
+                <select name="m___IDX___p5_genero" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">70. Teléfono 1</label>
+                <input type="text" name="m___IDX___p5_telefono_1" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">71. Teléfono 2</label>
+                <input type="text" name="m___IDX___p5_telefono_2" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+        </div>
+
+        <!-- Identidad, Orientación y Rol -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-semibold mb-1">68. Identidad de Género</label>
+                <select name="m___IDX___p5_identidad" class="w-full border p-2 rounded bg-slate-50 mb-2">
+                    <option value="">Seleccione...</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Transexual">Transexual</option>
+                    <option value="Transgenero">Transgenero</option>
+                    <option value="No_responde">No responde</option>
+                    <option value="Otro">Otro (¿Cuál?)</option>
+                </select>
+                <input type="text" name="m___IDX___p5_identidad_otro_cual" placeholder="¿Cuál?" class="w-full border p-1.5 rounded">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">69. Orientación Sexual</label>
+                <select name="m___IDX___p5_orientacion" class="w-full border p-2 rounded bg-slate-50 mb-2">
+                    <option value="">Seleccione...</option>
+                    <option value="Hetero">Heterosexual</option>
+                    <option value="Lesbiana">Lesbiana</option>
+                    <option value="Gay">Gay</option>
+                    <option value="Bisexual">Bisexual</option>
+                    <option value="No_responde">No responde</option>
+                    <option value="Otro">Otro (¿Cuál?)</option>
+                </select>
+                <input type="text" name="m___IDX___p5_orientacion_otro_cual" placeholder="¿Cuál?" class="w-full border p-1.5 rounded">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">72. Rol dentro de la familia</label>
+                <select name="m___IDX___p5_rol" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Resp_Economico">Responsable Económico</option>
+                    <option value="Conyuge">Cónyuge o compañero/a</option>
+                    <option value="Hijo">Hijo/a</option>
+                    <option value="Hermano">Hermano/a</option>
+                    <option value="Padre_Madre">Padre o Madre</option>
+                    <option value="Otros">Otros</option>
                 </select>
             </div>
         </div>
+
+        <!-- 5.2 Socioeconómicos (Compactos) -->
+        <h4 class="text-sm font-bold text-teal-800 border-t pt-3">5.2 Características Socioeconómicas</h4>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+                <label class="block font-semibold mb-1">73. Ocupación</label>
+                <input type="text" name="m___IDX___p5_ocupacion" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">74. Nivel Educativo</label>
+                <select name="m___IDX___p5_educacion" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Preescolar">Preescolar</option>
+                    <option value="Primaria">Básica Primaria</option>
+                    <option value="Secundaria">Básica Secundaria</option>
+                    <option value="Media">Media Académica o Clásica</option>
+                    <option value="Media_Tecnica">Media Técnica (Bachillerato Técnico)</option>
+                    <option value="Normalista">Normalista</option>
+                    <option value="Tecnica_Prof">Técnica Profesional</option>
+                    <option value="Tecnologica">Tecnológica</option>
+                    <option value="Profesional">Profesional</option>
+                    <option value="Especializacion">Especialización</option>
+                    <option value="Maestria">Maestría</option>
+                    <option value="Doctorado">Doctorado</option>
+                    <option value="Ninguno">Ninguno</option>
+                    <option value="Tecnica_Lab">Técnica Laboral</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">75. Régimen de afiliación</label>
+                <select name="m___IDX___p5_regimen" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Subsidiado">Subsidiado</option>
+                    <option value="Contributivo">Contributivo</option>
+                    <option value="Especial">Especial</option>
+                    <option value="Excepcion">Excepción</option>
+                    <option value="No_Afiliado">No afiliado</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">76. EAPB</label>
+                <input type="text" name="m___IDX___p5_eapb" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+        </div>
+
+        <!-- 77. Sujeto Especial Protección (Checkboxes - Se mantienen como checks porque admite selección múltiple) -->
+        <div class="border-t pt-3">
+            <label class="block font-semibold mb-2">77. Sujeto de especial protección constitucional o situaciones (Múltiple):</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[10px] mb-2">
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Ninos"> Niñas, niños o adolescentes</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Gestante"> Gestante</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Adulto_Mayor"> Persona adulta mayor</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Diversa"> Persona con orientación diversa</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Campesino"> Campesino/a</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Migrante"> Migrantes</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Madre_Cabeza"> Madre cabeza de familia</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Enf_Huerfana"> Enfermedades huérfanas</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Conflicto"> Víctima conflicto armado</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Violencia_Genero"> Víctima de violencia de género e intrafamiliar</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Violencia_Interpersonal"> Víctima de violencia interpersonal</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Privada_Libertad"> Persona privada de la libertad</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Penal_Adolescente"> Responsabilidad penal adolescente</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Otro"> Otro</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Ninguna"> Ninguna</label>
+            </div>
+            <input type="text" name="m___IDX___p5_prot_otro_cual" placeholder="¿Cuál?" class="w-full border p-1.5 rounded">
+        </div>
+
+        <!-- 78 y 79. Violencia y Etnia (Compactados a Select) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-semibold mb-1">78. Modalidad de la violencia (aplica si seleccionó víctima en el ítem 77)</label>
+                <select name="m___IDX___p5_violencia" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Fisica">Física</option>
+                    <option value="Psicologica">Psicológica</option>
+                    <option value="Negligencia">Negligencia y abandono</option>
+                    <option value="Sexual">Sexual</option>
+                    <option value="Patrimonial">Patrimonial o económica</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">79. Pertenencia étnica</label>
+                <select name="m___IDX___p5_etnia" class="w-full border p-2 rounded bg-slate-50 mb-2">
+                    <option value="">Seleccione...</option>
+                    <option value="Indigena">Indígena</option>
+                    <option value="Rrom">Rrom (Gitano)</option>
+                    <option value="Negro">Negro</option>
+                    <option value="Afro">Afrocolombiano</option>
+                    <option value="Raizal">Raizal</option>
+                    <option value="Palenquero">Palenquero</option>
+                    <option value="Ninguna">Ninguna</option>
+                </select>
+                <label class="block font-semibold mb-1">80. Pueblo o comunidad étnica a la cual pertenece:</label>
+                <input type="text" name="m___IDX___p5_pueblo_etnico" class="w-full border p-1.5 rounded bg-slate-50">
+            </div>
+        </div>
+    </div>
+</details>
+
+            <!-- ACORDEÓN: PÁGINA 6 (SITUACIÓN DE SALUD Y ATENCIONES) -->
+            <details class="group border rounded-md mb-3">
+                <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+                    <span>Página 6: Prácticas de Cuidado y Atenciones Pendientes (Campos 81 - 89)</span>
+                    <span class="transition group-open:rotate-180">▼</span>
+                </summary>
+                <div class="p-4 bg-white space-y-4 text-xs">
+                    <div>
+                        <label class="block font-bold text-gray-500 mb-2">82. ¿Se reconoce como persona con discapacidad?</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="Fisica"> Física</label>
+                            <label><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="Auditiva"> Auditiva</label>
+                            <label><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="Visual"> Visual</label>
+                            <label><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="Sin_discapacidad"> Sin discapacidad</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-bold text-gray-500 mb-2">84. Intención reproductiva a corto plazo</label>
+                        <div class="flex gap-4">
+                            <label><input type="radio" name="m___IDX___p6_intencion_reproductiva" value="Si"> Sí</label>
+                            <label><input type="radio" name="m___IDX___p6_intencion_reproductiva" value="No"> No</label>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- ACORDEÓN: PÁGINA 7 (VALORACIÓN FÍSICA E INFECCIOSAS) -->
+            <details class="group border rounded-md mb-3">
+                <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+                    <span>Página 7: Valoración Nutricional, Tensión y Transmisibles (Campos 90 - 104)</span>
+                    <span class="transition group-open:rotate-180">▼</span>
+                </summary>
+                <div class="p-4 bg-white text-xs space-y-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block font-semibold">92. Peso (Kg)</label>
+                            <input type="text" name="m___IDX___p7_peso" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block font-semibold">93. Talla (cm)</label>
+                            <input type="text" name="m___IDX___p7_talla" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block font-semibold">98. Tensión Sistólica</label>
+                            <input type="text" name="m___IDX___p7_tension_sistolica" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block font-semibold">98. Tensión Diastólica</label>
+                            <input type="text" name="m___IDX___p7_tension_diastolica" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- ACORDEÓN: PÁGINA 8 (SALUD MENTAL Y CONSUMO) -->
+            <details class="group border rounded-md">
+                <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+                    <span>Página 8: Salud Mental y Consumo de Sustancias (Campos 105 - 110)</span>
+                    <span class="transition group-open:rotate-180">▼</span>
+                </summary>
+                <div class="p-4 bg-white text-xs space-y-4">
+                    <div>
+                        <label class="block font-semibold mb-2">107. Durante los últimos 8 días, ¿ha pensado en lastimarse o no querer vivir?</label>
+                        <div class="flex gap-4">
+                            <label><input type="radio" name="m___IDX___p8_autolesion" value="Si"> Sí</label>
+                            <label><input type="radio" name="m___IDX___p8_autolesion" value="Ninguno"> Ninguno</label>
+                            <label><input type="radio" name="m___IDX___p8_autolesion" value="No_aplica"> No aplica</label>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </div>
     </template>
+
 
     <script>
         function showTab(i) {
@@ -347,14 +955,41 @@
             document.querySelectorAll('.tab-btn')[i].classList.add('active');
         }
 
-        function addMember() {
-            const container = document.getElementById('membersContainer');
-            const template = document.getElementById('memberTemplate');
-            container.appendChild(template.content.cloneNode(true));
+        let miembroContador = 0;
+
+        function agregarMiembro() {
+            const container = document.getElementById('miembrosContainer');
+            const template = document.getElementById('miembroTemplate').innerHTML;
+            
+            // Reemplazar el comodín __IDX__ por el número de índice correspondiente
+            const htmlModificado = template.replace(/__IDX__/g, miembroContador);
+            
+            // Insertar en el DOM
+            container.insertAdjacentHTML('beforeend', htmlModificado);
+            
+            // Actualizar la numeración visual
+            actualizarNumeracion();
+            miembroContador++;
         }
 
-        // Agregar el primero por defecto
-        window.onload = addMember;
+        function eliminarMiembro(btn) {
+            if (confirm("¿Estás seguro de eliminar a este integrante?")) {
+                btn.closest('.miembro-card').remove();
+                actualizarNumeracion();
+            }
+        }
+
+        function actualizarNumeracion() {
+            const miembros = document.querySelectorAll('.miembro-card');
+            miembros.forEach((card, index) => {
+                card.querySelector('.miembro-numero').textContent = index + 1;
+            });
+        }
+
+        // Agregar el primer familiar por defecto al cargar
+        window.onload = function() {
+            agregarMiembro();
+        };
     </script>
 </body>
 </html>
