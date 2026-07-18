@@ -24,12 +24,43 @@
             <button type="button" onclick="showTab(2)" class="tab-btn px-6 py-3">3. Entorno</button>
             <button type="button" onclick="showTab(3)" class="tab-btn px-6 py-3">4. Riesgos</button>
             <button type="button" onclick="showTab(4)" class="tab-btn px-6 py-3">5. Integrantes</button>
+            <button type="button" onclick="showTab(5)" class="tab-btn px-6 py-3">6. Plan de Cuidado</button>
         </nav>
 
         <!-- FORMULARIO HACIA PYTHON -->
         <form action="/generar" method="POST" class="bg-white p-8 shadow-lg rounded-b-lg">
+
+
+
+
+
+
+
+
+
+
+
+
             
+
+            <!-- ########################################### -->
             <!-- SECCIÓN 1: GENERAL -->
+            <!-- ########################################### -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div id="tab0" class="tab-content active">
                     <!-- 1. POLÍTICA DE DATOS -->
                     <div class="bg-teal-50 p-4 rounded-lg border border-teal-200">
@@ -111,9 +142,29 @@
 
 
 
+
+
+
+
+
+
            
-            
+            <!-- ########################################### -->
             <!-- PESTAÑA 2: PERSONAL Y VIVIENDA -->
+            <!-- ########################################### -->
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div id="tab1" class="tab-content space-y-6">
                 
                 <!-- 2.4 DETALLE PERSONAL -->
@@ -325,7 +376,26 @@
 
 
 
+
+
+
+
+
+
+
+            <!-- ########################################### -->
             <!-- PESTAÑA 3: ENTORNO Y FAMILIA -->
+            <!-- ########################################### -->
+
+
+
+
+
+
+
+
+
+
             <div id="tab2" class="tab-content space-y-6">
 
                 <!-- SECCIÓN 3.1 y 3.2: ENTORNO PERIDOMICILIO -->
@@ -536,7 +606,30 @@
 
 
 
+
+
+
+
+
+
+
+
+
+            <!-- ########################################### -->
             <!-- SECCIÓN 4.1 (Campo 54): SITUACIONES DE RIESGO -->
+            <!-- ########################################### -->
+
+
+
+
+
+
+
+
+
+
+
+
             <div id="tab3" class="tab-content space-y-6">
                 <div class="bg-white p-6 rounded-lg border">
                     <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">54. Situaciones o condiciones que pueden alterar o generar riesgo para la salud (física o mental)</h3>
@@ -620,6 +713,149 @@
 
 
 
+
+
+
+
+
+
+
+
+            <!-- ########################################### -->
+            <!-- PESTAÑA 5: PLAN DE CUIDADO (PÁGINAS 9, 10 Y 11) -->
+            <!-- ########################################### -->
+
+
+
+
+
+
+
+            <div id="tab5" class="tab-content space-y-6">
+                <h2 class="text-xl font-bold text-teal-800 border-b pb-2">6. Plan de Cuidado</h2>
+
+                <!-- ACORDEÓN: 6.1 CUIDADO DE LA VIVIENDA (PÁGINA 9) -->
+                <details class="group border rounded-md mb-3" open>
+                    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+                        <span>6.1 Cuidado de la Vivienda (Página 9)</span>
+                        <span class="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <div class="p-4 bg-white space-y-6 text-xs">
+                        
+                        <!-- Encabezados -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold">111. Código de EBS</label>
+                                <input type="text" name="p9_cod_ebs" class="w-full border p-2 rounded bg-slate-50 mt-1">
+                            </div>
+                            <div>
+                                <label class="block font-semibold">112. Código de vivienda</label>
+                                <input type="text" name="p9_cod_vivienda" class="w-full border p-2 rounded bg-slate-50 mt-1">
+                            </div>
+                        </div>
+
+                        <!-- TABLA 1: ACCIÓN / INTERVENCIÓN -->
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-teal-700 mb-3">113 - 115. Acción / Intervención Directa</h4>
+                            <div class="space-y-4">
+                                <!-- Fila Dinámica de Formato Fijo (4 filas) -->
+                                <!-- Se utiliza un bucle en el HTML para generar las 4 filas de forma ordenada -->
+                                <script>
+                                    for (let i = 0; i < 4; i++) {
+                                        document.write(`
+                                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-slate-50 rounded border border-slate-200">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                                                    <select name="p9_t1_tipo_${i}" class="w-full border p-1 rounded bg-white">
+                                                        <option value="">...</option>
+                                                        <option value="CC">CC</option>
+                                                        <option value="DE">DE</option>
+                                                        <option value="PT">PT</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                                                    <input type="text" name="p9_t1_num_${i}" class="w-full border p-1 rounded bg-white">
+                                                </div>
+                                            </div>
+                                            <div class="md:col-span-2">
+                                                <label class="block text-[10px] font-bold text-gray-500">114. Acción / Intervención (CUPS / NoCUPS)</label>
+                                                <input type="text" name="p9_t1_accion_${i}" class="w-full border p-1 rounded bg-white">
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">115. Respuesta</label>
+                                                <select name="p9_t1_resp_${i}" class="w-full border p-1 rounded bg-white">
+                                                    <option value="">...</option>
+                                                    <option value="EnSitio">En sitio</option>
+                                                    <option value="Derivada">Derivada</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        `);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+
+                        <!-- TABLA 2: ACCIÓN DE CUIDADO CONCERTADA Y SEGUIMIENTO -->
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-teal-700 mb-3">116 - 119. Acción de Cuidado Concertada y Seguimiento</h4>
+                            <div class="space-y-4">
+                                <script>
+                                    for (let i = 0; i < 4; i++) {
+                                        document.write(`
+                                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-slate-50 rounded border border-slate-200">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                                                    <select name="p9_t2_tipo_${i}" class="w-full border p-1 rounded bg-white">
+                                                        <option value="">...</option>
+                                                        <option value="CC">CC</option>
+                                                        <option value="DE">DE</option>
+                                                        <option value="PT">PT</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                                                    <input type="text" name="p9_t2_num_${i}" class="w-full border p-1 rounded bg-white">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">117. Fecha Concertada</label>
+                                                <input type="text" name="p9_t2_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">118. Seguimiento 1</label>
+                                                <input type="text" name="p9_t2_seg1_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                                                <select name="p9_t2_seg1_estado_${i}" class="w-full border p-0.5 rounded bg-white text-[10px]">
+                                                    <option value="">Estado...</option>
+                                                    <option value="C">C. Cumple</option>
+                                                    <option value="CP">CP. Cumple Parcial</option>
+                                                    <option value="NC">NC. No Cumple</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">119. Seguimiento 2</label>
+                                                <input type="text" name="p9_t2_seg2_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                                                <select name="p9_t2_seg2_estado_${i}" class="w-full border p-0.5 rounded bg-white text-[10px]">
+                                                    <option value="">Estado...</option>
+                                                    <option value="C">C. Cumple</option>
+                                                    <option value="CP">CP. Cumple Parcial</option>
+                                                    <option value="NC">NC. No Cumple</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        `);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+
             <div class="mt-8 pt-4 border-t flex justify-end">
                 <button type="submit" class="bg-teal-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-teal-700 transition">
                     Generar PDF
@@ -627,6 +863,30 @@
             </div>
         </form>
     </main>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ########################################### -->
+<!-- Plantilla para un miembro de la familia -->
+<!-- ########################################### -->
+
+
+
+
+
+
+
+
+
+
 
 
     <template id="miembroTemplate">

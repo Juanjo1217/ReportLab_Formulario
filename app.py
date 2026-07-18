@@ -43,6 +43,9 @@ AJUSTE_MANUAL_Y_P7 = -4
 AJUSTE_MANUAL_X_P8 = -3  # Ajuste para la Página 8
 AJUSTE_MANUAL_Y_P8 = -4
 
+AJUSTE_MANUAL_X_P9 = -3  # Ajuste para la Página 9
+AJUSTE_MANUAL_Y_P9 = -4
+
 COORD_P1 = {
 
     # 1.1 Tratamiento de datos
@@ -636,6 +639,49 @@ COORD_MIEMBRO = {
 
 }
 
+
+COORD_P9 = {
+"p9_cod_ebs": (138, 674),
+"p9_cod_vivienda": (422, 673),
+
+"p9_t1_tipo_0_cc": (64, 619),
+"p9_t1_tipo_1_cc": (63, 577),
+"p9_t1_tipo_2_cc": (64, 534),
+"p9_t1_tipo_3_cc": (63, 492),
+
+"p9_t1_tipo_0_de": (64, 605),
+"p9_t1_tipo_1_de": (64, 563),
+"p9_t1_tipo_2_de": (64, 520),
+"p9_t1_tipo_3_de": (64, 479),
+
+"p9_t1_tipo_0_pt": (64, 591),
+"p9_t1_tipo_1_pt": (63, 548),
+"p9_t1_tipo_2_pt": (64, 506),
+"p9_t1_tipo_3_pt": (64, 463),
+
+"p9_t1_num_0": (102, 619),
+"p9_t1_num_1": (102, 577),
+"p9_t1_num_2": (101, 534),
+"p9_t1_num_3": (101, 492),
+
+"p9_t1_accion_0": (178, 620),
+"p9_t1_accion_1": (177, 578),
+"p9_t1_accion_2": (177, 535),
+"p9_t1_accion_3": (177, 493),
+
+"p9_t1_resp_0_ensitio": (457, 619),
+"p9_t1_resp_1_ensitio": (457, 577),
+"p9_t1_resp_2_ensitio": (457, 534),
+"p9_t1_resp_3_ensitio": (457, 492),
+
+"p9_t1_resp_0_derivada": (515, 619),
+"p9_t1_resp_1_derivada": (515, 577),
+"p9_t1_resp_2_derivada": (515, 534),
+"p9_t1_resp_3_derivada": (515, 492),
+
+}
+
+
 app = Flask(__name__)
 
 
@@ -1044,6 +1090,88 @@ def generar_overlay_miembro(idx, form, width, height):
     packet.seek(0)
     return packet
 
+def generar_overlay_p9(datos, width, height):
+    packet = io.BytesIO()
+    can = canvas.Canvas(packet, pagesize=(width, height))
+    can.setFont("Helvetica-Bold", 9)
+
+    # 1. EBS y Código de Vivienda
+    if "p9_cod_ebs" in COORD_P9:
+        can.drawString(*COORD_P9["p9_cod_ebs"], datos.get("p9_cod_ebs", ""))
+    if "p9_cod_vivienda" in COORD_P9:
+        can.drawString(*COORD_P9["p9_cod_vivienda"], datos.get("p9_cod_vivienda", ""))
+
+    # 2. Procesar Tabla 1 (Acción / Intervención)
+    for i in range(4):
+        # Tipo ID (CC, DE, PT)
+        tipo = datos.get(f"p9_t1_tipo_{i}")
+        if tipo:
+            key_tipo = f"p9_t1_tipo_{i}_{tipo.lower()}"
+            if key_tipo in COORD_P9: can.drawString(*COORD_P9[key_tipo], "X")
+            
+        # Número de Documento
+        num = datos.get(f"p9_t1_num_{i}")
+        key_num = f"p9_t1_num_{i}"
+        if num and key_num in COORD_P9: 
+            # Ajusta la coordenada Y según el tipo de ID
+            # COORD_P9[key_num][1] = COORD_P9[key_tipo][1]  # Ajusta la coordenada Y según el tipo de ID
+            can.drawString(*COORD_P9[key_num], num.upper())
+        
+        # Acción / Intervención
+        accion = datos.get(f"p9_t1_accion_{i}")
+        key_accion = f"p9_t1_accion_{i}"
+        if accion and key_accion in COORD_P9: can.drawString(*COORD_P9[key_accion], accion.upper())
+        
+        # Respuesta (En sitio / Derivada)
+        resp = datos.get(f"p9_t1_resp_{i}")
+        if resp:
+            key_resp = f"p9_t1_resp_{i}_{resp.lower()}"
+            if key_resp in COORD_P9: can.drawString(*COORD_P9[key_resp], "X")
+
+    # 3. Procesar Tabla 2 (Seguimientos)
+    for i in range(4):
+        # Tipo ID
+        tipo = datos.get(f"p9_t2_tipo_{i}")
+        if tipo:
+            key_tipo = f"p9_t2_tipo_{i}_{tipo.lower()}"
+            if key_tipo in COORD_P9: can.drawString(*COORD_P9[key_tipo], "X")
+            
+        # Número de Documento
+        num = datos.get(f"p9_t2_num_{i}")
+        key_num = f"p9_t2_num_{i}"
+        if num and key_num in COORD_P9: can.drawString(*COORD_P9[key_num], num.upper())
+        
+        # Fecha Concertada
+        fecha = datos.get(f"p9_t2_fecha_{i}")
+        key_fecha = f"p9_t2_fecha_{i}"
+        if fecha and key_fecha in COORD_P9: can.drawString(*COORD_P9[key_fecha], fecha)
+
+        # Seguimiento 1 (Fecha y Estado)
+        seg1_fecha = datos.get(f"p9_t2_seg1_fecha_{i}")
+        key_seg1_f = f"p9_t2_seg1_fecha_{i}"
+        if seg1_fecha and key_seg1_f in COORD_P9: can.drawString(*COORD_P9[key_seg1_f], seg1_fecha)
+        
+        seg1_est = datos.get(f"p9_t2_seg1_estado_{i}")
+        if seg1_est:
+            key_seg1_est = f"p9_t2_seg1_est_{i}_{seg1_est.lower()}"
+            if key_seg1_est in COORD_P9: can.drawString(*COORD_P9[key_seg1_est], "X")
+
+        # Seguimiento 2 (Fecha y Estado)
+        seg2_fecha = datos.get(f"p9_t2_seg2_fecha_{i}")
+        key_seg2_f = f"p9_t2_seg2_fecha_{i}"
+        if seg2_fecha and key_seg2_f in COORD_P9: can.drawString(*COORD_P9[key_seg2_f], seg2_fecha)
+        
+        seg2_est = datos.get(f"p9_t2_seg2_estado_{i}")
+        if seg2_est:
+            key_seg2_est = f"p9_t2_seg2_est_{i}_{seg2_est.lower()}"
+            if key_seg2_est in COORD_P9: can.drawString(*COORD_P9[key_seg2_est], "X")
+
+    can.save()
+    packet.seek(0)
+    return packet
+
+
+
 @app.route('/')
 def index():
     return render_template('formulario.html')
@@ -1057,10 +1185,13 @@ def generar():
     member_indices = obtener_lista_segura(form_completo, 'member_indices[]')
 
     # Separación lógica de datos de las pestañas fijas
-    datos_p1 = {k: v for k, v in form_completo.items() if not k.startswith("p2_") and not k.startswith("p3_") and not k.startswith("p4_") and not k.startswith("m_")}
+    datos_p1 = {k: v for k, v in form_completo.items() if not k.startswith("p2_") and not k.startswith("p3_") and not k.startswith("p4_") and not k.startswith("m_") and not k.startswith("p9_")}
     datos_p2 = {k: v for k, v in form_completo.items() if k.startswith("p2_")}
     datos_p3 = {k: v for k, v in form_completo.items() if k.startswith("p3_")}
     datos_p4 = {k: v for k, v in form_completo.items() if k.startswith("p4_")}
+    
+    # NUEVO: Separar los datos de la página 9
+    datos_p9 = {k: v for k, v in form_completo.items() if k.startswith("p9_")}
     
     # Recoger listas de Checkboxes de páginas fijas
     riesgos_p2 = obtener_lista_segura(form_completo, 'p2_riesgos[]')
@@ -1169,7 +1300,29 @@ def generar():
         # FASE 3: COPIAR PÁGINAS FINALES 9 A 11 (CUIDADO DE VIVIENDA / FAMILIA)
         # =============================================================
         for idx in range(8, len(reader.pages)):
-            writer.add_page(reader.pages[idx])
+            page = reader.pages[idx]
+            width = float(page.mediabox.width)
+            height = float(page.mediabox.height)
+            
+            x_offset = float(page.mediabox.left)
+            y_offset = float(page.mediabox.bottom)
+            
+            # NUEVO: Si estamos en el índice 8 (Página 9 de la plantilla), estampamos los datos
+            if idx == 8:
+                overlay_packet = generar_overlay_p9(datos_p9, width, height)
+                overlay_reader = PdfReader(overlay_packet)
+                overlay_page = overlay_reader.pages[0]
+                
+                # Aplicamos los desvíos y el ajuste de margen manual de la Página 9
+                desplazamiento_x = x_offset + (AJUSTE_MANUAL_X_P9 if 'AJUSTE_MANUAL_X_P9' in globals() else 0)
+                desplazamiento_y = y_offset + (AJUSTE_MANUAL_Y_P9 if 'AJUSTE_MANUAL_Y_P9' in globals() else 0)
+                
+                if desplazamiento_x != 0 or desplazamiento_y != 0:
+                    overlay_page.add_transformation(Transformation().translate(tx=desplazamiento_x, ty=desplazamiento_y))
+                
+                page.merge_page(overlay_page)
+            
+            writer.add_page(page)
 
         # Generación del archivo en memoria y descarga
         output = io.BytesIO()
