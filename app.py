@@ -4,6 +4,25 @@ from reportlab.lib.pagesizes import letter
 from pypdf import PdfReader, PdfWriter, Transformation
 import io
 
+import os
+import sys
+import webbrowser
+from threading import Timer
+from flask import Flask, render_template, request, send_file
+from reportlab.pdfgen import canvas
+from pypdf import PdfReader, PdfWriter, Transformation
+import io
+
+# =========================================================================
+# --- RESOLUCIÓN DE RUTAS PARA PYINSTALLER ---
+# =========================================================================
+def resource_path(relative_path):
+    """ Obtiene la ruta absoluta de los recursos, compatible con el empaquetado de PyInstaller """
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 def dibujar_guia(can):
         can.setFont("Helvetica", 7)
@@ -943,7 +962,11 @@ COORD_P11 = {
 "p11_t2_seg2_est_3_cp": (508, 219),
 "p11_t2_seg2_est_3_nc": (507, 203),
 }
-app = Flask(__name__)
+
+
+
+template_dir = resource_path('templates')
+app = Flask(__name__, template_folder=template_dir)
 
 
 def clasificar_paginas_pdf(reader):
@@ -1694,7 +1717,7 @@ def generar():
     hogar_p4 = obtener_lista_segura(form_completo, 'p4_hogar[]')
 
     try:
-        clean_reader = PdfReader("plantilla_ministerio.pdf")
+        clean_reader = PdfReader(resource_path("plantilla_ministerio.pdf"))
         
         # 1. Cargar el PDF base subido por el usuario (si existe) o usar la plantilla limpia
         if pdf_base_subido and pdf_base_subido.filename != '':
@@ -1981,7 +2004,13 @@ def importar():
     except Exception as e:
         return {"error": f"Error al procesar el PDF: {e}"}, 500
 
-
+def open_browser():
+    """ Abre el navegador web por defecto del ordenador """
+    webbrowser.open_new("http://127.0.0.1:5000")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Espera 1.2 segundos para asegurar que Flask haya iniciado y abre la pestaña web
+    Timer(1.2, open_browser).start()
+    
+    # Desactivamos debug para evitar aperturas de pestañas dobles y optimizar velocidad
+    app.run(host='127.0.0.1', port=5000, debug=False)
