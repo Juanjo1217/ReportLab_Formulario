@@ -17,6 +17,10 @@
     </header>
 
     <main class="max-w-4xl mx-auto mt-6 p-4">
+
+        
+
+
         <!-- Navegación -->
         <nav class="flex border-b bg-white mb-4 rounded-t-lg shadow-sm">
             <button type="button" onclick="showTab(0)" class="tab-btn px-6 py-3 active">1. General</button>
@@ -28,7 +32,7 @@
         </nav>
 
         <!-- FORMULARIO HACIA PYTHON -->
-        <form action="/generar" method="POST" class="bg-white p-8 shadow-lg rounded-b-lg">
+        <form action="/generar" method="POST" enctype="multipart/form-data" class="bg-white p-8 shadow-lg rounded-b-lg">
 
 
 
@@ -39,9 +43,6 @@
 
 
 
-
-
-            
 
             <!-- ########################################### -->
             <!-- SECCIÓN 1: GENERAL -->
@@ -62,6 +63,20 @@
 
 
             <div id="tab0" class="tab-content active">
+                <!-- SECCIÓN IMPORTAR PDF EXISTENTE -->
+                <div class="bg-teal-50 border border-teal-200 rounded-lg p-5 mb-6">
+                    <h3 class="font-bold text-teal-800 text-sm mb-1 flex items-center gap-1.5">
+                        📄 Continuar sobre PDF Existente (Opcional)
+                    </h3>
+                    <p class="text-xs text-teal-700 mb-3">Si tienes un PDF parcialmente diligenciado, súbelo aquí. Los nuevos datos se escribirán directamente sobre ese archivo en lugar de usar una plantilla vacía.</p>
+                    <input type="file" name="pdf_base" accept=".pdf" class="block w-full text-xs file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-teal-600 file:text-white hover:file:bg-teal-700 cursor-pointer">
+                </div>
+
+
+
+
+
+
                     <!-- 1. POLÍTICA DE DATOS -->
                     <div class="bg-teal-50 p-4 rounded-lg border border-teal-200">
                         <h3 class="font-bold text-teal-800 mb-2">1.1 Tratamiento y uso de datos</h3>
@@ -853,6 +868,162 @@
                         </div>
                     </div>
                 </details>
+
+
+
+
+                <!-- ACORDEÓN: 6.2 CUIDADO DE LA FAMILIA (PÁGINA 10) -->
+                <details class="group border rounded-md mb-3" open>
+                    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+                        <span>6.2 Cuidado de la familia (Página 10)</span>
+                        <span class="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <div class="p-4 bg-white space-y-6 text-xs">
+                        
+                        <!-- Encabezados -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold">120. Código de EBS</label>
+                                <input type="text" name="p10_cod_ebs" class="w-full border p-2 rounded bg-slate-50 mt-1">
+                            </div>
+
+                            <div>
+                                <label class="block font-semibold">121. Código de vivienda</label>
+                                <input type="text" name="p10_cod_vivienda" class="w-full border p-2 rounded bg-slate-50 mt-1">
+                            </div>
+                            
+                            <div>
+                                
+                                <label class="block font-semibold">123. Código de familia/Hogar</label>
+                                <input type="text" name="p10_cod_familia" class="w-full border p-2 rounded bg-slate-50 mt-1">
+                            </div>
+                        </div>
+
+                        <!-- TABLA 1: ACCIÓN / INTERVENCIÓN -->
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-teal-700 mb-3">123 - 125. Acción / Intervención Directa</h4>
+                            <div class="space-y-4">
+                                <!-- Fila Dinámica de Formato Fijo (4 filas) -->
+                                <!-- Se utiliza un bucle en el HTML para generar las 4 filas de forma ordenada -->
+                                <script>
+                                    for (let i = 0; i < 4; i++) {
+                                        document.write(`
+                                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-slate-50 rounded border border-slate-200">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                                                    <select name="p10_t1_tipo_${i}" class="w-full border p-1 rounded bg-white">
+                                                        <option value="">...</option>
+                                                        <option value="CC">CC</option>
+                                                        <option value="DE">DE</option>
+                                                        <option value="PT">PT</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                                                    <input type="text" name="p9_t1_num_${i}" class="w-full border p-1 rounded bg-white">
+                                                </div>
+                                            </div>
+                                            <div class="md:col-span-2">
+                                                <label class="block text-[10px] font-bold text-gray-500">124. Acción / Intervención (CUPS / NoCUPS)</label>
+                                                <input type="text" name="p10_t1_accion_${i}" class="w-full border p-1 rounded bg-white">
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">125. Respuesta</label>
+                                                <select name="p10_t1_resp_${i}" class="w-full border p-1 rounded bg-white">
+                                                    <option value="">...</option>
+                                                    <option value="EnSitio">En sitio</option>
+                                                    <option value="Derivada">Derivada</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        `);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+
+                        <!-- TABLA 2: ACCIÓN DE CUIDADO CONCERTADA Y SEGUIMIENTO -->
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-teal-700 mb-3">126 - 129. Acción de Cuidado Concertada y Seguimiento</h4>
+                            <div class="space-y-4">
+                                <script>
+                                    for (let i = 0; i < 4; i++) {
+                                        document.write(`
+                                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-slate-50 rounded border border-slate-200">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                                                    <select name="p10_t2_tipo_${i}" class="w-full border p-1 rounded bg-white">
+                                                        <option value="">...</option>
+                                                        <option value="CC">CC</option>
+                                                        <option value="DE">DE</option>
+                                                        <option value="PT">PT</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                                                    <input type="text" name="p10_t2_num_${i}" class="w-full border p-1 rounded bg-white">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">117. Fecha Concertada</label>
+                                                <input type="text" name="p10_t2_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">118. Seguimiento 1</label>
+                                                <input type="text" name="p10_t2_seg1_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                                                <select name="p10_t2_seg1_estado_${i}" class="w-full border p-0.5 rounded bg-white text-[10px]">
+                                                    <option value="">Estado...</option>
+                                                    <option value="C">C. Cumple</option>
+                                                    <option value="CP">CP. Cumple Parcial</option>
+                                                    <option value="NC">NC. No Cumple</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">119. Seguimiento 2</label>
+                                                <input type="text" name="p10_t2_seg2_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                                                <select name="p10_t2_seg2_estado_${i}" class="w-full border p-0.5 rounded bg-white text-[10px]">
+                                                    <option value="">Estado...</option>
+                                                    <option value="C">C. Cumple</option>
+                                                    <option value="CP">CP. Cumple Parcial</option>
+                                                    <option value="NC">NC. No Cumple</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        `);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+
+                <details class="group border rounded-md mb-3">
+
+                    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+                        <span>6.3 Cuidado de la Persona (Página 11) - Planes Médicos Individuales</span>
+                        <span class="transition group-open:rotate-180">▼</span>
+                    </summary>
+
+                    <div class="p-4 bg-white space-y-6 text-xs">
+                        <div class="flex justify-between items-center border-b pb-3">
+                            <div>
+                                <h4 class="font-bold text-teal-800">Planes de Cuidado de la Persona</h4>
+                                <p class="text-xs text-gray-500">Agrega un plan de cuidado individual solo para las personas que requieran atención del médico líder.</p>
+                            </div>
+
+                            <button type="button" onclick="agregarPlanP11()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded shadow-md transition text-xs">
+                                + Agregar Plan de Cuidado (Pág 11)
+                            </button>
+
+                        </div>
+                        
+                        <!-- Contenedor de planes de cuidado individuales -->
+                        <div id="p11Container" class="space-y-6 mt-4"></div>
+                    </div>
+                </details>
             </div>
 
 
@@ -1585,7 +1756,308 @@
     </template>
 
 
+
+
+
+
+
+
+
+
+
+<!-- ========================================== -->
+<!-- PLANTILLA PARA UN PLAN INDIVIDUAL DE P11  -->
+<!-- ========================================== -->
+
+
+
+
+
+
+
+
+
+<template id="p11Template">
+    <div class="p11-card bg-slate-50 border border-slate-300 rounded-lg p-6 relative">
+        <!-- Campo oculto para enviar los índices de los planes activos a Python -->
+        <input type="hidden" name="p11_indices[]" value="__IDX__">
+
+        <!-- Botón de eliminación -->
+        <button type="button" onclick="this.closest('.p11-card').remove(); actualizarNumeracionP11();" class="absolute top-4 right-4 bg-red-100 hover:bg-red-200 text-red-600 font-bold px-3 py-1 rounded text-xs transition">
+            Eliminar Plan X
+        </button>
+
+        <h4 class="font-bold text-teal-700 mb-4 border-b pb-1 text-sm">Plan de Cuidado Individual #<span class="p11-numero"></span></h4>
+        
+        <!-- Encabezados -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div>
+                <label class="block font-semibold">130. Código de EBS</label>
+                <input type="text" name="p11_idx___IDX___p11_cod_ebs" class="w-full border p-2 rounded bg-white mt-1">
+            </div>
+            <div>
+                <label class="block font-semibold">131. Código de vivienda</label>
+                <input type="text" name="p11_idx___IDX___p11_cod_vivienda" class="w-full border p-2 rounded bg-white mt-1">
+            </div>
+            <div>
+                <label class="block font-semibold">132. Cód. Familia/Hogar</label>
+                <input type="text" name="p11_idx___IDX___p11_cod_familia" class="w-full border p-2 rounded bg-white mt-1">
+            </div>
+        </div>
+
+        <!-- Identificación del Integrante Atendido -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4 mb-4">
+            <div>
+                <label class="block font-semibold mb-2">133. Tipo de identificación integrante de la familia</label>
+                <select name="p11_idx___IDX___p11_id_tipo" class="w-full border p-2 rounded bg-white">
+                    <option value="">Seleccione...</option>
+                    <option value="AS">AS. Adulto sin Identificación</option>
+                    <option value="CC">CC. Cédula Ciudadanía</option>
+                    <option value="CD">CD. Carné Diplomático</option>
+                    <option value="CE">CE. Cédula de Extranjería</option>
+                    <option value="MS">MS. Menor sin Identificación</option>
+                    <option value="NV">NV. Nacido Vivo</option>
+                    <option value="PE">PE. Permiso Especial</option>
+                    <option value="PT">PT. Permiso Protección</option>
+                    <option value="RC">RC. Registro Civil</option>
+                    <option value="TI">TI. Tarjeta Identidad</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">134. Número de identificación de la persona atendida</label>
+                <input type="text" name="p11_idx___IDX___p11_id_numero" placeholder="Ej: 10029348..." class="w-full border p-2 rounded bg-white mt-1">
+            </div>
+        </div>
+
+        <!-- TABLA 1: ACCIÓN / INTERVENCIÓN DIRECTA (4 FILAS ESTÁTICAS) -->
+        <div class="border-t pt-4 mb-4">
+            <h5 class="font-bold text-teal-700 mb-3 text-xs">135 - 136. Acción / Intervención Directa</h5>
+            <div class="space-y-3">
+                
+                <!-- Fila 0 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t1_tipo_0" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t1_num_0" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-[10px] font-bold text-gray-500">136. Acción / Intervención (CUPS / NoCUPS)</label>
+                        <input type="text" name="p11_idx___IDX___p11_t1_accion_0" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">136. Respuesta</label>
+                        <select name="p11_idx___IDX___p11_t1_resp_0" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="EnSitio">En sitio</option><option value="Derivada">Derivada</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t1_tipo_1" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t1_num_1" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-[10px] font-bold text-gray-500">136. Acción / Intervención (CUPS / NoCUPS)</label>
+                        <input type="text" name="p11_idx___IDX___p11_t1_accion_1" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">136. Respuesta</label>
+                        <select name="p11_idx___IDX___p11_t1_resp_1" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="EnSitio">En sitio</option><option value="Derivada">Derivada</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t1_tipo_2" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t1_num_2" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-[10px] font-bold text-gray-500">136. Acción / Intervención (CUPS / NoCUPS)</label>
+                        <input type="text" name="p11_idx___IDX___p11_t1_accion_2" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">136. Respuesta</label>
+                        <select name="p11_idx___IDX___p11_t1_resp_2" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="EnSitio">En sitio</option><option value="Derivada">Derivada</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t1_tipo_3" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t1_num_3" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-[10px] font-bold text-gray-500">136. Acción / Intervención (CUPS / NoCUPS)</label>
+                        <input type="text" name="p11_idx___IDX___p11_t1_accion_3" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">136. Respuesta</label>
+                        <select name="p11_idx___IDX___p11_t1_resp_3" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="EnSitio">En sitio</option><option value="Derivada">Derivada</option></select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TABLA 2: ACCIÓN DE CUIDADO CONCERTADA Y SEGUIMIENTO (4 FILAS ESTÁTICAS) -->
+        <div class="border-t pt-4">
+            <h5 class="font-bold text-teal-700 mb-3 text-xs">137 - 140. Acción de Cuidado Concertada y Seguimiento</h5>
+            <div class="space-y-3">
+                
+                <!-- Fila 0 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t2_tipo_0" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t2_num_0" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">138. Fecha Concertada</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_fecha_0" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">139. Seguimiento 1</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg1_fecha_0" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg1_estado_0" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">140. Seguimiento 2</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg2_fecha_0" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg2_estado_0" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t2_tipo_1" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t2_num_1" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">138. Fecha Concertada</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_fecha_1" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">139. Seguimiento 1</label>
+                        <input type="text" name="m___IDX___p11_t2_seg1_fecha_1" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg1_estado_1" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">140. Seguimiento 2</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg2_fecha_1" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg2_estado_1" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t2_tipo_2" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t2_num_2" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">138. Fecha Concertada</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_fecha_2" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">139. Seguimiento 1</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg1_fecha_2" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg1_estado_2" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">140. Seguimiento 2</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg2_fecha_2" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg2_estado_2" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t2_tipo_3" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t2_num_3" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">138. Fecha Concertada</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_fecha_3" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">139. Seguimiento 1</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg1_fecha_3" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg1_estado_3" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">140. Seguimiento 2</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg2_fecha_3" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg2_estado_3" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</template>
+
+
+
+<!-- ========================================== -->
+<!-- SCRIPTS -->
+<!-- ========================================== -->
+
+
+
     <script>
+
         function showTab(i) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1624,10 +2096,32 @@
             });
         }
 
+        let p11Contador = 0;
+
         // Agregar el primer familiar por defecto al cargar
         window.onload = function() {
             agregarMiembro();
+            agregarPlanP11();
         };
+
+        function agregarPlanP11() {
+            const container = document.getElementById('p11Container');
+            const template = document.getElementById('p11Template').innerHTML;
+            
+            // Reemplazar el comodín __IDX__ por el índice del plan de cuidado actual
+            const htmlModificado = template.replace(/__IDX__/g, p11Contador);
+            
+            container.insertAdjacentHTML('beforeend', htmlModificado);
+            actualizarNumeracionP11();
+            p11Contador++;
+        }
+
+        function actualizarNumeracionP11() {
+            const planes = document.querySelectorAll('.p11-card');
+            planes.forEach((card, index) => {
+                card.querySelector('.p11-numero').textContent = index + 1;
+            });
+        }
     </script>
 </body>
 </html>
