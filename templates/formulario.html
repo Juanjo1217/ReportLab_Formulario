@@ -1029,50 +1029,298 @@
 </details>
 
             <!-- ACORDEÓN: PÁGINA 7 (VALORACIÓN FÍSICA E INFECCIOSAS) -->
-            <details class="group border rounded-md mb-3">
-                <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
-                    <span>Página 7: Valoración Nutricional, Tensión y Transmisibles (Campos 90 - 104)</span>
-                    <span class="transition group-open:rotate-180">▼</span>
-                </summary>
-                <div class="p-4 bg-white text-xs space-y-4">
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div>
-                            <label class="block font-semibold">92. Peso (Kg)</label>
-                            <input type="text" name="m___IDX___p7_peso" class="w-full border p-2 rounded">
-                        </div>
-                        <div>
-                            <label class="block font-semibold">93. Talla (cm)</label>
-                            <input type="text" name="m___IDX___p7_talla" class="w-full border p-2 rounded">
-                        </div>
-                        <div>
-                            <label class="block font-semibold">98. Tensión Sistólica</label>
-                            <input type="text" name="m___IDX___p7_tension_sistolica" class="w-full border p-2 rounded">
-                        </div>
-                        <div>
-                            <label class="block font-semibold">98. Tensión Diastólica</label>
-                            <input type="text" name="m___IDX___p7_tension_diastolica" class="w-full border p-2 rounded">
-                        </div>
-                    </div>
-                </div>
-            </details>
+            <!-- ACORDEÓN COMPACTO: PÁGINA 7 (VALORACIÓN NUTRICIONAL, TENSIÓN E INFECCIOSAS) -->
+<details class="group border rounded-md mb-3">
+    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+        <span>Página 7: Valoración Nutricional, Tensión y Transmisibles (Campos 90 - 104)</span>
+        <span class="transition group-open:rotate-180">▼</span>
+    </summary>
+    <div class="p-4 bg-white space-y-5 text-xs">
+        
+        <!-- Campo 90 (Derechos en salud) -->
+        <div>
+            <label class="block font-bold text-gray-700 mb-2">90. Prácticas para el ejercicio y exigibilidad del derecho a la salud:</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p7_derechos[]" value="conoce"> Conoce los derechos y deberes en salud</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p7_derechos[]" value="info"> Tiene información sobre servicios de salud a los que tiene derecho</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p7_derechos[]" value="lugares"> Conoce los lugares donde pueden prestar los servicios</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p7_derechos[]" value="resolver"> Conoce cómo resolver las dificultades para acceder</label>
+            </div>
+        </div>
 
-            <!-- ACORDEÓN: PÁGINA 8 (SALUD MENTAL Y CONSUMO) -->
-            <details class="group border rounded-md">
-                <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
-                    <span>Página 8: Salud Mental y Consumo de Sustancias (Campos 105 - 110)</span>
-                    <span class="transition group-open:rotate-180">▼</span>
-                </summary>
-                <div class="p-4 bg-white text-xs space-y-4">
-                    <div>
-                        <label class="block font-semibold mb-2">107. Durante los últimos 8 días, ¿ha pensado en lastimarse o no querer vivir?</label>
-                        <div class="flex gap-4">
-                            <label><input type="radio" name="m___IDX___p8_autolesion" value="Si"> Sí</label>
-                            <label><input type="radio" name="m___IDX___p8_autolesion" value="Ninguno"> Ninguno</label>
-                            <label><input type="radio" name="m___IDX___p8_autolesion" value="No_aplica"> No aplica</label>
-                        </div>
-                    </div>
+        <!-- Campo 91, 92, 93, 94 y 95 (Medidas Físicas) -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">91. Lactancia menor 6m</label>
+                <select name="m___IDX___p7_lactancia" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                    <option value="no_aplica">No aplica</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">92. Peso (Kilogramos)</label>
+                <input type="text" name="m___IDX___p7_peso" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">93. Talla (Centímetros)</label>
+                <input type="text" name="m___IDX___p7_talla" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">94. Cintura >18 años (cm)</label>
+                <input type="text" name="m___IDX___p7_circunferencia_cintura" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">95. IMC (>5 años)</label>
+                <input type="text" name="m___IDX___p7_imc" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+        </div>
+
+        <!-- Campo 96 (Antropometría) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-1">96. Clasificación antropométrica del estado nutricional</label>
+            <select name="m___IDX___p7_antropometrico" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                <option value="">Seleccione...</option>
+                <option value="obesidad">Obesidad</option>
+                <option value="sobrepeso">Sobrepeso</option>
+                <option value="riesgo_sobrepeso">Riesgo de Sobrepeso</option>
+                <option value="peso_adecuado">Peso adecuado para la talla o IMC adecuado para la edad</option>
+                <option value="riesgo_desnutricion">Riesgo de Desnutrición Aguda (<5 años), o Riesgo de delgadez (>4 años)</option>
+                <option value="desnutricion_moderada">Desnutrición Aguda Moderada</option>
+                <option value="desnutricion_severa">Desnutrición Aguda Severa</option>
+                <option value="riesgo_delgadez">Riesgo de Delgadez</option>
+                <option value="delgadez">Delgadez</option>
+                <option value="bajo_peso_gestacional">Bajo Peso para la Edad Gestacional</option>
+                <option value="normal">Normal</option>
+            </select>
+        </div>
+
+        <!-- Campo 97 (Signos físicos de desnutrición) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">97. Se identifican signos físicos de desnutrición aguda (niños de 3 meses a 5 años):</label>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-[11px]">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="cabeza"> Cabeza</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="cara"> Cara</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="piel"> Piel</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="torax"> Tórax y abdomen</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="extremidades"> Extremidades</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="comportamiento"> Comportamiento</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="edema"> Edema</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="ninguna"> Ninguna</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="no_aplica"> No aplica</label>
+            </div>
+        </div>
+
+        <!-- Campo 98 y 99 (Tensión Arterial) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-bold text-gray-700 mb-2">98. Medición de Tensión arterial (>18 años)</label>
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <input type="number" name="m___IDX___p7_tension_sistolica" placeholder="Sistólica" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                    <input type="number" name="m___IDX___p7_tension_diastolica" placeholder="Diastólica" class="w-full border p-2 rounded bg-slate-50 text-xs">
                 </div>
-            </details>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_tension_no_aplica" value="Si"> No aplica</label>
+            </div>
+            <div class="md:col-span-2">
+                <label class="block font-bold text-gray-700 mb-1">99. Clasificación de la Tensión arterial</label>
+                <select name="m___IDX___p7_tension_clasificacion" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                    <option value="">Seleccione...</option>
+                    <option value="crisis">Crisis hipertensiva (sistólica > 180 / diastólica > 120)</option>
+                    <option value="alta_2">Alta - Hipertensión nivel 2 (sistólica ≥ 140 / diastólica ≥ 90)</option>
+                    <option value="alta_1">Alta - Hipertensión nivel 1 (sistólica 130-139 / diastólica 80-89)</option>
+                    <option value="elevada">Elevada (sistólica 120-129 / diastólica < 80)</option>
+                    <option value="normal">Normal (sistólica < 120 / diastólica < 80)</option>
+                    <option value="no_aplica">No aplica</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo 100 (Enfermedades No Transmisibles) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">100. Diagnóstico previo de alguna enfermedad no transmisible (Crónica):</label>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-[10px]">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="obstetrica"> Enf. obstétrica</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="cardiovascular"> Cardiovasculares</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="diabetes"> Diabetes</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="cancer"> Cáncer</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="epoc"> EPOC</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="raras"> Enf. raras y huérfanas</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="trastorno"> Trastorno mental</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="epilepsia"> Epilepsia</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="secuelas"> Secuelas de lesiones</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 101 (Enfermedades Transmisibles) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">101. ¿Presenta alguna situación o condición de salud transmisible?:</label>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[10px] max-h-40 overflow-y-auto p-2 border rounded bg-slate-50">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="infancia"> Enf. prevalentes de la infancia (EDA/ERA)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="tuberculosis"> Tuberculosis</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="lepra"> Lepra</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="rabia"> Rabia</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="dengue"> Dengue</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="chikungunya"> Chikungunya</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="zika"> Zika</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="chagas"> Chagas</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="visceral"> Leishmaniasis visceral</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="cutanea"> Leishmaniasis cutánea</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="tungiasis"> Tungiasis</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="alimentos"> Transmitidas por alimentos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="era"> Respiratoria aguda (ERA)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="eda"> Diarreica aguda (EDA)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 102 y 103 (Zona Endémica y Tratamiento) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-3">
+            <div class="md:col-span-2">
+                <label class="block font-bold text-gray-700 mb-2">102. ¿Vive en zona endémica o presenta signos y síntomas de:</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[10px]">
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="geohelmintiasis"> Geohelmintiasis</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="teniasis"> Teniasis</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="tracoma"> Tracoma</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="escabiosis"> Escabiosis</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="pian"> Pian</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="malaria"> Malaria</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="ninguna"> Ninguna</label>
+                </div>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">103. ¿Recibe atención y tratamiento actualmente?</label>
+                <select name="m___IDX___p7_tratamiento" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                    <option value="">Seleccione...</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                    <option value="no_aplica">No aplica</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo 104 (Motivo no atención) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">104. Motivo por el cual no ha recibido la atención:</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 text-[10px] max-h-40 overflow-y-auto p-2 border rounded bg-slate-50">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_afiliado"> Persona no afiliada</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="lejos"> El servicio de salud está lejos de su residencia</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="tramites"> Dificultades con trámites administrativos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_agenda"> "No hay agenda" para esta atención</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_sabe"> No sabe cómo solicitar la cita</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_pagar"> No puede pagar el copago</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="horarios"> Horarios de atención restringidos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="tiempos"> Largos tiempos de espera</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_comodo"> No se siente cómodo/a con el personal de salud</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="enfermo"> Persona enferma que no puede acudir al servicio</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_adherencia"> No tiene adherencia al tratamiento</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_disponibilidad"> No hay disponibilidad de medicamentos en el centro</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="falta_tiempo"> Falta de tiempo del cuidador</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="falta_adecuacion"> Falta de adecuación sociocultural del servicio</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_aplica"> No aplica</label>
+            </div>
+        </div>
+    </div>
+</details>
+
+            
+            <!-- ACORDEÓN COMPACTO: PÁGINA 8 (SALUD MENTAL Y CONSUMO DE SUSTANCIAS) -->
+<details class="group border rounded-md">
+    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+        <span>Página 8: Salud Mental y Consumo de Sustancias (Campos 105 - 110)</span>
+        <span class="transition group-open:rotate-180">▼</span>
+    </summary>
+    <div class="p-4 bg-white space-y-5 text-xs">
+        
+        <!-- Campo 105 (Situaciones de riesgo jóvenes de 14 a 28 años) -->
+        <div>
+            <label class="block font-bold text-gray-700 mb-2">105. ¿Identifica situaciones familiares o personales que alteren o generen riesgo? (Indagar de 14 a 28 años):</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[10px] max-h-48 overflow-y-auto p-2 border rounded bg-slate-50">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="convivencia"> Inicio de la convivencia en pareja</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="nuevo_integrante"> Llegada de un nuevo integrante</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="ingreso_estudiar"> Ingreso a estudiar</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="perdida_ano"> Pérdida del año escolar</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="embarazo"> Embarazo temprano o adolescente</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="independencia"> Independencia o salida del hogar paterno-materno</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="separacion"> Separación de pareja</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="duelo"> Duelo</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="desempleo"> Desempleo o pérdida abrupta del trabajo</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="crisis"> Pérdidas o crisis económicas</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="conflictos"> Conflictos familiares</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="abandono"> Situación de abandono</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="no_cuenta_redes"> No identifica / No cuenta con redes de apoyo sociales</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="estigma"> Estigma y discriminación</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="conflictos_orientacion"> Conflictos relacionados con su orientación sexual</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="trastorno"> Trastorno de salud mental en algún integrante de la familia</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 106 (Salud mental durante más de dos semanas) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">106. Durante más de dos semanas (solo personas mayores de 14 años):</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p8_salud_mental[]" value="triste"> Se ha sentido triste todos los días durante la mayor parte del día</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p8_salud_mental[]" value="perder_interes"> Ha perdido el interés en actividades que antes disfrutaba</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p8_salud_mental[]" value="inquieto_nervioso"> Se ha sentido inquieto(a) o nervioso(a) todos los días durante la mayor parte del día</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p8_salud_mental[]" value="ninguno"> Ninguno</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p8_salud_mental[]" value="no_aplica"> No aplica</label>
+            </div>
+        </div>
+
+        <!-- Campo 107 y 108 (Autolesión y Consumo) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">107. Durante los últimos 8 días, ¿ha pensado en autolesionarse? (>14 años)</label>
+                <select name="m___IDX___p8_autolesion" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="si">Ha pensado en lastimarse o en no querer seguir viviendo</option>
+                    <option value="ninguno">Ninguno</option>
+                    <option value="no_aplica">No aplica</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">108. Consumo de sustancias psicoactivas en los últimos 3 meses (14 a 17 años)</label>
+                <select name="m___IDX___p8_consumo" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="si">Sí (Aplique ASSIST, AUDIT, Carlos CRAFFT)</option>
+                    <option value="no">No</option>
+                    <option value="no_aplica">No aplica</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo 109 (Resultados Instrumentos de Consumo) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">109. Resultados de riesgos instrumentos de consumo (No obligatorio):</label>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500">Puntaje riesgo ASSIST</label>
+                    <input type="number" name="m___IDX___p8_puntaje_assist" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500">Puntaje riesgo AUDIT</label>
+                    <input type="number" name="m___IDX___p8_puntaje_audit" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500">Puntaje riesgo Carlos CRAFFT</label>
+                    <input type="number" name="m___IDX___p8_puntaje_crafft" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                </div>
+            </div>
+        </div>
+
+        <!-- Campo 110 (Limitación actividades) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-1">110. ¿Ha presentado alguna otra situación de salud que limite sus actividades en la última semana?</label>
+            <select name="m___IDX___p8_limita" class="w-full border p-2 rounded bg-slate-50">
+                <option value="">Seleccione...</option>
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+    </div>
+</details>
         </div>
     </template>
 

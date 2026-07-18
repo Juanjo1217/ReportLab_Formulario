@@ -504,6 +504,135 @@ COORD_MIEMBRO = {
 "p6_mot_falta_adecuacion": (64, 57),
 "p6_mot_ninguna": (262, 57),
 
+"p7_peso": (170, 635),
+"p7_talla": (170, 618),
+"p7_circunferencia_cintura": (542, 635),
+"p7_imc": (371, 618),
+"p7_tension_sistolica": (156, 479),
+"p7_tension_diastolica": (356, 479),
+
+"p7_tension_no_aplica": (474, 479),
+
+"p7_der_conoce": (64, 714),
+"p7_der_info": (64, 701),
+"p7_der_lugares": (64, 685),
+"p7_der_resolver": (63, 671),
+"p7_lactancia_si": (344, 652),
+"p7_lactancia_no": (434, 652),
+"p7_lactancia_no_aplica": (502, 652),
+"p7_ant_obesidad": (63, 578),
+"p7_ant_sobrepeso": (131, 578),
+"p7_ant_riesgo_sobrepeso": (204, 578),
+"p7_ant_peso_adecuado": (314, 578),
+"p7_ant_riesgo_desnutricion": (64, 565),
+"p7_ant_desnutricion_moderada": (396, 565),
+"p7_ant_desnutricion_severa": (63, 543),
+"p7_ant_riesgo_delgadez": (195, 543),
+"p7_ant_delgadez": (301, 543),
+"p7_ant_bajo_peso_gestacional": (368, 543),
+"p7_ant_normal": (530, 543),
+"p7_desn_cabeza": (416, 525),
+"p7_desn_cara": (478, 525),
+"p7_desn_piel": (529, 525),
+"p7_desn_torax": (63, 511),
+"p7_desn_extremidades": (162, 511),
+"p7_desn_comportamiento": (246, 511),
+"p7_desn_edema": (342, 511),
+"p7_desn_ninguna": (404, 511),
+"p7_desn_no_aplica": (469, 511),
+"p7_ten_crisis": (64, 448),
+"p7_ten_alta_2": (64, 435),
+"p7_ten_alta_1": (64, 420),
+"p7_ten_elevada": (63, 405),
+"p7_ten_normal": (64, 389),
+"p7_ent_obstetrica": (64, 358),
+"p7_ent_cardiovascular": (63, 345),
+"p7_ent_diabetes": (347, 345),
+"p7_ent_cancer": (415, 345),
+"p7_ten_no_aplica": (388, 390),
+"p7_ent_epoc": (474, 345),
+"p7_ent_raras": (63, 331),
+"p7_ent_trastorno": (216, 330),
+"p7_ent_epilepsia": (314, 330),
+"p7_ent_secuelas": (63, 317),
+"p7_ent_ninguna": (473, 316),
+"p7_tra_infancia": (64, 285),
+"p7_tra_tuberculosis": (469, 285),
+"p7_tra_lepra": (63, 271),
+"p7_tra_rabia": (121, 271),
+"p7_tra_dengue": (176, 270),
+"p7_tra_chikungunya": (239, 271),
+"p7_tra_zika": (321, 271),
+"p7_tra_chagas": (371, 271),
+"p7_tra_visceral": (432, 271),
+"p7_tra_cutanea": (64, 258),
+"p7_tra_tungiasis": (182, 257),
+"p7_tra_alimentos": (251, 257),
+"p7_tra_era": (63, 243),
+"p7_tra_eda": (234, 242),
+"p7_tra_ninguna": (396, 242),
+"p7_end_geohelmintiasis": (57, 211),
+"p7_end_teniasis": (151, 211),
+"p7_end_tracoma": (266, 211),
+"p7_end_escabiosis": (332, 211),
+"p7_end_pian": (404, 211),
+"p7_end_malaria": (455, 211),
+"p7_end_ninguna": (518, 211),
+"p7_tratamiento_si": (404, 191),
+"p7_tratamiento_no": (460, 191),
+"p7_tratamiento_no_aplica": (519, 191),
+"p7_mot_no_afiliado": (64, 154),
+"p7_mot_lejos": (168, 155),
+"p7_mot_tramites": (394, 155),
+"p7_mot_no_agenda": (64, 141),
+"p7_mot_no_sabe": (228, 141),
+"p7_mot_no_pagar": (370, 141),
+"p7_mot_horarios": (64, 127),
+"p7_mot_tiempos": (219, 127),
+"p7_mot_no_comodo": (349, 127),
+"p7_mot_enfermo": (64, 113),
+"p7_mot_no_adherencia": (275, 113),
+"p7_mot_no_disponibilidad": (64, 98),
+"p7_mot_falta_tiempo": (332, 98),
+"p7_mot_falta_adecuacion": (64, 83),
+"p7_mot_no_aplica": (280, 84),
+
+"p7_tension_no_aplica": (474, 479),
+"p7_tension_no_aplica": (474, 479),
+"p8_puntaje_assist": (425, 512),
+"p8_puntaje_audit": (217, 498),
+"p8_puntaje_crafft": (487, 498),
+"p8_riesgo_convivencia": (64, 706),
+"p8_riesgo_nuevo_integrante": (214, 706),
+"p8_riesgo_ingreso_estudiar": (362, 706),
+"p8_riesgo_perdida_ano": (462, 706),
+"p8_riesgo_embarazo": (64, 692),
+"p8_riesgo_independencia": (222, 691),
+"p8_riesgo_separacion": (439, 692),
+"p8_riesgo_duelo": (538, 692),
+"p8_riesgo_desempleo": (64, 678),
+"p8_riesgo_crisis": (245, 677),
+"p8_riesgo_conflictos": (382, 677),
+"p8_riesgo_abandono": (63, 663),
+"p8_riesgo_no_cuenta_redes": (196, 663),
+"p8_riesgo_estigma": (464, 663),
+"p8_riesgo_conflictos_orientacion": (63, 649),
+"p8_riesgo_trastorno": (274, 649),
+"p8_riesgo_ninguna": (522, 649),
+"p8_triste_dos_semanas": (63, 616),
+"p8_perdida_interes": (327, 616),
+"p8_inquieto_nervioso": (63, 602),
+"p8_salud_mental_ninguno": (413, 602),
+"p8_salud_mental_no_aplica": (478, 603),
+"p8_autolesion_si": (63, 571),
+"p8_autolesion_ninguno": (380, 571),
+"p8_autolesion_no_aplica": (506, 571),
+"p8_consumo_si": (63, 531),
+"p8_consumo_no": (350, 530),
+"p8_consumo_no_aplica": (478, 530),
+"p8_limita_si": (480, 482),
+"p8_limita_no": (542, 482),
+
 
 }
 
@@ -810,29 +939,107 @@ def generar_overlay_miembro(idx, form, width, height):
                 can.drawString(*COORD_MIEMBRO[key_coord], "X")
 
 
-    # ---------------------------------------------
-    # PÁGINA 7 (Familiar pág 3)
-    # ---------------------------------------------
-    can.showPage() # Saltamos a la tercera página del integrante
+ 
+    # =============================================================
+    # PÁGINA 7 (Familiar pág 3) - PROCESAMIENTO COMPLETO
+    # =============================================================
+    can.showPage() 
     can.setFont("Helvetica-Bold", 9)
 
-    campos_texto_p7 = ["p7_peso", "p7_talla", "p7_tension_sistolica", "p7_tension_diastolica"]
+    # 1. Procesar Campos de Texto / Números (Página 7)
+    campos_texto_p7 = [
+        "p7_peso", "p7_talla", "p7_circunferencia_cintura", 
+        "p7_imc", "p7_tension_sistolica", "p7_tension_diastolica"
+    ]
     for campo in campos_texto_p7:
         field_name = f"m_{idx}_{campo}"
         if campo in COORD_MIEMBRO:
             can.drawString(*COORD_MIEMBRO[campo], form.get(field_name, '').upper())
 
-    # ---------------------------------------------
-    # PÁGINA 8 (Familiar pág 4)
-    # ---------------------------------------------
-    can.showPage() # Saltamos a la cuarta página del integrante
+    # 2. Procesar Selección Única (Desplegables / Radios)
+    radio_mappings_p7 = {
+        "p7_lactancia": "p7_lactancia",
+        "p7_antropometrico": "p7_ant",
+        "p7_tension_clasificacion": "p7_ten",
+        "p7_tratamiento": "p7_tratamiento"
+    }
+    for key_html, coord_prefix in radio_mappings_p7.items():
+        val = form.get(f"m_{idx}_{key_html}")
+        if val:
+            key_coord = f"{coord_prefix}_{str(val).lower()}"
+            if key_coord in COORD_MIEMBRO:
+                can.drawString(*COORD_MIEMBRO[key_coord], "X")
+
+    # Caso especial: Checkbox "No aplica" para tensión arterial
+    if form.get(f"m_{idx}_p7_tension_no_aplica") == "Si":
+        if "p7_ten_no_aplica" in COORD_MIEMBRO:
+            can.drawString(*COORD_MIEMBRO["p7_tension_no_aplica"], "X")
+
+    # 3. Procesar Checkboxes Grupales (Listas múltiples)
+    checkbox_groups_p7 = {
+        "p7_derechos[]": "p7_der",
+        "p7_desnutricion_signos[]": "p7_desn",
+        "p7_no_transmisibles[]": "p7_ent",
+        "p7_transmisibles[]": "p7_tra",
+        "p7_endemicas[]": "p7_end",
+        "p7_no_atencion_motivos[]": "p7_mot"
+    }
+    for key_html, coord_prefix in checkbox_groups_p7.items():
+        seleccionados = obtener_lista_segura(form, f"m_{idx}_{key_html}")
+        for item in seleccionados:
+            key_coord = f"{coord_prefix}_{str(item).lower()}"
+            if key_coord in COORD_MIEMBRO:
+                can.drawString(*COORD_MIEMBRO[key_coord], "X")
+
+    # =============================================================
+    # PÁGINA 8 (Familiar pág 4) - PROCESAMIENTO COMPLETO
+    # =============================================================
+    can.showPage() 
     can.setFont("Helvetica-Bold", 9)
 
-    # Autolesión (Radio)
-    autolesion = form.get(f"m_{idx}_p8_autolesion")
-    key_aut = f"p8_autolesion_{str(autolesion).lower()}"
-    if key_aut in COORD_MIEMBRO: can.drawString(*COORD_MIEMBRO[key_aut], "X")
+    # 1. Procesar Campos de Texto / Números (Página 8)
+    campos_texto_p8 = ["p8_puntaje_assist", "p8_puntaje_audit", "p8_puntaje_crafft"]
+    for campo in campos_texto_p8:
+        field_name = f"m_{idx}_{campo}"
+        if campo in COORD_MIEMBRO:
+            can.drawString(*COORD_MIEMBRO[campo], form.get(field_name, '').upper())
 
+    # 2. Procesar Selección Única (Desplegables / Radios)
+    radio_mappings_p8 = {
+        "p8_autolesion": "p8_autolesion",
+        "p8_consumo": "p8_consumo",
+        "p8_limita": "p8_limita"
+    }
+    for key_html, coord_prefix in radio_mappings_p8.items():
+        val = form.get(f"m_{idx}_{key_html}")
+        if val:
+            key_coord = f"{coord_prefix}_{str(val).lower()}"
+            if key_coord in COORD_MIEMBRO:
+                can.drawString(*COORD_MIEMBRO[key_coord], "X")
+
+    # 3. Procesar Checkboxes (Riesgos Jóvenes de 14 a 28 años)
+    riesgos_jovenes = obtener_lista_segura(form, f"m_{idx}_p8_jovenes_riesgos[]")
+    for r in riesgos_jovenes:
+        key_riesgo = f"p8_riesgo_{r.lower()}"
+        if key_riesgo in COORD_MIEMBRO:
+            can.drawString(*COORD_MIEMBRO[key_riesgo], "X")
+
+    # 4. Procesar Checkboxes (Durante más de dos semanas)
+    salud_mental = obtener_lista_segura(form, f"m_{idx}_p8_salud_mental[]")
+    for sm in salud_mental:
+        # Mapea los valores del formulario a sus respectivas claves en COORD_MIEMBRO
+        mapping_sm = {
+            "triste": "p8_triste_dos_semanas",
+            "perder_interes": "p8_perdida_interes",
+            "inquieto_nervioso": "p8_inquieto_nervioso",
+            "ninguno": "p8_salud_mental_ninguno",
+            "no_aplica": "p8_salud_mental_no_aplica"
+        }
+        key_sm = mapping_sm.get(sm.lower())
+        if key_sm and key_sm in COORD_MIEMBRO:
+            can.drawString(*COORD_MIEMBRO[key_sm], "X")
+
+    # Fin del bloque del integrante
     can.save()
     packet.seek(0)
     return packet
