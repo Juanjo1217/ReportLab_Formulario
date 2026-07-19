@@ -19,6 +19,16 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+def obtener_ruta_externa(relative_path):
+    """ Obtiene la ruta de un archivo ubicado en la misma carpeta que el ejecutable .exe """
+    if getattr(sys, 'frozen', False):
+        # Si la app está compilada, sys.executable apunta a la carpeta donde reside el .exe
+        base_path = os.path.dirname(sys.executable)
+    else:
+        # Si corre en modo de desarrollo normal (Python app.py)
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_path, relative_path)
+
 def dibujar_guia(can):
         can.setFont("Helvetica", 7)
         can.setStrokeColorRGB(0.8, 0.8, 0.8) # Gris claro
@@ -61,7 +71,7 @@ AJUSTE_MANUAL_X_P9 = -3  # Ajuste para la Página 9
 AJUSTE_MANUAL_Y_P9 = -4
 
 AJUSTE_MANUAL_X_P10 = -3  # Ajuste para la Página 10
-AJUSTE_MANUAL_Y_P10 = 1
+AJUSTE_MANUAL_Y_P10 = 31
 
 AJUSTE_MANUAL_X_P11 = -3  # Ajuste para la Página 11
 AJUSTE_MANUAL_Y_P11 = -4
@@ -759,9 +769,9 @@ COORD_P9 = {
 }
 
 COORD_P10 = {
-"p10_cod_ebs": (138, 702),
-"p10_cod_vivienda": (330, 702),
-"p10_cod_familia": (512, 702),
+"p10_cod_ebs": (138, 675),
+"p10_cod_vivienda": (330, 675),
+"p10_cod_familia": (512, 675),
 
 "p10_t1_tipo_0_cc": (64, 619),
 "p10_t1_tipo_1_cc": (63, 577),
@@ -802,30 +812,37 @@ COORD_P10 = {
 "p10_t2_tipo_1_cc": (63, 365),
 "p10_t2_tipo_2_cc": (63, 319),
 "p10_t2_tipo_3_cc": (63, 273),
+
 "p10_t2_tipo_0_de": (62, 394),
 "p10_t2_tipo_1_de": (63, 350),
 "p10_t2_tipo_2_de": (63, 305),
 "p10_t2_tipo_3_de": (63, 259),
+
 "p10_t2_tipo_0_pt": (63, 378),
 "p10_t2_tipo_1_pt": (63, 335),
 "p10_t2_tipo_2_pt": (63, 291),
 "p10_t2_tipo_3_pt": (63, 245),
+
 "p10_t2_num_0": (102, 407),
 "p10_t2_num_1": (101, 365),
 "p10_t2_num_2": (100, 319),
 "p10_t2_num_3": (100, 273),
+
 "p10_t2_fecha_0": (178, 393),
 "p10_t2_fecha_1": (177, 351),
 "p10_t2_fecha_2": (176, 305),
 "p10_t2_fecha_3": (176, 259),
+
 "p10_t2_seg1_fecha_0": (267, 392),
 "p10_t2_seg1_fecha_1": (268, 349),
 "p10_t2_seg1_fecha_2": (267, 305),
 "p10_t2_seg1_fecha_3": (268, 259),
+
 "p10_t2_seg1_est_0_c": (356, 407),
 "p10_t2_seg1_est_1_c": (356, 365),
 "p10_t2_seg1_est_2_c": (356, 319),
 "p10_t2_seg1_est_3_c": (356, 274),
+
 "p10_t2_seg1_est_0_cp": (357, 394),
 "p10_t2_seg1_est_1_cp": (357, 351),
 "p10_t2_seg1_est_2_cp": (356, 306),
@@ -1699,6 +1716,7 @@ def generar():
     datos_p3 = {k: v for k, v in form_completo.items() if k.startswith("p3_")}
     datos_p4 = {k: v for k, v in form_completo.items() if k.startswith("p4_")}
     datos_p9 = {k: v for k, v in form_completo.items() if k.startswith("p9_")}
+    datos_p10 = {k: v for k, v in form_completo.items() if k.startswith("p10_")}
     
     # Recoger listas de Checkboxes
     riesgos_p2 = obtener_lista_segura(form_completo, 'p2_riesgos[]')
@@ -1709,7 +1727,7 @@ def generar():
     hogar_p4 = obtener_lista_segura(form_completo, 'p4_hogar[]')
 
     try:
-        clean_reader = PdfReader("plantilla_ministerio.pdf")
+        clean_reader = PdfReader(resource_path("plantilla_ministerio.pdf"))
         pdf_base_subido = request.files.get('pdf_base')
         
         if pdf_base_subido and pdf_base_subido.filename != '':
@@ -1846,7 +1864,7 @@ def generar():
         # =============================================================
         for page_key, template_idx, adj_x, adj_y, data_dict, overlay_func in [
             ("p9", 8, AJUSTE_MANUAL_X_P9, AJUSTE_MANUAL_Y_P9, datos_p9, generar_overlay_p9),
-            ("p10", 9, 0, 0, {}, None)
+            ("p10", 9, AJUSTE_MANUAL_X_P10, AJUSTE_MANUAL_Y_P10, datos_p10, generar_overlay_p10)
         ]:
             if mapa_paginas[page_key]:
                 page_idx_real = mapa_paginas[page_key][0]
@@ -1930,10 +1948,43 @@ def generar():
         return send_file(output, as_attachment=True, download_name="APS_Ficha_Completa.pdf")
         
     except Exception as e:
-        return f"Error al procesar el PDF: {e}"
+        # --- BLOQUE DE DEPURACIÓN DE RUTAS ---
+        # Calculamos la ruta que Python está intentando abrir
+        ruta_esperada = obtener_ruta_externa("plantilla_ministerio.pdf")
+        existe_archivo = os.path.exists(ruta_esperada)
+        
+        # Imprimimos en la consola de comandos de tu terminal
+        print("\n" + "!"*50)
+        print("      ERROR DE RUTA ENCONTRADO")
+        print("!"*50)
+        print(f"[DEBUG] Ruta esperada: {ruta_esperada}")
+        print(f"[DEBUG] ¿El archivo realmente existe ahí?: {existe_archivo}")
+        print(f"[DEBUG] Directorio de ejecución actual: {os.getcwd()}")
+        print("!"*50 + "\n")
+        
+        # Devolvemos el mensaje detallado a tu navegador web
+        return f"Error al procesar el PDF: {e}. <br><br><b>Ruta buscada:</b> '{ruta_esperada}' <br><b>¿Existe el archivo en esa ruta?:</b> {existe_archivo}"
 
 
-
+@app.route('/apagar', methods=['POST', 'GET'])
+def apagar():
+    """ Fuerza la detención limpia y segura del servidor de Python """
+    # Retardamos el apagado 0.5 segundos para permitir que el navegador 
+    # reciba la confirmación visual de que se cerró el programa.
+    def apagar_proceso():
+        import os
+        os._exit(0) # Detiene de forma absoluta el proceso de Python y libera el puerto
+        
+    Timer(0.5, apagar_proceso).start()
+    return """
+    <body style="font-family: sans-serif; text-align: center; background-color: #f1f5f9; padding-top: 100px; color: #0f172a;">
+        <div style="background: white; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <h1 style="color: #0d9488; font-size: 24px;">¡Sistema cerrado!</h1>
+            <p style="color: #475569; font-size: 14px;">El servidor offline se ha apagado de forma segura y ha liberado los puertos de tu ordenador.</p>
+            <p style="font-weight: bold; color: #0d9488; font-size: 13px;">Ya puedes cerrar esta pestaña del navegador.</p>
+        </div>
+    </body>
+    """
 
 
 
@@ -2017,9 +2068,20 @@ def open_browser():
     """ Abre el navegador web por defecto del ordenador """
     webbrowser.open_new("http://127.0.0.1:5000")
 
+# =========================================================================
+# --- INICIO DEL SERVIDOR INTELIGENTE (Desarrollo vs Producción) ---
+# =========================================================================
 if __name__ == '__main__':
-    # Espera 1.2 segundos para asegurar que Flask haya iniciado y abre la pestaña web
-    Timer(1.2, open_browser).start()
+    # Detecta si la aplicación está compilada en un ejecutable .exe
+    is_frozen = getattr(sys, 'frozen', False)
     
-    # Desactivamos debug para evitar aperturas de pestañas dobles y optimizar velocidad
-    app.run(host='127.0.0.1', port=5000, debug=False)
+    if is_frozen:
+        # MODO PRODUCCIÓN (.exe compilado): 
+        # Abre el navegador automáticamente y deshabilita la depuración
+        Timer(1.2, open_browser).start()
+        app.run(host='127.0.0.1', port=5000, debug=False)
+    else:
+        # MODO DESARROLLO (Ejecución local con Python app.py):
+        # Habilita la auto-recarga automática en caliente al guardar cambios.
+        # No inicia el temporizador para evitar que te abra pestañas nuevas en cada recarga.
+        app.run(host='127.0.0.1', port=5000, debug=True)
