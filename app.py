@@ -1,16 +1,11 @@
-from flask import Flask, render_template, request, send_file
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
-from pypdf import PdfReader, PdfWriter, Transformation
-import io
-
 import os
 import sys
 import webbrowser
 from threading import Timer
 from flask import Flask, render_template, request, send_file
 from reportlab.pdfgen import canvas
-from pypdf import PdfReader, PdfWriter, Transformation
+from reportlab.lib.pagesizes import letter
+from pypdf import PdfReader, PdfWriter, Transformation, PageObject 
 import io
 
 # =========================================================================
@@ -1345,7 +1340,7 @@ def generar_overlay_miembro(idx, form, width, height):
     # Caso especial: Checkbox "No aplica" para tensión arterial
     if form.get(f"m_{idx}_p7_tension_no_aplica") == "Si":
         if "p7_ten_no_aplica" in COORD_MIEMBRO:
-            can.drawString(*COORD_MIEMBRO["p7_tension_no_aplica"], "X")
+            can.drawString(*COORD_MIEMBRO["p7_ten_no_aplica"], "X")
 
     # 3. Procesar Checkboxes Grupales (Listas múltiples)
     checkbox_groups_p7 = {
@@ -1694,9 +1689,6 @@ def index():
 def generar():
     form_completo = request.form
     
-    # Recuperamos el archivo PDF subido por el usuario (si existe)
-    pdf_base_subido = request.files.get('pdf_base')
-
     # Recogemos la lista de índices activos
     member_indices = obtener_lista_segura(form_completo, 'member_indices[]')
     p11_indices = obtener_lista_segura(form_completo, 'p11_indices[]')
@@ -1717,15 +1709,14 @@ def generar():
     hogar_p4 = obtener_lista_segura(form_completo, 'p4_hogar[]')
 
     try:
-        clean_reader = PdfReader(resource_path("plantilla_ministerio.pdf"))
+        clean_reader = PdfReader("plantilla_ministerio.pdf")
+        pdf_base_subido = request.files.get('pdf_base')
         
-        # 1. Cargar el PDF base subido por el usuario (si existe) o usar la plantilla limpia
         if pdf_base_subido and pdf_base_subido.filename != '':
             reader_base = PdfReader(pdf_base_subido)
         else:
             reader_base = clean_reader
             
-        # Escaneamos e indexamos la ubicación real de las páginas en el PDF base
         mapa_paginas = clasificar_paginas_pdf(reader_base)
         writer = PdfWriter()
 
@@ -1733,7 +1724,6 @@ def generar():
         # FASE 1: PROCESAR Y AGREGAR PÁGINAS 1 A 4 (FIJAS)
         # =============================================================
         for idx in range(4):
-            # Buscamos en qué índice real del PDF base quedó mapeada esta página
             key_pag = f"p{idx+1}"
             if mapa_paginas[key_pag]:
                 page_idx_real = mapa_paginas[key_pag][0]
@@ -1768,40 +1758,45 @@ def generar():
                 desplazamiento_x += AJUSTE_MANUAL_X_P4
                 desplazamiento_y += AJUSTE_MANUAL_Y_P4
 
+            # Clonación y fusión segura mediante createBlankPage para evitar mutación
             if overlay_packet:
                 overlay_reader = PdfReader(overlay_packet)
                 overlay_page = overlay_reader.pages[0]
                 if desplazamiento_x != 0 or desplazamiento_y != 0:
                     overlay_page.add_transformation(Transformation().translate(tx=desplazamiento_x, ty=desplazamiento_y))
-                page.merge_page(overlay_page)
-            
-            writer.add_page(page)
+                
+                # Creamos una hoja en blanco limpia del mismo tamaño
+                nueva_pagina = PageObject.create_blank_page(width=width, height=height)
+                nueva_pagina.merge_page(page)          # Estampamos la plantilla original de fondo
+                nueva_pagina.merge_page(overlay_page)  # Estampamos el texto transparente de respuesta
+                writer.add_page(nueva_pagina)
+            else:
+                nueva_pagina = PageObject.create_blank_page(width=width, height=height)
+                nueva_pagina.merge_page(page)
+                writer.add_page(nueva_pagina)
 
         # =============================================================
         # FASE 2: PROCESAR INTEGRANTES DINÁMICAMENTE (REPETIR PÁGINAS 5 A 8)
         # =============================================================
-        # Determinamos cuántos integrantes procesar (el máximo entre los ya existentes y los enviados)
         cant_existentes = len(mapa_paginas["p5"])
         cant_formulario = len(member_indices)
         total_integrantes = max(cant_existentes, cant_formulario)
 
         for i in range(total_integrantes):
             if i < cant_existentes:
-                # Tomamos la posición real de las páginas de este familiar del PDF base
                 p5_idx = mapa_paginas["p5"][i]
                 p6_idx = mapa_paginas["p6"][i]
                 p7_idx = mapa_paginas["p7"][i]
                 p8_idx = mapa_paginas["p8"][i]
                 blank_pages = [reader_base.pages[p5_idx], reader_base.pages[p6_idx], reader_base.pages[p7_idx], reader_base.pages[p8_idx]]
             else:
-                # Si es un familiar nuevo, cargamos la plantilla de respaldo limpia
-                blank_pages = [clean_reader.pages[4], clean_reader.pages[5], clean_reader.pages[6], clean_reader.pages[7]]
+                temp_reader = PdfReader(resource_path("plantilla_ministerio.pdf"))
+                blank_pages = [temp_reader.pages[4], temp_reader.pages[5], temp_reader.pages[6], temp_reader.pages[7]]
             
             ref_page = blank_pages[0]
             width = float(ref_page.mediabox.width)
             height = float(ref_page.mediabox.height)
 
-            # Generamos overlay solo si este familiar fue editado/enviado en esta sesión
             overlay_packet = None
             if i < cant_formulario:
                 m_idx = member_indices[i]
@@ -1835,20 +1830,23 @@ def generar():
                     if desplazamiento_x != 0 or desplazamiento_y != 0:
                         overlay_page.add_transformation(Transformation().translate(tx=desplazamiento_x, ty=desplazamiento_y))
                     
-                    base_page.merge_page(overlay_page)
-                    writer.add_page(base_page)
+                    # Fusión mediante clonación en hoja limpia para evitar contaminación cruzada de datos
+                    nueva_pagina = PageObject.create_blank_page(width=width, height=height)
+                    nueva_pagina.merge_page(base_page)
+                    nueva_pagina.merge_page(overlay_page)
+                    writer.add_page(nueva_pagina)
             else:
-                # Si ya existía y no se envió información nueva, lo copiamos tal como venía
                 for base_page in blank_pages:
-                    writer.add_page(base_page)
+                    nueva_pagina = PageObject.create_blank_page(width=width, height=height)
+                    nueva_pagina.merge_page(base_page)
+                    writer.add_page(nueva_pagina)
 
         # =============================================================
         # FASE 3: COPIAR PÁGINAS FINALES 9 Y 10 (ESTÁTICAS)
         # =============================================================
-        # Mapeamos usando las claves detectadas dinámicamente por texto
         for page_key, template_idx, adj_x, adj_y, data_dict, overlay_func in [
             ("p9", 8, AJUSTE_MANUAL_X_P9, AJUSTE_MANUAL_Y_P9, datos_p9, generar_overlay_p9),
-            ("p10", 9, 0, 0, {}, None) # Página 10 (la maneja tu código limpio)
+            ("p10", 9, 0, 0, {}, None)
         ]:
             if mapa_paginas[page_key]:
                 page_idx_real = mapa_paginas[page_key][0]
@@ -1871,9 +1869,15 @@ def generar():
                 
                 if desplazamiento_x != 0 or desplazamiento_y != 0:
                     overlay_page.add_transformation(Transformation().translate(tx=desplazamiento_x, ty=desplazamiento_y))
-                page.merge_page(overlay_page)
                 
-            writer.add_page(page)
+                nueva_pagina = PageObject.create_blank_page(width=width, height=height)
+                nueva_pagina.merge_page(page)
+                nueva_pagina.merge_page(overlay_page)
+                writer.add_page(nueva_pagina)
+            else:
+                nueva_pagina = PageObject.create_blank_page(width=width, height=height)
+                nueva_pagina.merge_page(page)
+                writer.add_page(nueva_pagina)
 
         # =============================================================
         # FASE 4: PROCESAR DINÁMICAMENTE LA PÁGINA 11 (SOLO CASOS ATENDIDOS)
@@ -1887,7 +1891,8 @@ def generar():
                 p11_idx_pdf = mapa_paginas["p11"][i]
                 page_p11 = reader_base.pages[p11_idx_pdf]
             else:
-                page_p11 = clean_reader.pages[10] # Página 11 de respaldo limpia
+                temp_reader = PdfReader(resource_path("plantilla_ministerio.pdf"))
+                page_p11 = temp_reader.pages[10]
                 
             width = float(page_p11.mediabox.width)
             height = float(page_p11.mediabox.height)
@@ -1909,12 +1914,16 @@ def generar():
                 if desplazamiento_x != 0 or desplazamiento_y != 0:
                     overlay_page.add_transformation(Transformation().translate(tx=desplazamiento_x, ty=desplazamiento_y))
 
-                page_p11.merge_page(overlay_page)
-                writer.add_page(page_p11)
+                # Fusión limpia mediante clonación
+                nueva_pagina = PageObject.create_blank_page(width=width, height=height)
+                nueva_pagina.merge_page(page_p11)
+                nueva_pagina.merge_page(overlay_page)
+                writer.add_page(nueva_pagina)
             else:
-                writer.add_page(page_p11)
+                nueva_pagina = PageObject.create_blank_page(width=width, height=height)
+                nueva_pagina.merge_page(page_p11)
+                writer.add_page(nueva_pagina)
 
-        # Compilación final y descarga
         output = io.BytesIO()
         writer.write(output)
         output.seek(0)
