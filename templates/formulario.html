@@ -16,7 +16,7 @@
     <div class="flex gap-3">
     <!-- BOTÓN IMPORTAR -->
     <button type="button" onclick="importarPDF_Nativo()" class="bg-teal-600 text-white px-4 py-2 rounded-md font-bold hover:bg-teal-500 transition text-sm">
-        📥 Importar PDF
+        📥 Importar PDF (Experimental)
     </button>
     <!-- BOTÓN APAGAR -->
     <button type="button" onclick="cerrarAplicacion()" class="bg-red-600 text-white px-4 py-2 rounded-md font-bold hover:bg-red-700 transition text-sm">
@@ -77,8 +77,30 @@
                     <h3 class="font-bold text-teal-800 text-sm mb-1 flex items-center gap-1.5">
                         📄 Continuar sobre PDF Existente (Opcional)
                     </h3>
-                    <p class="text-xs text-teal-700 mb-3">Si tienes un PDF parcialmente diligenciado, súbelo aquí. Los nuevos datos se escribirán directamente sobre ese archivo en lugar de usar una plantilla vacía.</p>
-                    <input type="file" name="pdf_base" accept=".pdf" class="block w-full text-xs file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-teal-600 file:text-white hover:file:bg-teal-700 cursor-pointer">
+                    <p class="text-xs text-teal-700 mb-3">
+                        Si tienes un PDF parcialmente diligenciado, súbelo aquí. Los nuevos datos se escribirán directamente sobre ese archivo en lugar de usar una plantilla vacía.
+                    </p>
+                    
+                    <div class="flex items-center gap-3">
+                        <input 
+                            type="file" 
+                            id="pdfInput"
+                            name="pdf_base" 
+                            accept=".pdf" 
+                            onchange="toggleRemoveButton()"
+                            class="block w-full text-xs file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-teal-600 file:text-white hover:file:bg-teal-700 cursor-pointer"
+                        >
+                        
+                        <!-- Botón para eliminar el PDF seleccionado -->
+                        <button 
+                            type="button" 
+                            id="removePdfBtn" 
+                            onclick="clearPdfInput()" 
+                            class="hidden text-xs text-red-600 hover:text-red-800 font-medium underline shrink-0 transition-colors"
+                        >
+                            ✕ Quitar archivo
+                        </button>
+                    </div>
                 </div>
 
 
@@ -2132,7 +2154,7 @@
             });
         }
 
-        
+
         document.getElementById('apsForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -2210,6 +2232,21 @@
 
         function cerrarAplicacion() {
             window.pywebview.api.cerrar_app();
+        }
+        const pdfInput = document.getElementById('pdfInput');
+        const removePdfBtn = document.getElementById('removePdfBtn');
+
+        function toggleRemoveButton() {
+            if (pdfInput.files && pdfInput.files.length > 0) {
+                removePdfBtn.classList.remove('hidden');
+            } else {
+                removePdfBtn.classList.add('hidden');
+            }
+        }
+
+        function clearPdfInput() {
+            pdfInput.value = ''; // Limpia el archivo seleccionado
+            toggleRemoveButton(); // Oculta de nuevo el botón
         }
     </script>
 </body>
