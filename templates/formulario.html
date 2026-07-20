@@ -13,18 +13,16 @@
 <body class="bg-gray-100">
 
     <header class="bg-teal-700 text-white p-4 shadow-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-        <div>
-            <h1 class="text-lg font-bold">Sistema APS - Equipos Básicos</h1>
-            <p class="text-xs opacity-80">Ministerio de Salud y Protección Social</p>
-        </div>
-        <div class="flex gap-3">
-            <!-- BOTÓN APAGAR -->
-            <a href="/apagar" class="bg-red-600 text-white px-4 py-2 rounded-md font-bold hover:bg-red-700 transition text-sm flex items-center">
-                Salir y Cerrar
-            </a>
-        </div>
-    </div>
+    <div class="flex gap-3">
+    <!-- BOTÓN IMPORTAR -->
+    <button type="button" onclick="importarPDF_Nativo()" class="bg-teal-600 text-white px-4 py-2 rounded-md font-bold hover:bg-teal-500 transition text-sm">
+        📥 Importar PDF
+    </button>
+    <!-- BOTÓN APAGAR -->
+    <button type="button" onclick="cerrarAplicacion()" class="bg-red-600 text-white px-4 py-2 rounded-md font-bold hover:bg-red-700 transition text-sm">
+        Salir y Cerrar
+    </button>
+</div>
 </header>
 
     <main class="max-w-4xl mx-auto mt-6 p-4">
@@ -43,7 +41,7 @@
         </nav>
 
         <!-- FORMULARIO HACIA PYTHON -->
-        <form action="/generar" method="POST" enctype="multipart/form-data" class="bg-white p-8 shadow-lg rounded-b-lg">
+        <form id="apsForm" class="bg-white p-8 shadow-lg rounded-b-lg">
 
 
 
@@ -2132,6 +2130,86 @@
             planes.forEach((card, index) => {
                 card.querySelector('.p11-numero').textContent = index + 1;
             });
+        }
+
+        
+        document.getElementById('apsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Serializa todos los inputs en un único objeto estructurado
+            const data = {};
+            const formData = new FormData(this);
+            
+            formData.forEach((value, key) => {
+                if (key.endsWith('[]')) {
+                    if (!data[key]) data[key] = [];
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            // Validar si hay un PDF base cargado en el input file
+            const fileInput = document.querySelector('input[name="pdf_base"]');
+            if (fileInput && fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = function() {
+                    // Convierte a Base64 y lo agrega al payload antes de enviar a Python
+                    data['pdf_base_base64'] = reader.result.split(',')[1];
+                    enviarAPython(data);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                enviarAPython(data);
+            }
+        });
+
+        function enviarAPython(dataPayload) {
+            // LLama de forma asíncrona a la API de Python expuesta por PyWebView
+            window.pywebview.api.generar_pdf(dataPayload).then(response => {
+                if (response.success) {
+                    alert("¡PDF Generado con éxito!\nGuardado en: " + response.path);
+                } else {
+                    alert("Error al generar el PDF: " + response.error);
+                }
+            }).catch(err => {
+                alert("Ocurrió un error en el puente nativo: " + err);
+            });
+        }
+
+        function importarPDF_Nativo() {
+            window.pywebview.api.importar_pdf().then(response => {
+                if (response.success) {
+                    const datos = response.datos;
+                    
+                    // Recorremos los datos y rellenamos automáticamente los inputs de la vista
+                    for (const [key, val] of Object.entries(datos)) {
+                        const elements = document.getElementsByName(key);
+                        if (elements.length > 0) {
+                            const el = elements[0];
+                            if (el.type === 'radio') {
+                                // Marca el radio button correspondiente
+                                const radioElement = Array.from(elements).find(r => r.value.toUpperCase() === val.toUpperCase());
+                                if (radioElement) radioElement.checked = true;
+                            } else if (el.type === 'checkbox') {
+                                // En caso de que sea un check simple
+                                el.checked = (val === 'X');
+                            } else {
+                                // Campos de texto y selectores
+                                el.value = val;
+                            }
+                        }
+                    }
+                    alert("Datos importados con éxito desde el PDF.");
+                } else {
+                    alert("No se pudo importar: " + response.error);
+                }
+            });
+        }
+
+        function cerrarAplicacion() {
+            window.pywebview.api.cerrar_app();
         }
     </script>
 </body>

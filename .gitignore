@@ -2,3 +2,4 @@
 /dist
 /.venv
 app.spec
+main.spec
