@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario APS - Ministerio de Salud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-btn.active { border-bottom: 4px solid #0d9488; color: #0d9488; font-weight: bold; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-teal-700 text-white p-4 shadow-md sticky top-0 z-50">
+    <div class="flex gap-3">
+    <!-- BOTÓN IMPORTAR -->
+    <button type="button" onclick="importarPDF_Nativo()" class="bg-teal-600 text-white px-4 py-2 rounded-md font-bold hover:bg-teal-500 transition text-sm">
+        📥 Importar PDF (Experimental)
+    </button>
+    <!-- BOTÓN APAGAR -->
+    <button type="button" onclick="cerrarAplicacion()" class="bg-red-600 text-white px-4 py-2 rounded-md font-bold hover:bg-red-700 transition text-sm">
+        Salir y Cerrar
+    </button>
+</div>
+</header>
+
+    <main class="max-w-4xl mx-auto mt-6 p-4">
+
+        
+
+
+        <!-- Navegación -->
+        <nav class="flex border-b bg-white mb-4 rounded-t-lg shadow-sm">
+            <button type="button" onclick="showTab(0)" class="tab-btn px-6 py-3 active">1. General</button>
+            <button type="button" onclick="showTab(1)" class="tab-btn px-6 py-3">2. Vivienda</button>
+            <button type="button" onclick="showTab(2)" class="tab-btn px-6 py-3">3. Entorno</button>
+            <button type="button" onclick="showTab(3)" class="tab-btn px-6 py-3">4. Riesgos</button>
+            <button type="button" onclick="showTab(4)" class="tab-btn px-6 py-3">5. Integrantes</button>
+            <button type="button" onclick="showTab(5)" class="tab-btn px-6 py-3">6. Plan de Cuidado</button>
+        </nav>
+
+        <!-- FORMULARIO HACIA PYTHON -->
+        <form id="apsForm" class="bg-white p-8 shadow-lg rounded-b-lg">
+
+
+
+
+
+
+
+
+
+
+
+            <!-- ########################################### -->
+            <!-- SECCIÓN 1: GENERAL -->
+            <!-- ########################################### -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div id="tab0" class="tab-content active">
+                <!-- SECCIÓN IMPORTAR PDF EXISTENTE -->
+                <div class="bg-teal-50 border border-teal-200 rounded-lg p-5 mb-6">
+                    <h3 class="font-bold text-teal-800 text-sm mb-1 flex items-center gap-1.5">
+                        📄 Continuar sobre PDF Existente (Opcional)
+                    </h3>
+                    <p class="text-xs text-teal-700 mb-3">
+                        Si tienes un PDF parcialmente diligenciado, súbelo aquí. Los nuevos datos se escribirán directamente sobre ese archivo en lugar de usar una plantilla vacía.
+                    </p>
+                    
+                    <div class="flex items-center gap-3">
+                        <input 
+                            type="file" 
+                            id="pdfInput"
+                            name="pdf_base" 
+                            accept=".pdf" 
+                            onchange="toggleRemoveButton()"
+                            class="block w-full text-xs file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-teal-600 file:text-white hover:file:bg-teal-700 cursor-pointer"
+                        >
+                        
+                        <!-- Botón para eliminar el PDF seleccionado -->
+                        <button 
+                            type="button" 
+                            id="removePdfBtn" 
+                            onclick="clearPdfInput()" 
+                            class="hidden text-xs text-red-600 hover:text-red-800 font-medium underline shrink-0 transition-colors"
+                        >
+                            ✕ Quitar archivo
+                        </button>
+                    </div>
+                </div>
+
+
+
+
+
+
+                    <!-- 1. POLÍTICA DE DATOS -->
+                    <div class="bg-teal-50 p-4 rounded-lg border border-teal-200">
+                        <h3 class="font-bold text-teal-800 mb-2">1.1 Tratamiento y uso de datos</h3>
+                        <p class="text-xs mb-3 text-gray-600">Autorizo al Ministerio de Salud para el tratamiento de mis datos personales (Ley 1581 de 2012).</p>
+                        <div class="flex gap-4">
+                            <label class="flex items-center gap-2"><input type="radio" name="tratamiento_datos" value="SI"> SI</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="tratamiento_datos" value="NO"> NO</label>
+                        </div>
+                    </div>
+
+                    <!-- 2.1 SITUACIONES INMINENTES -->
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-bold text-gray-800 mb-3 text-sm">2.1 Identificación de situaciones inminentes que ponen en peligro la vida:</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                            <label class="flex items-center gap-2"><input type="radio" name="situacion_vida" value="Fisica"> Física (urgencia vital)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="situacion_vida" value="Psicologica"> Psicológica (salud mental)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="situacion_vida" value="Emergencia"> Situación de emergencia o desastre</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="situacion_vida" value="No_aplica"> No aplica</label>
+                        </div>
+                    </div>
+
+                    <!-- 2.2 DATOS GENERALES -->
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-bold text-gray-800 mb-4 text-sm border-b pb-2">2.2 Datos generales del escenario</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-500">3. Departamento</label>
+                                <input type="text" name="departamento" class="w-full border p-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-500">4. UZPE</label>
+                                <input type="text" name="uzpe" class="w-full border p-2 rounded">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-xs font-bold uppercase text-gray-500">5. Municipio / Área no municipalizada</label>
+                            <input type="text" name="municipio" class="w-full border p-2 rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-2">6. Área de ubicación de la vivienda</label>
+                            <div class="flex gap-6 text-sm">
+                                <label><input type="radio" name="area_ubicacion" value="Urbana"> Área Urbana</label>
+                                <label><input type="radio" name="area_ubicacion" value="Rural"> Área rural</label>
+                                <label><input type="radio" name="area_ubicacion" value="Centro_poblado"> Centro poblado</label>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-500">7. Territorio</label>
+                                <input type="text" name="territorio" class="w-full border p-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-500">8. Microterritorio</label>
+                                <input type="text" name="microterritorio" class="w-full border p-2 rounded">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500">9. Corregimiento / Vereda / Barrio / Resguardo</label>
+                            <input type="text" name="corregimiento_barrio" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+
+                    <!-- 2.3 DETALLES DEL EQUIPO -->
+                    <div class="bg-gray-50 p-4 rounded-lg border">
+                        <h3 class="font-bold text-gray-800 mb-3 text-sm">2.3 Detalles del Equipo de Salud</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500">10. Número de identificación del Equipo de Salud</label>
+                                <input type="text" name="id_equipo" class="w-full border p-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500">11. Prestador primario / Organismo de adscripción</label>
+                                <input type="text" name="prestador_primario" class="w-full border p-2 rounded">
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+
+
+
+
+
+
+
+
+           
+            <!-- ########################################### -->
+            <!-- PESTAÑA 2: PERSONAL Y VIVIENDA -->
+            <!-- ########################################### -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div id="tab1" class="tab-content space-y-6">
+                
+                <!-- 2.4 DETALLE PERSONAL -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">2.4 Detalle de personal del Equipo de Salud</h3>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">12. Tipo de identificación del responsable</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                            <label class="flex items-center gap-2"><input type="radio" name="p2_id_tipo" value="CC"> CC. Cédula Ciudadanía</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="p2_id_tipo" value="CD"> CD. Carné Diplomático</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="p2_id_tipo" value="CE"> CE. Cédula Extranjería</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="p2_id_tipo" value="PT"> PT. Permiso Protección</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">13. Número de identificación del responsable</label>
+                            <input type="text" name="p2_id_numero" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">14. Perfil profesional</label>
+                            <input type="text" name="p2_perfil_profesional" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">15. Código de la ficha</label>
+                            <input type="text" name="p2_codigo_ficha" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">16. Fecha diligenciamiento</label>
+                            <input type="date" name="p2_fecha_ficha" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2.4.1 DATOS DE ABORDAJE -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">2.4.1 Datos de abordaje</h3>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">17. Entorno donde se realiza la identificación</label>
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
+                            <label><input type="radio" name="p2_entorno" value="Hogar"> Hogar</label>
+                            <label><input type="radio" name="p2_entorno" value="Comunitario"> Comunitario</label>
+                            <label><input type="radio" name="p2_entorno" value="Institucional"> Institucional</label>
+                            <label><input type="radio" name="p2_entorno" value="Educativo"> Educativo</label>
+                            <label><input type="radio" name="p2_entorno" value="Laboral"> Laboral</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-500">18. Nombre de la institución, entidad, organización, etc.</label>
+                        <input type="text" name="p2_nombre_institucion" class="w-full border p-2 rounded">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-500">19. Cabeza de familia / Líder / Representante legal</label>
+                        <input type="text" name="p2_cabeza_familia" class="w-full border p-2 rounded">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2">20. ¿Pertenece al Programa Jóvenes en Paz?</label>
+                        <div class="flex gap-4 text-sm">
+                            <label><input type="radio" name="p2_jovenes_paz" value="Si"> Sí</label>
+                            <label><input type="radio" name="p2_jovenes_paz" value="No"> No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2.5 DATOS DE LA VIVIENDA -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">2.5 Datos generales de la vivienda</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="md:col-span-3">
+                            <label class="block text-xs font-bold text-gray-500">21. Dirección</label>
+                            <input type="text" name="p2_direccion" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">22. Latitud</label>
+                            <input type="text" name="p2_latitud" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">23. Longitud</label>
+                            <input type="text" name="p2_longitud" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">24. Punto de referencia</label>
+                            <input type="text" name="p2_punto_referencia" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">25. N.° de Identificación del hogar</label>
+                            <input type="text" name="p2_id_hogar" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">26. N.° de Identificación de la familia</label>
+                            <input type="text" name="p2_id_familia" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">27. Estrato socioeconómico de la vivienda</label>
+                        <div class="grid grid-cols-3 md:grid-cols-6 gap-2 text-sm">
+                            <label><input type="radio" name="p2_estrato" value="Bajo-Bajo"> Bajo-Bajo</label>
+                            <label><input type="radio" name="p2_estrato" value="Bajo"> Bajo</label>
+                            <label><input type="radio" name="p2_estrato" value="Medio-Bajo"> Medio-Bajo</label>
+                            <label><input type="radio" name="p2_estrato" value="Medio"> Medio</label>
+                            <label><input type="radio" name="p2_estrato" value="Medio-Alto"> Medio-Alto</label>
+                            <label><input type="radio" name="p2_estrato" value="Alto"> Alto</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">28. N.° de hogares</label>
+                            <input type="number" name="p2_num_hogares" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">29. N.° de personas</label>
+                            <input type="number" name="p2_num_personas" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">30. N.° de habitaciones</label>
+                            <input type="number" name="p2_num_habitaciones" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">32. Personas x habitación</label>
+                            <input type="number" name="p2_personas_habitacion" class="w-full border p-2 rounded">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">31. Elementos para dormir (camas, hamacas...)</label>
+                            <input type="number" name="p2_elementos_dormir" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-2">33. Hacinamiento</label>
+                            <div class="flex gap-4 text-sm mt-2">
+                                <label><input type="radio" name="p2_hacinamiento" value="Si"> Sí</label>
+                                <label><input type="radio" name="p2_hacinamiento" value="No"> No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3.1 CARACTERÍSTICAS Y CONDICIONES -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">3.1 Características del entorno y vivienda</h3>
+                    
+                    <!-- Campo 34 (Tipo de vivienda) -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">34. Tipo de vivienda</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Casa"> Casa</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Apartamento"> Apartamento</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Cuarto"> Tipo "Cuarto"</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Tradicional_Indigena"> Tradicional Indígena</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Carpa"> Carpa</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Tradicional_Etnica"> Tradicional Étnica</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Contenedor"> Contenedor</label>
+                            <label><input type="radio" name="p2_tipo_vivienda" value="Embarcacion"> Embarcación</label>
+                        </div>
+                    </div>
+
+                    <!-- Campo 35 (Material de cubierta) -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">35. Material predominante de la cubierta o techo</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                            <label><input type="radio" name="p2_techo" value="Concreto"> Concreto</label>
+                            <label><input type="radio" name="p2_techo" value="Tejas_barro"> Tejas de barro</label>
+                            <label><input type="radio" name="p2_techo" value="Fibrocemento_sin_asbesto"> Fibrocemento sin asbesto</label>
+                            <label><input type="radio" name="p2_techo" value="Zinc"> Zinc</label>
+                            <label><input type="radio" name="p2_techo" value="Plastico"> Plástico</label>
+                            <label><input type="radio" name="p2_techo" value="Fibrocemento_con_asbesto"> Fibrocemento con asbesto</label>
+                            <label><input type="radio" name="p2_techo" value="Palma"> Palma o paja</label>
+                            <label><input type="radio" name="p2_techo" value="Desechos"> Desechos</label>
+                        </div>
+                    </div>
+
+                    <!-- Campo 36 (Escenarios de riesgo) -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-3">36. ¿Se identifica algunos de los siguientes escenarios de riesgo de accidente?</label>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Cortantes"> Objetos cortantes o punzantes al alcance de los niños</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Quimicos"> Sustancias químicas al alcance de los niños o envasadas incorrectamente</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Medicamentos"> Medicamentos al alcance de los niños</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Velas"> Velas, velones o incienso encendidos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Electricas"> Conexiones eléctricas en mal estado o sobrecargadas</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Botones"> Botones, canicas u objetos pequeños al alcance de los niños</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Pasillos"> Pasillos obstruidos con juguetes u otros objetos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Superficies"> Superficies resbaladizas, suelos con agua, grasa, aceites, etc.</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Tanques"> Tanques o recipientes de almacenamiento de agua sin tapa</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Escaleras"> Escaleras sin protección</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p2_riesgos[]" value="Ninguno"> Ninguno</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- ########################################### -->
+            <!-- PESTAÑA 3: ENTORNO Y FAMILIA -->
+            <!-- ########################################### -->
+
+
+
+
+
+
+
+
+
+
+            <div id="tab2" class="tab-content space-y-6">
+
+                <!-- SECCIÓN 3.1 y 3.2: ENTORNO PERIDOMICILIO -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">3.1 / 3.2 Entorno y Peri-domicilio</h3>
+                    
+                    <!-- Campo 37 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">37. ¿Se observan criaderos o reservorios de vectores transmisores de enfermedades?</label>
+                        <div class="flex gap-4 text-sm">
+                            <label><input type="radio" name="p3_criaderos" value="Si"> Sí</label>
+                            <label><input type="radio" name="p3_criaderos" value="No"> No</label>
+                            <label><input type="radio" name="p3_criaderos" value="No_aplica"> No aplica</label>
+                        </div>
+                    </div>
+
+                    <!-- Campo 38 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-3">38. Observe e indague si cerca de la vivienda hay alguno de los siguientes:</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Cultivos"> Cultivos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Apriscos"> Apriscos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Porquerizas"> Porquerizas</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Galpones"> Galpones</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Baldios"> Terrenos baldíos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Plagas"> Presencia de Plagas (roedores, zancudos...)</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Olores"> Malos olores</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Ruidos"> Ruido o sonidos desagradables</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Excretas"> Sitios satélites de disposición de excretas</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Rellenos"> Rellenos sanitarios/botaderos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Contaminacion"> Contaminación visual</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Rio"> Río o quebrada</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Planta"> Planta de tratamiento de agua residual</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Mineria"> Extracción minera</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Industrias"> Industrias Contaminantes</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Canales"> Canales de agua lluvia</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Vias"> Vías de alto tráfico vehicular</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Quemas"> Quemas a cielo abierto</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Alta_Tension"> Fuentes de energía de alta tensión</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Agroquimicos"> Almacenamiento de agroquímicos</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Asbesto"> Talleres o industrias que dispongan de asbesto</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" name="p3_entorno_riesgos[]" value="Ninguno"> Ninguno</label>
+                        </div>
+                    </div>
+
+                    <!-- Campo 39 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">39. ¿Al interior de la vivienda se realiza alguna actividad económica?</label>
+                        <div class="flex gap-4 text-sm">
+                            <label><input type="radio" name="p3_act_economica" value="Si"> Sí</label>
+                            <label><input type="radio" name="p3_act_economica" value="No"> No</label>
+                        </div>
+                    </div>
+
+                    <!-- Campo 40 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-3">40. Señale los animales que conviven con la familia:</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                            <label><input type="checkbox" name="p3_animales[]" value="Perros"> Perros</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Gatos"> Gatos</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Porcinos"> Porcinos</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Bovinos"> Bovinos (Vacas/Toros)</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Equinos"> Equinos</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Ovinos"> Ovinos / Caprinos</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Aves_Prod"> Aves de producción</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Aves_Orn"> Aves ornamentales</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Peces"> Peces ornamentales / Hamster</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Cobayos"> Cobayos / Conejos</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Silvestres"> Animales silvestres</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Otro"> Otro</label>
+                            <label><input type="checkbox" name="p3_animales[]" value="Ninguno"> Ninguno</label>
+                        </div>
+                    </div>
+
+                    <!-- Campos 41 - 44 -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">41. N.° de perros</label>
+                            <input type="number" name="p3_num_perros" class="w-full border p-2 rounded text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">42. Perros vacunados</label>
+                            <input type="number" name="p3_num_perros_vacuna" class="w-full border p-2 rounded text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">43. N.° de gatos</label>
+                            <input type="number" name="p3_num_gatos" class="w-full border p-2 rounded text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">44. Gatos vacunados</label>
+                            <input type="number" name="p3_num_gatos_vacuna" class="w-full border p-2 rounded text-xs">
+                        </div>
+                    </div>
+
+                    <!-- Campo 45 -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2">45. ¿Cuentan con carnet de vacunación vigente (< 3 años)?</label>
+                        <div class="flex gap-4 text-sm">
+                            <label><input type="radio" name="p3_carnet" value="Si"> Sí</label>
+                            <label><input type="radio" name="p3_carnet" value="No"> No</label>
+                            <label><input type="radio" name="p3_carnet" value="No_aplica"> No aplica</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 3.3: AGUA Y SANEAMIENTO -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">3.3 Saneamiento Básico</h3>
+                    
+                    <!-- Campo 46 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">46. Principal fuente de abastecimiento de agua para consumo</label>
+                        <select name="p3_agua" class="w-full border p-2 rounded text-xs">
+                            <option value="Esp">Acueducto administrado por empresa prestadora (ESP)</option>
+                            <option value="Veredal">Acueducto veredal o comunitario</option>
+                            <option value="Pila">Pila pública</option>
+                            <option value="Carro">Carro tanque</option>
+                            <option value="Comunitaria">Abasto con distribución comunitaria</option>
+                            <option value="Pozo_Bomba">Pozo con bomba</option>
+                            <option value="Pozo_Sin_Bomba">Pozo sin bomba / aljibe / jagüey</option>
+                            <option value="Laguna">Laguna / río / quebrada</option>
+                            <option value="Lluvias">Aguas lluvias</option>
+                            <option value="Botella">Agua embotellada o en bolsa</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo 47 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">47. Sistema de disposición de excretas en la vivienda</label>
+                        <select name="p3_exc" class="w-full border p-2 rounded text-xs">
+                            <option value="Alcantarillado">Sanitario conectado al alcantarillado</option>
+                            <option value="Letrina">Sanitario y letrina</option>
+                            <option value="Septico">Sanitario conectado a pozo séptico</option>
+                            <option value="Seco">Sanitario ecológico seco</option>
+                            <option value="Sin_Conexion">Sanitario sin conexión</option>
+                            <option value="Fuente">Sanitario con disposición a fuente hídrica</option>
+                            <option value="Abierto">Campo abierto</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo 48 y 49 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-2">48. Disposición de aguas residuales</label>
+                            <select name="p3_res" class="w-full border p-2 rounded text-xs">
+                                <option value="Alcantarillado">Alcantarillado</option>
+                                <option value="Septico">Pozo séptico</option>
+                                <option value="Oxidacion">Campo de oxidación</option>
+                                <option value="Biofiltro">Biofiltro</option>
+                                <option value="Abierto">Campo abierto</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-2">49. Disposición final de residuos sólidos</label>
+                            <select name="p3_sol" class="w-full border p-2 rounded text-xs">
+                                <option value="Recoleccion">Recolección de servicio de aseo</option>
+                                <option value="Enterramiento">Enterramiento</option>
+                                <option value="Quema">Quema a campo abierto</option>
+                                <option value="Abierto">Disposición a campo abierto</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 4.1: CONTEXTO FAMILIAR -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">4. Identificación de Procesos en la Familia</h3>
+                    
+                    <!-- Campo 50 -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-500 mb-2">50. Tipo de familia</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                            <label><input type="radio" name="p3_tipo_familia" value="Nuclear_Biparental"> Nuclear biparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Nuclear_Monoparental"> Nuclear monoparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Extenso_Biparental"> Extenso biparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Extenso_Monoparental"> Extenso monoparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Compuesto_Biparental"> Compuesto biparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Compuesto_Monoparental"> Compuesto monoparental</label>
+                            <label><input type="radio" name="p3_tipo_familia" value="Unipersonal"> Unipersonal</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500">51. N.° de personas que conforman la familia</label>
+                            <input type="number" name="p3_fam_personas" class="w-full border p-2 rounded text-xs mt-1">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-2">52. ¿Se identifica un cuidador principal?</label>
+                            <div class="flex gap-4 text-sm mt-2">
+                                <label><input type="radio" name="p3_cuidador" value="Si"> Sí</label>
+                                <label><input type="radio" name="p3_cuidador" value="No"> No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campo 53 -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2">53. Escala ZARIT (si se cuenta con cuidador principal)</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                            <label><input type="radio" name="p3_zarit" value="Ausencia"> Ausencia de sobrecarga (≤ 46)</label>
+                            <label><input type="radio" name="p3_zarit" value="Ligera"> Sobrecarga ligera (47-55)</label>
+                            <label><input type="radio" name="p3_zarit" value="Intensa"> Sobrecarga intensa (≥ 56)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- ########################################### -->
+            <!-- SECCIÓN 4.1 (Campo 54): SITUACIONES DE RIESGO -->
+            <!-- ########################################### -->
+
+
+
+
+
+
+
+
+
+
+
+
+            <div id="tab3" class="tab-content space-y-6">
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">54. Situaciones o condiciones que pueden alterar o generar riesgo para la salud (física o mental)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Convivencia"> Inicio de la convivencia en pareja</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Nuevo_Integrante"> Llegada de un nuevo integrante</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Ingreso_Estudiar"> Ingreso a estudiar</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Perdida_Ano"> Pérdida del año escolar</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Embarazo_Adolescente"> Embarazo temprano o adolescente</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Independencia_Hijos"> Independencia de los hijos-hijas</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Separacion"> Separación</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Jubilacion"> Jubilación</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Duelo"> Duelo</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Desempleo"> Desempleo o pérdida abrupta del trabajo</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Crisis_Economica"> Pérdidas o crisis económicas</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Muerte_Inesperada"> Muerte inesperada</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Migracion"> Migración</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Enfermedad_Terminal"> Enfermedad terminal o huérfana/rara en la familia</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Accidente_Discapacidad"> Accidente o situación que genera discapacidad</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Antecedentes_Suicidio"> Antecedentes de intento o muerte por suicidio</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Violencia"> Vivencia de alguna forma de violencia</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Abandono"> Persona en situación de abandono</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Consumo_Sustancias"> Consumo problemático de sustancias, incluyendo alcohol</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Trastorno_Mental"> Trastorno de salud mental</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" name="p4_riesgos[]" value="Ninguna"> Ninguna</label>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 4.2 (Campo 55): PRÁCTICAS VÍNCULOS FAMILIARES -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">55. Prácticas que favorecen los vínculos familiares</h3>
+                    <div class="space-y-2 text-xs">
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Tension" class="mt-0.5"> Cuando hay tensión o estrés en la familia lo reconoce y encuentran la forma de manejarlas de manera pacífica</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Decisiones" class="mt-0.5"> Las decisiones familiares son concertadas teniendo en cuenta a todos sus integrantes</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Conflictos" class="mt-0.5"> La familia resuelve los conflictos buscando el bienestar de todos sus integrantes</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Comunicacion" class="mt-0.5"> La comunicación en la familia está basada en la escucha activa, el respeto y la negociación</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Ninos" class="mt-0.5"> Si en la familia hay niños, niñas y adolescentes los padres y cuidadores comparten, apoyan y supervisan sus actividades con respeto y límites</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_vinculos[]" value="Adultos_Mayores" class="mt-0.5"> En familias con personas adultas mayores los demás integrantes de la familia tienen en cuenta sus intereses, opiniones y preferencias</label>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 4.2 (Campo 56): REDES DE APOYO -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">56. Redes de apoyo social</h3>
+                    <div class="space-y-3 text-xs">
+                        <label class="flex items-center gap-2"><input type="radio" name="p4_red_apoyo" value="Protectoras"> Cuenta con redes de apoyo sociales protectoras para el cuidado de su salud</label>
+                        <label class="flex items-center gap-2"><input type="radio" name="p4_red_apoyo" value="Ampliables"> Cuenta con redes de apoyo sociales para el cuidado de su salud, pero podría ampliarlas para fortalecerse</label>
+                        <label class="flex items-center gap-2"><input type="radio" name="p4_red_apoyo" value="Ninguna"> No identifica / no cuenta con redes de apoyo sociales protectoras</label>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 4.2 (Campo 57): PROTECCIÓN EN EL HOGAR -->
+                <div class="bg-white p-6 rounded-lg border">
+                    <h3 class="font-bold text-teal-800 mb-4 text-sm border-b pb-2">57. Prácticas para el cuidado de su salud y protección en el entorno hogar</h3>
+                    <div class="space-y-2 text-xs">
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Tratamiento_Agua" class="mt-0.5"> Tratamiento casero al agua antes del consumo humano y almacenamiento adecuado</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Ventilacion" class="mt-0.5"> Facilita la circulación del aire en la vivienda a través de la ventilación natural o artificial</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Evita_Humo" class="mt-0.5"> Evita el consumo de tabaco, el encendido de carros al interior de la vivienda y el uso de leña para cocinar</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Residuos" class="mt-0.5"> Los residuos sólidos se almacenan en recipientes con tapa, se separan en la fuente, no se queman, no se tiran a campo abierto o en fuentes de agua</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Limpieza" class="mt-0.5"> Los pisos y paredes de la vivienda están limpios</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Toldillos" class="mt-0.5"> Usa toldillos, angeos y trampas caseras para la protección contra vectores y roedores</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Limpieza_Entorno" class="mt-0.5"> Al interior de la vivienda o el peri-domicilio, jardín o espacios de la vivienda como patio o azotea están limpios</label>
+                        <label class="flex items-start gap-2"><input type="checkbox" name="p4_hogar[]" value="Quimicos_Seguros" class="mt-0.5"> El lugar donde se almacenan los productos químicos para el uso en el hogar se encuentra ventilado, cerrado y separado de comida, alimentos para animales o medicamentos y fuera del alcance de los niños, niñas y mascotas.</label>
+                    </div>
+                </div>
+            </div>
+            <div id="tab4" class="tab-content space-y-6">
+                <div class="flex justify-between items-center border-b pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-teal-800">5. Identificación de Integrantes de la Familia</h2>
+                        <p class="text-xs text-gray-500">Se generará un bloque de 4 páginas en el PDF final por cada integrante que agregues.</p>
+                    </div>
+                    <button type="button" onclick="agregarMiembro()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-2 rounded shadow-md transition text-sm">
+                        + Agregar Integrante
+                    </button>
+                </div>
+
+                <!-- Contenedor donde se insertarán los miembros dinámicamente -->
+                <div id="miembrosContainer" class="space-y-6"></div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <!-- ########################################### -->
+            <!-- PESTAÑA 5: PLAN DE CUIDADO (PÁGINAS 9, 10 Y 11) -->
+            <!-- ########################################### -->
+
+
+
+
+
+
+
+            <div id="tab5" class="tab-content space-y-6">
+                <h2 class="text-xl font-bold text-teal-800 border-b pb-2">6. Plan de Cuidado</h2>
+
+                <!-- ACORDEÓN: 6.1 CUIDADO DE LA VIVIENDA (PÁGINA 9) -->
+                <details class="group border rounded-md mb-3" open>
+                    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+                        <span>6.1 Cuidado de la Vivienda (Página 9)</span>
+                        <span class="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <div class="p-4 bg-white space-y-6 text-xs">
+                        
+                        <!-- Encabezados -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold">111. Código de EBS</label>
+                                <input type="text" name="p9_cod_ebs" class="w-full border p-2 rounded bg-slate-50 mt-1">
+                            </div>
+                            <div>
+                                <label class="block font-semibold">112. Código de vivienda</label>
+                                <input type="text" name="p9_cod_vivienda" class="w-full border p-2 rounded bg-slate-50 mt-1">
+                            </div>
+                        </div>
+
+                        <!-- TABLA 1: ACCIÓN / INTERVENCIÓN -->
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-teal-700 mb-3">113 - 115. Acción / Intervención Directa</h4>
+                            <div class="space-y-4">
+                                <!-- Fila Dinámica de Formato Fijo (4 filas) -->
+                                <!-- Se utiliza un bucle en el HTML para generar las 4 filas de forma ordenada -->
+                                <script>
+                                    for (let i = 0; i < 4; i++) {
+                                        document.write(`
+                                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-slate-50 rounded border border-slate-200">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                                                    <select name="p9_t1_tipo_${i}" class="w-full border p-1 rounded bg-white">
+                                                        <option value="">...</option>
+                                                        <option value="CC">CC</option>
+                                                        <option value="DE">DE</option>
+                                                        <option value="PT">PT</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                                                    <input type="text" name="p9_t1_num_${i}" class="w-full border p-1 rounded bg-white">
+                                                </div>
+                                            </div>
+                                            <div class="md:col-span-2">
+                                                <label class="block text-[10px] font-bold text-gray-500">114. Acción / Intervención (CUPS / NoCUPS)</label>
+                                                <input type="text" name="p9_t1_accion_${i}" class="w-full border p-1 rounded bg-white">
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">115. Respuesta</label>
+                                                <select name="p9_t1_resp_${i}" class="w-full border p-1 rounded bg-white">
+                                                    <option value="">...</option>
+                                                    <option value="EnSitio">En sitio</option>
+                                                    <option value="Derivada">Derivada</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        `);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+
+                        <!-- TABLA 2: ACCIÓN DE CUIDADO CONCERTADA Y SEGUIMIENTO -->
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-teal-700 mb-3">116 - 119. Acción de Cuidado Concertada y Seguimiento</h4>
+                            <div class="space-y-4">
+                                <script>
+                                    for (let i = 0; i < 4; i++) {
+                                        document.write(`
+                                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-slate-50 rounded border border-slate-200">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                                                    <select name="p9_t2_tipo_${i}" class="w-full border p-1 rounded bg-white">
+                                                        <option value="">...</option>
+                                                        <option value="CC">CC</option>
+                                                        <option value="DE">DE</option>
+                                                        <option value="PT">PT</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                                                    <input type="text" name="p9_t2_num_${i}" class="w-full border p-1 rounded bg-white">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">117. Fecha Concertada</label>
+                                                <input type="text" name="p9_t2_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">118. Seguimiento 1</label>
+                                                <input type="text" name="p9_t2_seg1_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                                                <select name="p9_t2_seg1_estado_${i}" class="w-full border p-0.5 rounded bg-white text-[10px]">
+                                                    <option value="">Estado...</option>
+                                                    <option value="C">C. Cumple</option>
+                                                    <option value="CP">CP. Cumple Parcial</option>
+                                                    <option value="NC">NC. No Cumple</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">119. Seguimiento 2</label>
+                                                <input type="text" name="p9_t2_seg2_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                                                <select name="p9_t2_seg2_estado_${i}" class="w-full border p-0.5 rounded bg-white text-[10px]">
+                                                    <option value="">Estado...</option>
+                                                    <option value="C">C. Cumple</option>
+                                                    <option value="CP">CP. Cumple Parcial</option>
+                                                    <option value="NC">NC. No Cumple</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        `);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+
+
+
+                <!-- ACORDEÓN: 6.2 CUIDADO DE LA FAMILIA (PÁGINA 10) -->
+                <details class="group border rounded-md mb-3" open>
+                    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+                        <span>6.2 Cuidado de la familia (Página 10)</span>
+                        <span class="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <div class="p-4 bg-white space-y-6 text-xs">
+                        
+                        <!-- Encabezados -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold">120. Código de EBS</label>
+                                <input type="text" name="p10_cod_ebs" class="w-full border p-2 rounded bg-slate-50 mt-1">
+                            </div>
+
+                            <div>
+                                <label class="block font-semibold">121. Código de vivienda</label>
+                                <input type="text" name="p10_cod_vivienda" class="w-full border p-2 rounded bg-slate-50 mt-1">
+                            </div>
+                            
+                            <div>
+                                
+                                <label class="block font-semibold">123. Código de familia/Hogar</label>
+                                <input type="text" name="p10_cod_familia" class="w-full border p-2 rounded bg-slate-50 mt-1">
+                            </div>
+                        </div>
+
+                        <!-- TABLA 1: ACCIÓN / INTERVENCIÓN -->
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-teal-700 mb-3">123 - 125. Acción / Intervención Directa</h4>
+                            <div class="space-y-4">
+                                <!-- Fila Dinámica de Formato Fijo (4 filas) -->
+                                <!-- Se utiliza un bucle en el HTML para generar las 4 filas de forma ordenada -->
+                                <script>
+                                    for (let i = 0; i < 4; i++) {
+                                        document.write(`
+                                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-slate-50 rounded border border-slate-200">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                                                    <select name="p10_t1_tipo_${i}" class="w-full border p-1 rounded bg-white">
+                                                        <option value="">...</option>
+                                                        <option value="CC">CC</option>
+                                                        <option value="DE">DE</option>
+                                                        <option value="PT">PT</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                                                    <input type="text" name="p9_t1_num_${i}" class="w-full border p-1 rounded bg-white">
+                                                </div>
+                                            </div>
+                                            <div class="md:col-span-2">
+                                                <label class="block text-[10px] font-bold text-gray-500">124. Acción / Intervención (CUPS / NoCUPS)</label>
+                                                <input type="text" name="p10_t1_accion_${i}" class="w-full border p-1 rounded bg-white">
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">125. Respuesta</label>
+                                                <select name="p10_t1_resp_${i}" class="w-full border p-1 rounded bg-white">
+                                                    <option value="">...</option>
+                                                    <option value="EnSitio">En sitio</option>
+                                                    <option value="Derivada">Derivada</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        `);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+
+                        <!-- TABLA 2: ACCIÓN DE CUIDADO CONCERTADA Y SEGUIMIENTO -->
+                        <div class="border-t pt-4">
+                            <h4 class="font-bold text-teal-700 mb-3">126 - 129. Acción de Cuidado Concertada y Seguimiento</h4>
+                            <div class="space-y-4">
+                                <script>
+                                    for (let i = 0; i < 4; i++) {
+                                        document.write(`
+                                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-slate-50 rounded border border-slate-200">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                                                    <select name="p10_t2_tipo_${i}" class="w-full border p-1 rounded bg-white">
+                                                        <option value="">...</option>
+                                                        <option value="CC">CC</option>
+                                                        <option value="DE">DE</option>
+                                                        <option value="PT">PT</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                                                    <input type="text" name="p10_t2_num_${i}" class="w-full border p-1 rounded bg-white">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">117. Fecha Concertada</label>
+                                                <input type="text" name="p10_t2_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">118. Seguimiento 1</label>
+                                                <input type="text" name="p10_t2_seg1_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                                                <select name="p10_t2_seg1_estado_${i}" class="w-full border p-0.5 rounded bg-white text-[10px]">
+                                                    <option value="">Estado...</option>
+                                                    <option value="C">C. Cumple</option>
+                                                    <option value="CP">CP. Cumple Parcial</option>
+                                                    <option value="NC">NC. No Cumple</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block text-[10px] font-bold text-gray-500">119. Seguimiento 2</label>
+                                                <input type="text" name="p10_t2_seg2_fecha_${i}" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                                                <select name="p10_t2_seg2_estado_${i}" class="w-full border p-0.5 rounded bg-white text-[10px]">
+                                                    <option value="">Estado...</option>
+                                                    <option value="C">C. Cumple</option>
+                                                    <option value="CP">CP. Cumple Parcial</option>
+                                                    <option value="NC">NC. No Cumple</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        `);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+
+                <details class="group border rounded-md mb-3">
+
+                    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+                        <span>6.3 Cuidado de la Persona (Página 11) - Planes Médicos Individuales</span>
+                        <span class="transition group-open:rotate-180">▼</span>
+                    </summary>
+
+                    <div class="p-4 bg-white space-y-6 text-xs">
+                        <div class="flex justify-between items-center border-b pb-3">
+                            <div>
+                                <h4 class="font-bold text-teal-800">Planes de Cuidado de la Persona</h4>
+                                <p class="text-xs text-gray-500">Agrega un plan de cuidado individual solo para las personas que requieran atención del médico líder.</p>
+                            </div>
+
+                            <button type="button" onclick="agregarPlanP11()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded shadow-md transition text-xs">
+                                + Agregar Plan de Cuidado (Pág 11)
+                            </button>
+
+                        </div>
+                        
+                        <!-- Contenedor de planes de cuidado individuales -->
+                        <div id="p11Container" class="space-y-6 mt-4"></div>
+                    </div>
+                </details>
+            </div>
+
+
+            <div class="mt-8 pt-4 border-t flex justify-end">
+                <button type="submit" class="bg-teal-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-teal-700 transition">
+                    Generar PDF
+                </button>
+            </div>
+        </form>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ########################################### -->
+<!-- Plantilla para un miembro de la familia -->
+<!-- ########################################### -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <template id="miembroTemplate">
+        <div class="miembro-card bg-white border border-gray-300 rounded-lg shadow-md p-6 relative" data-index="__IDX__">
+            <!-- Campo oculto para enviar los índices activos a Python -->
+            <input type="hidden" name="member_indices[]" value="__IDX__">
+
+            <!-- Botón de eliminación -->
+            <button type="button" onclick="eliminarMiembro(this)" class="absolute top-4 right-4 bg-red-100 hover:bg-red-200 text-red-600 font-bold px-3 py-1 rounded text-xs transition">
+                Eliminar Integrante
+            </button>
+
+            <h3 class="text-lg font-bold text-teal-700 mb-4 border-b pb-1">Integrante #<span class="miembro-numero"></span></h3>
+
+            <!-- ACORDEÓN: PÁGINA 5 (IDENTIFICACIÓN Y SOCIOECONÓMICOS) -->
+            <details class="group border rounded-md mb-3" open>
+    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+        <span>Página 5: Datos de Identificación y Socioeconómicos (Campos 58 - 80)</span>
+        <span class="transition group-open:rotate-180">▼</span>
+    </summary>
+    <div class="p-4 bg-white space-y-4 text-xs">
+        
+        <!-- 5.1 Nombres Completos -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+                <label class="block font-semibold mb-1">58. Primer Nombre</label>
+                <input type="text" name="m___IDX___p5_primer_nombre" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">59. Segundo Nombre</label>
+                <input type="text" name="m___IDX___p5_segundo_nombre" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">60. Primer Apellido</label>
+                <input type="text" name="m___IDX___p5_primer_apellido" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">61. Segundo Apellido</label>
+                <input type="text" name="m___IDX___p5_segundo_apellido" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+        </div>
+
+        <!-- Identificaciones -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-semibold mb-1">62. Tipo de Identificación</label>
+                <select name="m___IDX___p5_id_tipo" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="AS">AS. Adulto sin Identificación</option>
+                    <option value="CC">CC. Cédula Ciudadanía</option>
+                    <option value="CD">CD. Carné Diplomático</option>
+                    <option value="CE">CE. Cédula de Extranjería</option>
+                    <option value="MS">MS. Menor sin Identificación</option>
+                    <option value="NV">NV. Nacido Vivo</option>
+                    <option value="PE">PE. Permiso Especial</option>
+                    <option value="PT">PT. Permiso Protección</option>
+                    <option value="RC">RC. Registro Civil</option>
+                    <option value="TI">TI. Tarjeta Identidad</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">63. Número de Identificación</label>
+                <input type="text" name="m___IDX___p5_id_numero" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">64. Fecha de Nacimiento</label>
+                <input type="date" name="m___IDX___p5_fecha_nacimiento" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">65. Nacionalidad</label>
+                <input type="text" name="m___IDX___p5_nacionalidad" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+        </div>
+
+        <!-- Demografía Básica -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-semibold mb-1">66. Sexo</label>
+                <select name="m___IDX___p5_sexo" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                    <option value="Intersexual">Intersexual</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">67. Género</label>
+                <select name="m___IDX___p5_genero" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">70. Teléfono 1</label>
+                <input type="text" name="m___IDX___p5_telefono_1" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">71. Teléfono 2</label>
+                <input type="text" name="m___IDX___p5_telefono_2" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+        </div>
+
+        <!-- Identidad, Orientación y Rol -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-semibold mb-1">68. Identidad de Género</label>
+                <select name="m___IDX___p5_identidad" class="w-full border p-2 rounded bg-slate-50 mb-2">
+                    <option value="">Seleccione...</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Transexual">Transexual</option>
+                    <option value="Transgenero">Transgenero</option>
+                    <option value="No_responde">No responde</option>
+                    <option value="Otro">Otro (¿Cuál?)</option>
+                </select>
+                <input type="text" name="m___IDX___p5_identidad_otro_cual" placeholder="¿Cuál?" class="w-full border p-1.5 rounded">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">69. Orientación Sexual</label>
+                <select name="m___IDX___p5_orientacion" class="w-full border p-2 rounded bg-slate-50 mb-2">
+                    <option value="">Seleccione...</option>
+                    <option value="Hetero">Heterosexual</option>
+                    <option value="Lesbiana">Lesbiana</option>
+                    <option value="Gay">Gay</option>
+                    <option value="Bisexual">Bisexual</option>
+                    <option value="No_responde">No responde</option>
+                    <option value="Otro">Otro (¿Cuál?)</option>
+                </select>
+                <input type="text" name="m___IDX___p5_orientacion_otro_cual" placeholder="¿Cuál?" class="w-full border p-1.5 rounded">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">72. Rol dentro de la familia</label>
+                <select name="m___IDX___p5_rol" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Resp_Economico">Responsable Económico</option>
+                    <option value="Conyuge">Cónyuge o compañero/a</option>
+                    <option value="Hijo">Hijo/a</option>
+                    <option value="Hermano">Hermano/a</option>
+                    <option value="Padre_Madre">Padre o Madre</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 5.2 Socioeconómicos (Compactos) -->
+        <h4 class="text-sm font-bold text-teal-800 border-t pt-3">5.2 Características Socioeconómicas</h4>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+                <label class="block font-semibold mb-1">73. Ocupación</label>
+                <input type="text" name="m___IDX___p5_ocupacion" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">74. Nivel Educativo</label>
+                <select name="m___IDX___p5_educacion" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Preescolar">Preescolar</option>
+                    <option value="Primaria">Básica Primaria</option>
+                    <option value="Secundaria">Básica Secundaria</option>
+                    <option value="Media">Media Académica o Clásica</option>
+                    <option value="Media_Tecnica">Media Técnica (Bachillerato Técnico)</option>
+                    <option value="Normalista">Normalista</option>
+                    <option value="Tecnica_Prof">Técnica Profesional</option>
+                    <option value="Tecnologica">Tecnológica</option>
+                    <option value="Profesional">Profesional</option>
+                    <option value="Especializacion">Especialización</option>
+                    <option value="Maestria">Maestría</option>
+                    <option value="Doctorado">Doctorado</option>
+                    <option value="Ninguno">Ninguno</option>
+                    <option value="Tecnica_Lab">Técnica Laboral</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">75. Régimen de afiliación</label>
+                <select name="m___IDX___p5_regimen" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Subsidiado">Subsidiado</option>
+                    <option value="Contributivo">Contributivo</option>
+                    <option value="Especial">Especial</option>
+                    <option value="Excepcion">Excepción</option>
+                    <option value="No_Afiliado">No afiliado</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">76. EAPB</label>
+                <input type="text" name="m___IDX___p5_eapb" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+        </div>
+
+        <!-- 77. Sujeto Especial Protección (Checkboxes - Se mantienen como checks porque admite selección múltiple) -->
+        <div class="border-t pt-3">
+            <label class="block font-semibold mb-2">77. Sujeto de especial protección constitucional o situaciones (Múltiple):</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[10px] mb-2">
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Ninos"> Niñas, niños o adolescentes</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Gestante"> Gestante</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Adulto_Mayor"> Persona adulta mayor</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Diversa"> Persona con orientación diversa</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Campesino"> Campesino/a</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Migrante"> Migrantes</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Madre_Cabeza"> Madre cabeza de familia</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Enf_Huerfana"> Enfermedades huérfanas</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Conflicto"> Víctima conflicto armado</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Violencia_Genero"> Víctima de violencia de género e intrafamiliar</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Violencia_Interpersonal"> Víctima de violencia interpersonal</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Privada_Libertad"> Persona privada de la libertad</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Penal_Adolescente"> Responsabilidad penal adolescente</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Otro"> Otro</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p5_prot[]" value="Ninguna"> Ninguna</label>
+            </div>
+            <input type="text" name="m___IDX___p5_prot_otro_cual" placeholder="¿Cuál?" class="w-full border p-1.5 rounded">
+        </div>
+
+        <!-- 78 y 79. Violencia y Etnia (Compactados a Select) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-semibold mb-1">78. Modalidad de la violencia (aplica si seleccionó víctima en el ítem 77)</label>
+                <select name="m___IDX___p5_violencia" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Fisica">Física</option>
+                    <option value="Psicologica">Psicológica</option>
+                    <option value="Negligencia">Negligencia y abandono</option>
+                    <option value="Sexual">Sexual</option>
+                    <option value="Patrimonial">Patrimonial o económica</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">79. Pertenencia étnica</label>
+                <select name="m___IDX___p5_etnia" class="w-full border p-2 rounded bg-slate-50 mb-2">
+                    <option value="">Seleccione...</option>
+                    <option value="Indigena">Indígena</option>
+                    <option value="Rrom">Rrom (Gitano)</option>
+                    <option value="Negro">Negro</option>
+                    <option value="Afro">Afrocolombiano</option>
+                    <option value="Raizal">Raizal</option>
+                    <option value="Palenquero">Palenquero</option>
+                    <option value="Ninguna">Ninguna</option>
+                </select>
+                <label class="block font-semibold mb-1">80. Pueblo o comunidad étnica a la cual pertenece:</label>
+                <input type="text" name="m___IDX___p5_pueblo_etnico" class="w-full border p-1.5 rounded bg-slate-50">
+            </div>
+        </div>
+    </div>
+</details>
+
+            <!-- ACORDEÓN: PÁGINA 6 (SITUACIÓN DE SALUD Y ATENCIONES) -->
+            <!-- ACORDEÓN COMPACTO: PÁGINA 6 (SITUACIÓN DE SALUD Y ATENCIONES) -->
+<details class="group border rounded-md mb-3">
+    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+        <span>Página 6: Prácticas de Cuidado y Atenciones Pendientes (Campos 81 - 89)</span>
+        <span class="transition group-open:rotate-180">▼</span>
+    </summary>
+    <div class="p-4 bg-white space-y-5 text-xs">
+        
+        <!-- Campo 81 (Saberes Ancestrales) -->
+        <div>
+            <label class="block font-bold text-gray-700 mb-2">81. Prácticas de cuidado de la salud desde sus saberes ancestrales / tradicionales:</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="proteger"> Prácticas para proteger ante posibles daños (aseguranzas, rituales)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="transicion"> Prácticas en momentos de transición (arrullos, cantos, ritos de paso)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="tradicionales"> Prácticas tradicionales (baile, danza, música, plantas, masajes)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="armonizacion"> Prácticas de armonización o bienestar (consejería de sabedor/a)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="partera"> Acompañamiento de partera, sabedor o médico tradicional</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="cuidado_entorno"> Prácticas de cuidado con el entorno, alimentos u otros</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_ancestrales[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 82 y 83 (Discapacidad) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-3">
+            <div class="md:col-span-2">
+                <label class="block font-bold text-gray-700 mb-2">82. ¿Se reconoce como persona con discapacidad?</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[11px]">
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="fisica"> Física</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="auditiva"> Auditiva</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="visual"> Visual</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="sordoceguera"> Sordoceguera</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="intelectual"> Intelectual</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="psicosocial"> Psicosocial</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="multiple"> Múltiple</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_discapacidad[]" value="ninguna"> Sin discapacidad</label>
+                </div>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">83. Registro de discapacidad (RLCPD)</label>
+                <select name="m___IDX___p6_cert_disc" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                    <option value="No_aplica">No aplica</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo 84 y 85 (Planificación y Gestación) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">84. Intención reproductiva a corto plazo</label>
+                <select name="m___IDX___p6_intencion_reproductiva" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">85. Gestación actual confirmada</label>
+                <select name="m___IDX___p6_gestacion" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo 86 (Prácticas Rutinarias) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">86. ¿Realiza rutinariamente las siguientes prácticas de cuidado?</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="alimentos"> Consume alimentos en cantidad y calidad suficiente</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="actividad"> Realiza actividad física, ejercicio o deporte</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="higiene"> Higiene oral diaria (mínimo 2 veces al día)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="lavado"> Lavado de manos antes de comer / después de ir al baño</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="duerme"> Duerme suficiente para tener energía (6 a 8 horas diarias)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="control"> Controla tiempo en pantallas/televisión (menos de 2 horas)</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="ocio"> Realiza actividades recreativas o de ocio</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="cultural"> Participa en actividades culturales o comunitarias</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p6_rutinarias[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 87 (Atenciones Pendientes Promoción) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">87. Atenciones pendientes de promoción y mantenimiento (Marcar pendientes):</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 text-[10px] max-h-52 overflow-y-auto p-2 border rounded bg-slate-50">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="pymes"> Valoración Integral para la PYMS</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="bucal"> Valoración integral en salud bucal</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="lactancia"> Promoción y apoyo a lactancia materna</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="fluor"> Aplicación de flúor</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="profilaxis"> Profilaxis y remoción de placa bacteriana</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="vacunas"> Vacunación de acuerdo con el esquema</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="fortificacion"> Fortificación casera con micronutrientes en polvo</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="suplementos"> Suplementación con micronutrientes</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="desparasitacion"> Desparasitación intestinal antihelmíntica</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="anemia"> Tamizaje para anemia (Hemoglobina y Hematocrito)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="asesoria"> Asesoría en anticoncepción (Planificación)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="sum_anticonceptivos"> Suministro de anticonceptivos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="cardiovascular"> Tamizaje de riesgo cardiovascular</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="treponemica"> Prueba rápida treponémica</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="vih"> Prueba rápida y asesoría pre y postest VIH</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="hepatitis"> Prueba rápida para Hepatitis B y C</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="embarazo_prueba"> Prueba de embarazo por retraso o síntomas</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="cuello_uterino"> Tamizaje para cáncer de cuello uterino</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="colposcopia"> Colposcopia y biopsia cérvico uterina</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="mama"> Tamizaje para cáncer de mama</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="prostata"> Tamizaje para cáncer de próstata</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="colon"> Tamizaje para cáncer de colon y recto</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="educacion"> Educación para la salud</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_maint[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 88 (Ruta Materno Perinatal) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">88. Atenciones pendientes de la ruta materno perinatal:</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[10px]">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="preconcepcional"> Atención para el cuidado preconcepcional</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="ive"> Interrupción Voluntaria del Embarazo -IVE-</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="prenatal"> Atención para el cuidado prenatal (Controles)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="preparacion"> Preparación para la maternidad y paternidad</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="puerperio"> Atención del puerperio</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="metodo_post_parto"> Provisión de método anticonceptivo post-parto</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="recien_nacido"> Atención para el seguimiento del recién nacido</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="educacion"> Educación para la salud</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_materno[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 89 (Motivo No Atención) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">89. Motivo por el cual no ha recibido las atenciones de salud:</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 text-[10px] max-h-40 overflow-y-auto p-2 border rounded bg-slate-50">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="no_afiliado"> No afiliado</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="desconocimiento_derecho"> Desconocimiento del derecho a las intervenciones</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="desconocimiento_gratuito"> Desconocimiento que las intervenciones son gratuitas</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="lejos"> El servicio de salud está lejos del lugar de residencia</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="no_personal"> No hay personal de salud en el centro cercano</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="tramites"> Dificultades con trámites administrativos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="no_agenda"> "No hay agenda" para esta atención</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="no_sabe"> No sabe cómo solicitar la cita</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="horario"> Horarios de atención restringidos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="tiempos"> Largos tiempos de espera</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="no_comodo"> No se siente cómodo/a con el personal de salud</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="enfermo"> Persona enferma que no puede acudir al servicio</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="falta_tiempo"> Falta de tiempo del cuidador</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="falta_adecuacion"> Falta de adecuación sociocultural del servicio</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p6_motivos[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+    </div>
+</details>
+
+            <!-- ACORDEÓN: PÁGINA 7 (VALORACIÓN FÍSICA E INFECCIOSAS) -->
+            <!-- ACORDEÓN COMPACTO: PÁGINA 7 (VALORACIÓN NUTRICIONAL, TENSIÓN E INFECCIOSAS) -->
+<details class="group border rounded-md mb-3">
+    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+        <span>Página 7: Valoración Nutricional, Tensión y Transmisibles (Campos 90 - 104)</span>
+        <span class="transition group-open:rotate-180">▼</span>
+    </summary>
+    <div class="p-4 bg-white space-y-5 text-xs">
+        
+        <!-- Campo 90 (Derechos en salud) -->
+        <div>
+            <label class="block font-bold text-gray-700 mb-2">90. Prácticas para el ejercicio y exigibilidad del derecho a la salud:</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p7_derechos[]" value="conoce"> Conoce los derechos y deberes en salud</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p7_derechos[]" value="info"> Tiene información sobre servicios de salud a los que tiene derecho</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p7_derechos[]" value="lugares"> Conoce los lugares donde pueden prestar los servicios</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="m___IDX___p7_derechos[]" value="resolver"> Conoce cómo resolver las dificultades para acceder</label>
+            </div>
+        </div>
+
+        <!-- Campo 91, 92, 93, 94 y 95 (Medidas Físicas) -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">91. Lactancia menor 6m</label>
+                <select name="m___IDX___p7_lactancia" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                    <option value="no_aplica">No aplica</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">92. Peso (Kilogramos)</label>
+                <input type="text" name="m___IDX___p7_peso" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">93. Talla (Centímetros)</label>
+                <input type="text" name="m___IDX___p7_talla" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">94. Cintura >18 años (cm)</label>
+                <input type="text" name="m___IDX___p7_circunferencia_cintura" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">95. IMC (>5 años)</label>
+                <input type="text" name="m___IDX___p7_imc" class="w-full border p-2 rounded bg-slate-50">
+            </div>
+        </div>
+
+        <!-- Campo 96 (Antropometría) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-1">96. Clasificación antropométrica del estado nutricional</label>
+            <select name="m___IDX___p7_antropometrico" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                <option value="">Seleccione...</option>
+                <option value="obesidad">Obesidad</option>
+                <option value="sobrepeso">Sobrepeso</option>
+                <option value="riesgo_sobrepeso">Riesgo de Sobrepeso</option>
+                <option value="peso_adecuado">Peso adecuado para la talla o IMC adecuado para la edad</option>
+                <option value="riesgo_desnutricion">Riesgo de Desnutrición Aguda (<5 años), o Riesgo de delgadez (>4 años)</option>
+                <option value="desnutricion_moderada">Desnutrición Aguda Moderada</option>
+                <option value="desnutricion_severa">Desnutrición Aguda Severa</option>
+                <option value="riesgo_delgadez">Riesgo de Delgadez</option>
+                <option value="delgadez">Delgadez</option>
+                <option value="bajo_peso_gestacional">Bajo Peso para la Edad Gestacional</option>
+                <option value="normal">Normal</option>
+            </select>
+        </div>
+
+        <!-- Campo 97 (Signos físicos de desnutrición) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">97. Se identifican signos físicos de desnutrición aguda (niños de 3 meses a 5 años):</label>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-[11px]">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="cabeza"> Cabeza</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="cara"> Cara</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="piel"> Piel</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="torax"> Tórax y abdomen</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="extremidades"> Extremidades</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="comportamiento"> Comportamiento</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="edema"> Edema</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="ninguna"> Ninguna</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_desnutricion_signos[]" value="no_aplica"> No aplica</label>
+            </div>
+        </div>
+
+        <!-- Campo 98 y 99 (Tensión Arterial) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-bold text-gray-700 mb-2">98. Medición de Tensión arterial (>18 años)</label>
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <input type="number" name="m___IDX___p7_tension_sistolica" placeholder="Sistólica" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                    <input type="number" name="m___IDX___p7_tension_diastolica" placeholder="Diastólica" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                </div>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_tension_no_aplica" value="Si"> No aplica</label>
+            </div>
+            <div class="md:col-span-2">
+                <label class="block font-bold text-gray-700 mb-1">99. Clasificación de la Tensión arterial</label>
+                <select name="m___IDX___p7_tension_clasificacion" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                    <option value="">Seleccione...</option>
+                    <option value="crisis">Crisis hipertensiva (sistólica > 180 / diastólica > 120)</option>
+                    <option value="alta_2">Alta - Hipertensión nivel 2 (sistólica ≥ 140 / diastólica ≥ 90)</option>
+                    <option value="alta_1">Alta - Hipertensión nivel 1 (sistólica 130-139 / diastólica 80-89)</option>
+                    <option value="elevada">Elevada (sistólica 120-129 / diastólica < 80)</option>
+                    <option value="normal">Normal (sistólica < 120 / diastólica < 80)</option>
+                    <option value="no_aplica">No aplica</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo 100 (Enfermedades No Transmisibles) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">100. Diagnóstico previo de alguna enfermedad no transmisible (Crónica):</label>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-[10px]">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="obstetrica"> Enf. obstétrica</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="cardiovascular"> Cardiovasculares</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="diabetes"> Diabetes</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="cancer"> Cáncer</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="epoc"> EPOC</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="raras"> Enf. raras y huérfanas</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="trastorno"> Trastorno mental</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="epilepsia"> Epilepsia</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="secuelas"> Secuelas de lesiones</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_transmisibles[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 101 (Enfermedades Transmisibles) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">101. ¿Presenta alguna situación o condición de salud transmisible?:</label>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[10px] max-h-40 overflow-y-auto p-2 border rounded bg-slate-50">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="infancia"> Enf. prevalentes de la infancia (EDA/ERA)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="tuberculosis"> Tuberculosis</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="lepra"> Lepra</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="rabia"> Rabia</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="dengue"> Dengue</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="chikungunya"> Chikungunya</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="zika"> Zika</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="chagas"> Chagas</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="visceral"> Leishmaniasis visceral</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="cutanea"> Leishmaniasis cutánea</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="tungiasis"> Tungiasis</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="alimentos"> Transmitidas por alimentos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="era"> Respiratoria aguda (ERA)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="eda"> Diarreica aguda (EDA)</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_transmisibles[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 102 y 103 (Zona Endémica y Tratamiento) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-3">
+            <div class="md:col-span-2">
+                <label class="block font-bold text-gray-700 mb-2">102. ¿Vive en zona endémica o presenta signos y síntomas de:</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[10px]">
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="geohelmintiasis"> Geohelmintiasis</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="teniasis"> Teniasis</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="tracoma"> Tracoma</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="escabiosis"> Escabiosis</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="pian"> Pian</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="malaria"> Malaria</label>
+                    <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_endemicas[]" value="ninguna"> Ninguna</label>
+                </div>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">103. ¿Recibe atención y tratamiento actualmente?</label>
+                <select name="m___IDX___p7_tratamiento" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                    <option value="">Seleccione...</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                    <option value="no_aplica">No aplica</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo 104 (Motivo no atención) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">104. Motivo por el cual no ha recibido la atención:</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 text-[10px] max-h-40 overflow-y-auto p-2 border rounded bg-slate-50">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_afiliado"> Persona no afiliada</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="lejos"> El servicio de salud está lejos de su residencia</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="tramites"> Dificultades con trámites administrativos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_agenda"> "No hay agenda" para esta atención</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_sabe"> No sabe cómo solicitar la cita</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_pagar"> No puede pagar el copago</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="horarios"> Horarios de atención restringidos</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="tiempos"> Largos tiempos de espera</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_comodo"> No se siente cómodo/a con el personal de salud</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="enfermo"> Persona enferma que no puede acudir al servicio</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_adherencia"> No tiene adherencia al tratamiento</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_disponibilidad"> No hay disponibilidad de medicamentos en el centro</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="falta_tiempo"> Falta de tiempo del cuidador</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="falta_adecuacion"> Falta de adecuación sociocultural del servicio</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p7_no_atencion_motivos[]" value="no_aplica"> No aplica</label>
+            </div>
+        </div>
+    </div>
+</details>
+
+            
+            <!-- ACORDEÓN COMPACTO: PÁGINA 8 (SALUD MENTAL Y CONSUMO DE SUSTANCIAS) -->
+<details class="group border rounded-md">
+    <summary class="flex justify-between items-center p-3 font-semibold text-sm bg-slate-100 cursor-pointer select-none">
+        <span>Página 8: Salud Mental y Consumo de Sustancias (Campos 105 - 110)</span>
+        <span class="transition group-open:rotate-180">▼</span>
+    </summary>
+    <div class="p-4 bg-white space-y-5 text-xs">
+        
+        <!-- Campo 105 (Situaciones de riesgo jóvenes de 14 a 28 años) -->
+        <div>
+            <label class="block font-bold text-gray-700 mb-2">105. ¿Identifica situaciones familiares o personales que alteren o generen riesgo? (Indagar de 14 a 28 años):</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[10px] max-h-48 overflow-y-auto p-2 border rounded bg-slate-50">
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="convivencia"> Inicio de la convivencia en pareja</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="nuevo_integrante"> Llegada de un nuevo integrante</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="ingreso_estudiar"> Ingreso a estudiar</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="perdida_ano"> Pérdida del año escolar</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="embarazo"> Embarazo temprano o adolescente</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="independencia"> Independencia o salida del hogar paterno-materno</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="separacion"> Separación de pareja</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="duelo"> Duelo</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="desempleo"> Desempleo o pérdida abrupta del trabajo</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="crisis"> Pérdidas o crisis económicas</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="conflictos"> Conflictos familiares</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="abandono"> Situación de abandono</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="no_cuenta_redes"> No identifica / No cuenta con redes de apoyo sociales</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="estigma"> Estigma y discriminación</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="conflictos_orientacion"> Conflictos relacionados con su orientación sexual</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="trastorno"> Trastorno de salud mental en algún integrante de la familia</label>
+                <label class="flex items-center gap-1.5"><input type="checkbox" name="m___IDX___p8_jovenes_riesgos[]" value="ninguna"> Ninguna</label>
+            </div>
+        </div>
+
+        <!-- Campo 106 (Salud mental durante más de dos semanas) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">106. Durante más de dos semanas (solo personas mayores de 14 años):</label>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p8_salud_mental[]" value="triste"> Se ha sentido triste todos los días durante la mayor parte del día</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p8_salud_mental[]" value="perder_interes"> Ha perdido el interés en actividades que antes disfrutaba</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p8_salud_mental[]" value="inquieto_nervioso"> Se ha sentido inquieto(a) o nervioso(a) todos los días durante la mayor parte del día</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p8_salud_mental[]" value="ninguno"> Ninguno</label>
+                <label class="flex items-start gap-2"><input type="checkbox" name="m___IDX___p8_salud_mental[]" value="no_aplica"> No aplica</label>
+            </div>
+        </div>
+
+        <!-- Campo 107 y 108 (Autolesión y Consumo) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-3">
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">107. Durante los últimos 8 días, ¿ha pensado en autolesionarse? (>14 años)</label>
+                <select name="m___IDX___p8_autolesion" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="si">Ha pensado en lastimarse o en no querer seguir viviendo</option>
+                    <option value="ninguno">Ninguno</option>
+                    <option value="no_aplica">No aplica</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">108. Consumo de sustancias psicoactivas en los últimos 3 meses (14 a 17 años)</label>
+                <select name="m___IDX___p8_consumo" class="w-full border p-2 rounded bg-slate-50">
+                    <option value="">Seleccione...</option>
+                    <option value="si">Sí (Aplique ASSIST, AUDIT, Carlos CRAFFT)</option>
+                    <option value="no">No</option>
+                    <option value="no_aplica">No aplica</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Campo 109 (Resultados Instrumentos de Consumo) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-2">109. Resultados de riesgos instrumentos de consumo (No obligatorio):</label>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500">Puntaje riesgo ASSIST</label>
+                    <input type="number" name="m___IDX___p8_puntaje_assist" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500">Puntaje riesgo AUDIT</label>
+                    <input type="number" name="m___IDX___p8_puntaje_audit" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500">Puntaje riesgo Carlos CRAFFT</label>
+                    <input type="number" name="m___IDX___p8_puntaje_crafft" class="w-full border p-2 rounded bg-slate-50 text-xs">
+                </div>
+            </div>
+        </div>
+
+        <!-- Campo 110 (Limitación actividades) -->
+        <div class="border-t pt-3">
+            <label class="block font-bold text-gray-700 mb-1">110. ¿Ha presentado alguna otra situación de salud que limite sus actividades en la última semana?</label>
+            <select name="m___IDX___p8_limita" class="w-full border p-2 rounded bg-slate-50">
+                <option value="">Seleccione...</option>
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+    </div>
+</details>
+        </div>
+    </template>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ========================================== -->
+<!-- PLANTILLA PARA UN PLAN INDIVIDUAL DE P11  -->
+<!-- ========================================== -->
+
+
+
+
+
+
+
+
+
+<template id="p11Template">
+    <div class="p11-card bg-slate-50 border border-slate-300 rounded-lg p-6 relative">
+        <!-- Campo oculto para enviar los índices de los planes activos a Python -->
+        <input type="hidden" name="p11_indices[]" value="__IDX__">
+
+        <!-- Botón de eliminación -->
+        <button type="button" onclick="this.closest('.p11-card').remove(); actualizarNumeracionP11();" class="absolute top-4 right-4 bg-red-100 hover:bg-red-200 text-red-600 font-bold px-3 py-1 rounded text-xs transition">
+            Eliminar Plan X
+        </button>
+
+        <h4 class="font-bold text-teal-700 mb-4 border-b pb-1 text-sm">Plan de Cuidado Individual #<span class="p11-numero"></span></h4>
+        
+        <!-- Encabezados -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div>
+                <label class="block font-semibold">130. Código de EBS</label>
+                <input type="text" name="p11_idx___IDX___p11_cod_ebs" class="w-full border p-2 rounded bg-white mt-1">
+            </div>
+            <div>
+                <label class="block font-semibold">131. Código de vivienda</label>
+                <input type="text" name="p11_idx___IDX___p11_cod_vivienda" class="w-full border p-2 rounded bg-white mt-1">
+            </div>
+            <div>
+                <label class="block font-semibold">132. Cód. Familia/Hogar</label>
+                <input type="text" name="p11_idx___IDX___p11_cod_familia" class="w-full border p-2 rounded bg-white mt-1">
+            </div>
+        </div>
+
+        <!-- Identificación del Integrante Atendido -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4 mb-4">
+            <div>
+                <label class="block font-semibold mb-2">133. Tipo de identificación integrante de la familia</label>
+                <select name="p11_idx___IDX___p11_id_tipo" class="w-full border p-2 rounded bg-white">
+                    <option value="">Seleccione...</option>
+                    <option value="AS">AS. Adulto sin Identificación</option>
+                    <option value="CC">CC. Cédula Ciudadanía</option>
+                    <option value="CD">CD. Carné Diplomático</option>
+                    <option value="CE">CE. Cédula de Extranjería</option>
+                    <option value="MS">MS. Menor sin Identificación</option>
+                    <option value="NV">NV. Nacido Vivo</option>
+                    <option value="PE">PE. Permiso Especial</option>
+                    <option value="PT">PT. Permiso Protección</option>
+                    <option value="RC">RC. Registro Civil</option>
+                    <option value="TI">TI. Tarjeta Identidad</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">134. Número de identificación de la persona atendida</label>
+                <input type="text" name="p11_idx___IDX___p11_id_numero" placeholder="Ej: 10029348..." class="w-full border p-2 rounded bg-white mt-1">
+            </div>
+        </div>
+
+        <!-- TABLA 1: ACCIÓN / INTERVENCIÓN DIRECTA (4 FILAS ESTÁTICAS) -->
+        <div class="border-t pt-4 mb-4">
+            <h5 class="font-bold text-teal-700 mb-3 text-xs">135 - 136. Acción / Intervención Directa</h5>
+            <div class="space-y-3">
+                
+                <!-- Fila 0 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t1_tipo_0" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t1_num_0" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-[10px] font-bold text-gray-500">136. Acción / Intervención (CUPS / NoCUPS)</label>
+                        <input type="text" name="p11_idx___IDX___p11_t1_accion_0" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">136. Respuesta</label>
+                        <select name="p11_idx___IDX___p11_t1_resp_0" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="EnSitio">En sitio</option><option value="Derivada">Derivada</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t1_tipo_1" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t1_num_1" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-[10px] font-bold text-gray-500">136. Acción / Intervención (CUPS / NoCUPS)</label>
+                        <input type="text" name="p11_idx___IDX___p11_t1_accion_1" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">136. Respuesta</label>
+                        <select name="p11_idx___IDX___p11_t1_resp_1" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="EnSitio">En sitio</option><option value="Derivada">Derivada</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t1_tipo_2" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t1_num_2" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-[10px] font-bold text-gray-500">136. Acción / Intervención (CUPS / NoCUPS)</label>
+                        <input type="text" name="p11_idx___IDX___p11_t1_accion_2" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">136. Respuesta</label>
+                        <select name="p11_idx___IDX___p11_t1_resp_2" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="EnSitio">En sitio</option><option value="Derivada">Derivada</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t1_tipo_3" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t1_num_3" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-[10px] font-bold text-gray-500">136. Acción / Intervención (CUPS / NoCUPS)</label>
+                        <input type="text" name="p11_idx___IDX___p11_t1_accion_3" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">136. Respuesta</label>
+                        <select name="p11_idx___IDX___p11_t1_resp_3" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="EnSitio">En sitio</option><option value="Derivada">Derivada</option></select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TABLA 2: ACCIÓN DE CUIDADO CONCERTADA Y SEGUIMIENTO (4 FILAS ESTÁTICAS) -->
+        <div class="border-t pt-4">
+            <h5 class="font-bold text-teal-700 mb-3 text-xs">137 - 140. Acción de Cuidado Concertada y Seguimiento</h5>
+            <div class="space-y-3">
+                
+                <!-- Fila 0 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t2_tipo_0" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t2_num_0" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">138. Fecha Concertada</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_fecha_0" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">139. Seguimiento 1</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg1_fecha_0" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg1_estado_0" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">140. Seguimiento 2</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg2_fecha_0" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg2_estado_0" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t2_tipo_1" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t2_num_1" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">138. Fecha Concertada</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_fecha_1" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">139. Seguimiento 1</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg1_fecha_1" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg1_estado_1" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">140. Seguimiento 2</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg2_fecha_1" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg2_estado_1" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t2_tipo_2" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t2_num_2" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">138. Fecha Concertada</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_fecha_2" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">139. Seguimiento 1</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg1_fecha_2" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg1_estado_2" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">140. Seguimiento 2</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg2_fecha_2" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg2_estado_2" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                </div>
+
+                <!-- Fila 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-white rounded border border-slate-200">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Tipo ID</label>
+                            <select name="p11_idx___IDX___p11_t2_tipo_3" class="w-full border p-1 rounded bg-white"><option value="">...</option><option value="CC">CC</option><option value="DE">DE</option><option value="PT">PT</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500">Número</label>
+                            <input type="text" name="p11_idx___IDX___p11_t2_num_3" class="w-full border p-1 rounded bg-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">138. Fecha Concertada</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_fecha_3" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">139. Seguimiento 1</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg1_fecha_3" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg1_estado_3" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500">140. Seguimiento 2</label>
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg2_fecha_3" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <select name="p11_idx___IDX___p11_t2_seg2_estado_3" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</template>
+
+
+
+<!-- ========================================== -->
+<!-- SCRIPTS -->
+<!-- ========================================== -->
+
+
+
+    <script>
+
+        function showTab(i) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab'+i).classList.add('active');
+            document.querySelectorAll('.tab-btn')[i].classList.add('active');
+        }
+
+        let miembroContador = 0;
+
+        function agregarMiembro() {
+            const container = document.getElementById('miembrosContainer');
+            const template = document.getElementById('miembroTemplate').innerHTML;
+            
+            // Reemplazar el comodín __IDX__ por el número de índice correspondiente
+            const htmlModificado = template.replace(/__IDX__/g, miembroContador);
+            
+            // Insertar en el DOM
+            container.insertAdjacentHTML('beforeend', htmlModificado);
+            
+            // Actualizar la numeración visual
+            actualizarNumeracion();
+            miembroContador++;
+        }
+
+        function eliminarMiembro(btn) {
+            if (confirm("¿Estás seguro de eliminar a este integrante?")) {
+                btn.closest('.miembro-card').remove();
+                actualizarNumeracion();
+            }
+        }
+
+        function actualizarNumeracion() {
+            const miembros = document.querySelectorAll('.miembro-card');
+            miembros.forEach((card, index) => {
+                card.querySelector('.miembro-numero').textContent = index + 1;
+            });
+        }
+
+        let p11Contador = 0;
+
+        // Agregar el primer familiar por defecto al cargar
+        window.onload = function() {
+            agregarMiembro();
+            agregarPlanP11();
+        };
+
+        function agregarPlanP11() {
+            const container = document.getElementById('p11Container');
+            const template = document.getElementById('p11Template').innerHTML;
+            
+            // Reemplazar el comodín __IDX__ por el índice del plan de cuidado actual
+            const htmlModificado = template.replace(/__IDX__/g, p11Contador);
+            
+            container.insertAdjacentHTML('beforeend', htmlModificado);
+            actualizarNumeracionP11();
+            p11Contador++;
+        }
+
+        function actualizarNumeracionP11() {
+            const planes = document.querySelectorAll('.p11-card');
+            planes.forEach((card, index) => {
+                card.querySelector('.p11-numero').textContent = index + 1;
+            });
+        }
+
+
+        document.getElementById('apsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Serializa todos los inputs en un único objeto estructurado
+            const data = {};
+            const formData = new FormData(this);
+            
+            formData.forEach((value, key) => {
+                if (key.endsWith('[]')) {
+                    if (!data[key]) data[key] = [];
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            // Validar si hay un PDF base cargado en el input file
+            const fileInput = document.querySelector('input[name="pdf_base"]');
+            if (fileInput && fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = function() {
+                    // Convierte a Base64 y lo agrega al payload antes de enviar a Python
+                    data['pdf_base_base64'] = reader.result.split(',')[1];
+                    enviarAPython(data);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                enviarAPython(data);
+            }
+        });
+
+        function enviarAPython(dataPayload) {
+            // LLama de forma asíncrona a la API de Python expuesta por PyWebView
+            window.pywebview.api.generar_pdf(dataPayload).then(response => {
+                if (response.success) {
+                    alert("¡PDF Generado con éxito!\nGuardado en: " + response.path);
+                } else {
+                    alert("Error al generar el PDF: " + response.error);
+                }
+            }).catch(err => {
+                alert("Ocurrió un error en el puente nativo: " + err);
+            });
+        }
+
+        function importarPDF_Nativo() {
+            window.pywebview.api.importar_pdf().then(response => {
+                if (response.success) {
+                    const datos = response.datos;
+                    
+                    // 1. Limpiar los contenedores dinámicos existentes para iniciar carga limpia
+                    document.getElementById('miembrosContainer').innerHTML = "";
+                    document.getElementById('p11Container').innerHTML = "";
+                    miembroContador = 0;
+                    p11Contador = 0;
+
+                    // 2. Renderizar dinámicamente los integrantes familiares detectados
+                    const miembrosIndices = datos["member_indices[]"] || [];
+                    miembrosIndices.forEach(() => {
+                        agregarMiembro();
+                    });
+
+                    // 3. Renderizar dinámicamente los planes médicos detectados
+                    const planesIndices = datos["p11_indices[]"] || [];
+                    planesIndices.forEach(() => {
+                        agregarPlanP11();
+                    });
+
+                    // Mapeo inverso para Radios estáticos fijos de las páginas 1 a 4
+                    const radioMaps = {
+                        "tratamiento_si": { name: "tratamiento_datos", value: "SI" },
+                        "tratamiento_no": { name: "tratamiento_datos", value: "NO" },
+                        "situacion_fisica": { name: "situacion_vida", value: "Fisica" },
+                        "situacion_psico": { name: "situacion_vida", value: "Psicologica" },
+                        "situacion_emergencia": { name: "situacion_vida", value: "Emergencia" },
+                        "situacion_no_aplica": { name: "situacion_vida", value: "No_aplica" },
+                        "area_urbana": { name: "area_ubicacion", value: "Urbana" },
+                        "area_rural": { name: "area_ubicacion", value: "Rural" },
+                        "area_centro_poblado": { name: "area_ubicacion", value: "Centro_poblado" },
+                        "p2_id_tipo_cc": { name: "p2_id_tipo", value: "CC" },
+                        "p2_id_tipo_cd": { name: "p2_id_tipo", value: "CD" },
+                        "p2_id_tipo_ce": { name: "p2_id_tipo", value: "CE" },
+                        "p2_id_tipo_pt": { name: "p2_id_tipo", value: "PT" },
+                        "p2_entorno_hogar": { name: "p2_entorno", value: "Hogar" },
+                        "p2_entorno_comunitario": { name: "p2_entorno", value: "Comunitario" },
+                        "p2_entorno_institucional": { name: "p2_entorno", value: "Institucional" },
+                        "p2_entorno_educativo": { name: "p2_entorno", value: "Educativo" },
+                        "p2_entorno_laboral": { name: "p2_entorno", value: "Laboral" },
+                        "p2_jovenes_paz_si": { name: "p2_jovenes_paz", value: "Si" },
+                        "p2_jovenes_paz_no": { name: "p2_jovenes_paz", value: "No" },
+                        "p2_hacinamiento_si": { name: "p2_hacinamiento", value: "Si" },
+                        "p2_hacinamiento_no": { name: "p2_hacinamiento", value: "No" },
+                        "p2_estrato_bajo_bajo": { name: "p2_estrato", value: "Bajo-Bajo" },
+                        "p2_estrato_bajo": { name: "p2_estrato", value: "Bajo" },
+                        "p2_estrato_medio_bajo": { name: "p2_estrato", value: "Medio-Bajo" },
+                        "p2_estrato_medio": { name: "p2_estrato", value: "Medio" },
+                        "p2_estrato_medio_alto": { name: "p2_estrato", value: "Medio-Alto" },
+                        "p2_estrato_alto": { name: "p2_estrato", value: "Alto" },
+                        "p2_tipo_vivienda_casa": { name: "p2_tipo_vivienda", value: "Casa" },
+                        "p2_tipo_vivienda_apto": { name: "p2_tipo_vivienda", value: "Apartamento" },
+                        "p2_tipo_vivienda_cuarto": { name: "p2_tipo_vivienda", value: "Cuarto" },
+                        "p2_techo_concreto": { name: "p2_techo", value: "Concreto" },
+                        "p2_techo_barro": { name: "p2_techo", value: "Tejas_barro" },
+                        "p2_techo_zinc": { name: "p2_techo", value: "Zinc" },
+                        "p3_criaderos_si": { name: "p3_criaderos", value: "Si" },
+                        "p3_criaderos_no": { name: "p3_criaderos", value: "No" },
+                        "p3_criaderos_no_aplica": { name: "p3_criaderos", value: "No_aplica" },
+                        "p3_act_economica_si": { name: "p3_act_economica", value: "Si" },
+                        "p3_act_economica_no": { name: "p3_act_economica", value: "No" },
+                        "p3_carnet_si": { name: "p3_carnet", value: "Si" },
+                        "p3_carnet_no": { name: "p3_carnet", value: "No" },
+                        "p3_carnet_no_aplica": { name: "p3_carnet", value: "No_aplica" },
+                        "p4_red_protectoras": { name: "p4_red_apoyo", value: "Protectoras" },
+                        "p4_red_ampliables": { name: "p4_red_apoyo", value: "Ampliables" },
+                        "p4_red_ninguna": { name: "p4_red_apoyo", value: "Ninguna" }
+                    };
+
+                    // Prefijos de arrays de checkboxes dinámicos
+                    const arrayPrefixes = {
+                        "p2_riesgo_": "p2_riesgos[]",
+                        "p3_ent_": "p3_entorno_riesgos[]",
+                        "p3_ani_": "p3_animales[]",
+                        "p4_riesgo_": "p4_riesgos[]",
+                        "p4_vinculo_": "p4_vinculos[]",
+                        "p4_hogar_": "p4_hogar[]"
+                    };
+
+                    // 4. Inyección de datos
+                    for (let [key, val] of Object.entries(datos)) {
+                        if (key === "member_indices[]" || key === "p11_indices[]") continue;
+
+                        // Comprobar si pertenece a un radio fijo mapeado
+                        if (val === "X" && radioMaps[key]) {
+                            const rMap = radioMaps[key];
+                            const rEl = document.querySelector(`input[name="${rMap.name}"][value="${rMap.value}"]`);
+                            if (rEl) rEl.checked = true;
+                            continue;
+                        }
+
+                        // Comprobar si pertenece a un checkbox de array fijo mapeado
+                        let matchedArray = false;
+                        if (val === "X") {
+                            for (const [prefix, arrayName] of Object.entries(arrayPrefixes)) {
+                                if (key.startsWith(prefix)) {
+                                    const valHtml = key.replace(prefix, "");
+                                    const checkEl = Array.from(document.querySelectorAll(`input[name="${arrayName}"]`)).find(
+                                        el => el.value.toLowerCase() === valHtml.toLowerCase()
+                                    );
+                                    if (checkEl) checkEl.checked = true;
+                                    matchedArray = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (matchedArray) continue;
+
+                        // Comprobar si es un radio/selectbox dinámico de un integrante o de un plan médico
+                        let matchedDynamicRadio = false;
+                        if (val === "X") {
+                            // Radios de integrantes (m_0_p5_id_tipo_cc)
+                            const matchM = key.match(/^m_(\d+)_(p[5678]_[a-zA-Z0-9_]+)_(.+)$/);
+                            if (matchM) {
+                                const mIdx = matchM[1];
+                                const baseName = matchM[2];
+                                const optVal = matchM[3];
+                                const targetName = `m_${mIdx}_${baseName}`;
+                                
+                                const selectEl = document.querySelector(`select[name="${targetName}"]`);
+                                if (selectEl) {
+                                    selectEl.value = optVal.charAt(0).toUpperCase() + optVal.slice(1); // ej: "si" -> "Si" o "CC"
+                                } else {
+                                    const radioEl = Array.from(document.querySelectorAll(`input[name="${targetName}"]`)).find(
+                                        r => r.value.toLowerCase() === optVal.toLowerCase()
+                                    );
+                                    if (radioEl) radioEl.checked = true;
+                                }
+                                matchedDynamicRadio = true;
+                            }
+
+                            // Radios de planes médicos (p11_idx_0_p11_id_tipo_cc)
+                            const matchP11 = key.match(/^p11_idx_(\d+)_(p11_id_tipo|p11_t1_resp_\d|p11_t2_seg1_estado_\d|p11_t2_seg2_estado_\d)_(.+)$/);
+                            if (matchP11) {
+                                const p11Idx = matchP11[1];
+                                const baseName = matchP11[2];
+                                const optVal = matchP11[3];
+                                const targetName = `p11_idx_${p11Idx}_${baseName}`;
+                                
+                                const selectEl = document.querySelector(`select[name="${targetName}"]`);
+                                if (selectEl) {
+                                    selectEl.value = optVal.toUpperCase();
+                                } else {
+                                    const radioEl = Array.from(document.querySelectorAll(`input[name="${targetName}"]`)).find(
+                                        r => r.value.toLowerCase() === optVal.toLowerCase()
+                                    );
+                                    if (radioEl) radioEl.checked = true;
+                                }
+                                matchedDynamicRadio = true;
+                            }
+                        }
+                        if (matchedDynamicRadio) continue;
+
+                        // Comprobar si es un checkbox dinámico de integrante (m_0_p5_prot_ninos)
+                        let matchedDynamicCheck = false;
+                        if (val === "X") {
+                            const matchCheckM = key.match(/^m_(\d+)_(p[5678]_[a-zA-Z0-9]+)_(.+)$/);
+                            if (matchCheckM) {
+                                const mIdx = matchCheckM[1];
+                                const baseGroup = matchCheckM[2]; 
+                                const optVal = matchCheckM[3];   
+                                const targetName = `m_${mIdx}_${baseGroup}[]`;
+                                
+                                const checkEl = Array.from(document.querySelectorAll(`input[name="${targetName}"]`)).find(
+                                    el => el.value.toLowerCase() === optVal.toLowerCase()
+                                );
+                                if (checkEl) checkEl.checked = true;
+                                matchedDynamicCheck = true;
+                            }
+                        }
+                        if (matchedDynamicCheck) continue;
+
+                        // Campos de texto estándar y selectores fijos
+                        const textInput = document.querySelector(`input[name="${key}"], select[name="${key}"], textarea[name="${key}"]`);
+                        if (textInput && textInput.type !== 'radio' && textInput.type !== 'checkbox') {
+                            textInput.value = val;
+                        }
+                    }
+                    alert("Ficha importada y pre-completada con éxito de forma dinámica.");
+                } else {
+                    alert("No se pudo importar: " + response.error);
+                }
+            });
+        }
+
+        function cerrarAplicacion() {
+            window.pywebview.api.cerrar_app();
+        }
+        const pdfInput = document.getElementById('pdfInput');
+        const removePdfBtn = document.getElementById('removePdfBtn');
+
+        function toggleRemoveButton() {
+            if (pdfInput.files && pdfInput.files.length > 0) {
+                removePdfBtn.classList.remove('hidden');
+            } else {
+                removePdfBtn.classList.add('hidden');
+            }
+        }
+
+        function clearPdfInput() {
+            pdfInput.value = ''; // Limpia el archivo seleccionado
+            toggleRemoveButton(); // Oculta de nuevo el botón
+        }
+    </script>
+</body>
+</html>

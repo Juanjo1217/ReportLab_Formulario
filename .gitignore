@@ -1,5 +1,49 @@
-/build
-/dist
-/.venv
-app.spec
-main.spec
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# PyInstaller / Build artifacts
+build/
+dist/
+*.spec
+*.manifest
+
+# Output PDFs / Generated test files
+Formulario_Final.pdf
+APS_Ficha_Completa.pdf
+*.tmp
+
+# IDE & Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Flutter / Mobile subproject build & cache artifacts
+android_version/.dart_tool/
+android_version/.idea/
+android_version/*.iml
+android_version/build/
+.flutter-plugins
+.flutter-plugins-dependencies

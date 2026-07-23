@@ -1,0 +1,32 @@
+name: android_version
+description: "Aplicación Flutter Android para diligenciamiento y estampado de PDF de Formulario APS Ministerio."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  syncfusion_flutter_pdf: ^26.2.9
+  flutter_inappwebview: ^6.1.5
+  path_provider: ^2.1.4
+  permission_handler: ^11.3.1
+  open_file_plus: ^3.4.1
+  share_plus: ^10.0.0
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/pdf/plantilla_ministerio.pdf
+    - assets/html/formulario.html
+    - assets/json/coords.json
+

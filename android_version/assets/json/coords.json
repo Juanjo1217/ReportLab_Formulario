@@ -1,0 +1,3112 @@
+{
+  "AJUSTE_MANUAL_X_P1": 0,
+  "AJUSTE_MANUAL_Y_P1": 0,
+  "AJUSTE_MANUAL_X_P2": -3,
+  "AJUSTE_MANUAL_Y_P2": -4,
+  "AJUSTE_MANUAL_X_P3": -3,
+  "AJUSTE_MANUAL_Y_P3": -4,
+  "AJUSTE_MANUAL_X_P4": -3,
+  "AJUSTE_MANUAL_Y_P4": -4,
+  "AJUSTE_MANUAL_X_P5": -3,
+  "AJUSTE_MANUAL_Y_P5": -4,
+  "AJUSTE_MANUAL_X_P6": -3,
+  "AJUSTE_MANUAL_Y_P6": -4,
+  "AJUSTE_MANUAL_X_P7": -3,
+  "AJUSTE_MANUAL_Y_P7": -4,
+  "AJUSTE_MANUAL_X_P8": -3,
+  "AJUSTE_MANUAL_Y_P8": -4,
+  "AJUSTE_MANUAL_X_P9": -3,
+  "AJUSTE_MANUAL_Y_P9": -4,
+  "AJUSTE_MANUAL_X_P10": -3,
+  "AJUSTE_MANUAL_Y_P10": 31,
+  "AJUSTE_MANUAL_X_P11": -3,
+  "AJUSTE_MANUAL_Y_P11": -4,
+  "COORD_P1": {
+    "tratamiento_si": [
+      513,
+      483
+    ],
+    "tratamiento_no": [
+      513,
+      436
+    ],
+    "situacion_fisica": [
+      327,
+      334
+    ],
+    "situacion_psico": [
+      327,
+      319
+    ],
+    "situacion_emergencia": [
+      327,
+      305
+    ],
+    "situacion_no_aplica": [
+      327,
+      291
+    ],
+    "departamento": [
+      124,
+      245
+    ],
+    "uzpe": [
+      486,
+      245
+    ],
+    "municipio": [
+      197,
+      208
+    ],
+    "area_urbana": [
+      225,
+      191
+    ],
+    "area_rural": [
+      347,
+      191
+    ],
+    "area_centro_poblado": [
+      469,
+      191
+    ],
+    "territorio": [
+      108,
+      173
+    ],
+    "microterritorio": [
+      388,
+      173
+    ],
+    "corregimiento_barrio": [
+      381,
+      155
+    ],
+    "id_equipo": [
+      240,
+      93
+    ],
+    "prestador_primario": [
+      319,
+      74
+    ]
+  },
+  "COORD_P2": {
+    "p2_id_tipo_cc": [
+      63,
+      691
+    ],
+    "p2_id_tipo_cd": [
+      178,
+      691
+    ],
+    "p2_id_tipo_ce": [
+      291,
+      691
+    ],
+    "p2_id_tipo_pt": [
+      416,
+      691
+    ],
+    "p2_id_numero": [
+      345,
+      668
+    ],
+    "p2_perfil_profesional": [
+      484,
+      642
+    ],
+    "p2_codigo_ficha": [
+      147,
+      625
+    ],
+    "p2_fecha_ficha": [
+      475,
+      624
+    ],
+    "p2_entorno_hogar": [
+      255,
+      571
+    ],
+    "p2_entorno_comunitario": [
+      308,
+      571
+    ],
+    "p2_entorno_institucional": [
+      383,
+      572
+    ],
+    "p2_entorno_educativo": [
+      457,
+      572
+    ],
+    "p2_entorno_laboral": [
+      523,
+      572
+    ],
+    "p2_nombre_institucion": [
+      261,
+      547
+    ],
+    "p2_cabeza_familia": [
+      329,
+      530
+    ],
+    "p2_jovenes_paz_si": [
+      433,
+      513
+    ],
+    "p2_jovenes_paz_no": [
+      519,
+      513
+    ],
+    "p2_direccion": [
+      114,
+      467
+    ],
+    "p2_latitud": [
+      201,
+      449
+    ],
+    "p2_longitud": [
+      484,
+      449
+    ],
+    "p2_punto_referencia": [
+      230,
+      431
+    ],
+    "p2_id_hogar": [
+      188,
+      413
+    ],
+    "p2_id_familia": [
+      475,
+      414
+    ],
+    "p2_estrato_bajo_bajo": [
+      229,
+      396
+    ],
+    "p2_estrato_bajo": [
+      298,
+      396
+    ],
+    "p2_estrato_medio_bajo": [
+      344,
+      396
+    ],
+    "p2_estrato_medio": [
+      420,
+      396
+    ],
+    "p2_estrato_medio_alto": [
+      467,
+      396
+    ],
+    "p2_estrato_alto": [
+      541,
+      396
+    ],
+    "p2_num_hogares": [
+      222,
+      379
+    ],
+    "p2_num_personas": [
+      465,
+      379
+    ],
+    "p2_num_habitaciones": [
+      193,
+      362
+    ],
+    "p2_elementos_dormir": [
+      443,
+      359
+    ],
+    "p2_personas_habitacion": [
+      184,
+      345
+    ],
+    "p2_hacinamiento_si": [
+      141,
+      326
+    ],
+    "p2_hacinamiento_no": [
+      191,
+      325
+    ],
+    "p2_tipo_vivienda_casa": [
+      147,
+      243
+    ],
+    "p2_tipo_vivienda_apto": [
+      198,
+      243
+    ],
+    "p2_tipo_vivienda_cuarto": [
+      281,
+      243
+    ],
+    "p2_tipo_vivienda_tradicional_indigena": [
+      365,
+      243
+    ],
+    "p2_tipo_vivienda_carpa": [
+      506,
+      243
+    ],
+    "p2_tipo_vivienda_tradicional_etnica": [
+      49,
+      229
+    ],
+    "p2_tipo_vivienda_contenedor": [
+      171,
+      229
+    ],
+    "p2_tipo_vivienda_embarcacion": [
+      249,
+      229
+    ],
+    "p2_tipo_vivienda_vagon": [
+      328,
+      229
+    ],
+    "p2_tipo_vivienda_refugio": [
+      383,
+      229
+    ],
+    "p2_tipo_vivienda_cueva": [
+      473,
+      229
+    ],
+    "p2_tipo_vivienda_puente": [
+      530,
+      229
+    ],
+    "p2_techo_concreto": [
+      184,
+      212
+    ],
+    "p2_techo_barro": [
+      251,
+      211
+    ],
+    "p2_techo_fibrocemento_sin_asbesto": [
+      336,
+      211
+    ],
+    "p2_techo_zinc": [
+      466,
+      211
+    ],
+    "p2_techo_plastico": [
+      515,
+      211
+    ],
+    "p2_techo_fibrocemento_con_asbesto": [
+      183,
+      197
+    ],
+    "p2_techo_palma": [
+      374,
+      197
+    ],
+    "p2_techo_desechos": [
+      456,
+      197
+    ],
+    "p2_riesgo_cortantes": [
+      62,
+      161
+    ],
+    "p2_riesgo_quimicos": [
+      62,
+      147
+    ],
+    "p2_riesgo_medicamentos": [
+      62,
+      134
+    ],
+    "p2_riesgo_velas": [
+      277,
+      134
+    ],
+    "p2_riesgo_electricas": [
+      62,
+      119
+    ],
+    "p2_riesgo_botones": [
+      62,
+      105
+    ],
+    "p2_riesgo_pasillos": [
+      62,
+      90
+    ],
+    "p2_riesgo_superficies": [
+      299,
+      90
+    ],
+    "p2_riesgo_tanques": [
+      62,
+      77
+    ],
+    "p2_riesgo_escaleras": [
+      333,
+      76
+    ],
+    "p2_riesgo_ninguno": [
+      474,
+      76
+    ]
+  },
+  "COORD_P3": {
+    "p3_criaderos_si": [
+      396,
+      725
+    ],
+    "p3_criaderos_no": [
+      453,
+      725
+    ],
+    "p3_criaderos_no_aplica": [
+      512,
+      725
+    ],
+    "p3_ent_cultivos": [
+      356,
+      703
+    ],
+    "p3_ent_apriscos": [
+      420,
+      703
+    ],
+    "p3_ent_porquerizas": [
+      486,
+      703
+    ],
+    "p3_ent_galpones": [
+      64,
+      689
+    ],
+    "p3_ent_baldios": [
+      132,
+      689
+    ],
+    "p3_ent_plagas": [
+      228,
+      689
+    ],
+    "p3_ent_olores": [
+      504,
+      689
+    ],
+    "p3_ent_ruidos": [
+      63,
+      675
+    ],
+    "p3_ent_excretas": [
+      215,
+      675
+    ],
+    "p3_ent_rellenos": [
+      402,
+      675
+    ],
+    "p3_ent_contaminacion": [
+      63,
+      660
+    ],
+    "p3_ent_rio": [
+      176,
+      661
+    ],
+    "p3_ent_planta": [
+      266,
+      660
+    ],
+    "p3_ent_mineria": [
+      444,
+      661
+    ],
+    "p3_ent_industrias": [
+      63,
+      646
+    ],
+    "p3_ent_canales": [
+      63,
+      632
+    ],
+    "p3_ent_vias": [
+      170,
+      632
+    ],
+    "p3_ent_quemas": [
+      306,
+      632
+    ],
+    "p3_ent_alta_tension": [
+      63,
+      618
+    ],
+    "p3_ent_agroquimicos": [
+      286,
+      617
+    ],
+    "p3_ent_asbesto": [
+      64,
+      604
+    ],
+    "p3_ent_ninguno": [
+      466,
+      604
+    ],
+    "p3_act_economica_si": [
+      400,
+      558
+    ],
+    "p3_act_economica_no": [
+      506,
+      558
+    ],
+    "p3_ani_perros": [
+      456,
+      540
+    ],
+    "p3_ani_gatos": [
+      524,
+      540
+    ],
+    "p3_ani_porcinos": [
+      63,
+      526
+    ],
+    "p3_ani_bovinos": [
+      129,
+      526
+    ],
+    "p3_ani_equinos": [
+      272,
+      526
+    ],
+    "p3_ani_ovinos": [
+      450,
+      526
+    ],
+    "p3_ani_aves_prod": [
+      63,
+      512
+    ],
+    "p3_ani_aves_orn": [
+      169,
+      511
+    ],
+    "p3_ani_peces": [
+      278,
+      512
+    ],
+    "p3_ani_cobayos": [
+      420,
+      512
+    ],
+    "p3_ani_silvestres": [
+      64,
+      497
+    ],
+    "p3_ani_otro": [
+      175,
+      497
+    ],
+    "p3_ani_ninguno": [
+      390,
+      497
+    ],
+    "p3_num_perros": [
+      196,
+      480
+    ],
+    "p3_num_perros_vacuna": [
+      521,
+      480
+    ],
+    "p3_num_gatos": [
+      196,
+      462
+    ],
+    "p3_num_gatos_vacuna": [
+      521,
+      462
+    ],
+    "p3_carnet_si": [
+      396,
+      445
+    ],
+    "p3_carnet_no": [
+      452,
+      445
+    ],
+    "p3_carnet_no_aplica": [
+      511,
+      444
+    ],
+    "p3_agua_esp": [
+      63,
+      385
+    ],
+    "p3_agua_veredal": [
+      298,
+      385
+    ],
+    "p3_agua_pila": [
+      453,
+      385
+    ],
+    "p3_agua_carro": [
+      63,
+      371
+    ],
+    "p3_agua_comunitaria": [
+      143,
+      371
+    ],
+    "p3_agua_pozo_bomba": [
+      309,
+      371
+    ],
+    "p3_agua_pozo_sin_bomba": [
+      407,
+      371
+    ],
+    "p3_agua_laguna": [
+      63,
+      357
+    ],
+    "p3_agua_rio": [
+      159,
+      356
+    ],
+    "p3_agua_manantial": [
+      244,
+      357
+    ],
+    "p3_agua_lluvias": [
+      364,
+      357
+    ],
+    "p3_agua_aguatero": [
+      448,
+      357
+    ],
+    "p3_agua_botella": [
+      434,
+      400
+    ],
+    "p3_exc_alcantarillado": [
+      63,
+      325
+    ],
+    "p3_exc_letrina": [
+      231,
+      325
+    ],
+    "p3_exc_septico": [
+      330,
+      325
+    ],
+    "p3_exc_seco": [
+      63,
+      310
+    ],
+    "p3_exc_sin_conexion": [
+      196,
+      310
+    ],
+    "p3_exc_fuente": [
+      310,
+      310
+    ],
+    "p3_exc_abierto": [
+      494,
+      310
+    ],
+    "p3_res_alcantarillado": [
+      404,
+      293
+    ],
+    "p3_res_septico": [
+      505,
+      293
+    ],
+    "p3_res_oxidacion": [
+      64,
+      278
+    ],
+    "p3_res_biofiltro": [
+      172,
+      278
+    ],
+    "p3_res_fuente": [
+      236,
+      278
+    ],
+    "p3_res_abierto": [
+      322,
+      278
+    ],
+    "p3_sol_recoleccion": [
+      63,
+      246
+    ],
+    "p3_sol_enterramiento": [
+      324,
+      248
+    ],
+    "p3_sol_quema": [
+      410,
+      246
+    ],
+    "p3_sol_fuente": [
+      63,
+      232
+    ],
+    "p3_sol_abierto": [
+      241,
+      232
+    ],
+    "p3_fam_nuclear_biparental": [
+      157,
+      146
+    ],
+    "p3_fam_nuclear_monoparental": [
+      260,
+      146
+    ],
+    "p3_fam_extenso_biparental": [
+      375,
+      147
+    ],
+    "p3_fam_extenso_monoparental": [
+      63,
+      132
+    ],
+    "p3_fam_compuesto_biparental": [
+      188,
+      133
+    ],
+    "p3_fam_compuesto_monoparental": [
+      304,
+      132
+    ],
+    "p3_fam_unipersonal": [
+      421,
+      132
+    ],
+    "p3_fam_personas": [
+      250,
+      114
+    ],
+    "p3_cuidador_si": [
+      488,
+      96
+    ],
+    "p3_cuidador_no": [
+      538,
+      96
+    ],
+    "p3_zarit_ausencia": [
+      63,
+      64
+    ],
+    "p3_zarit_ligera": [
+      264,
+      64
+    ],
+    "p3_zarit_intensa": [
+      442,
+      64
+    ]
+  },
+  "COORD_P4": {
+    "p4_riesgo_convivencia": [
+      63,
+      707
+    ],
+    "p4_riesgo_nuevo_integrante": [
+      215,
+      707
+    ],
+    "p4_riesgo_ingreso_estudiar": [
+      365,
+      707
+    ],
+    "p4_riesgo_perdida_ano": [
+      466,
+      706
+    ],
+    "p4_riesgo_embarazo_adolescente": [
+      63,
+      692
+    ],
+    "p4_riesgo_independencia_hijos": [
+      224,
+      692
+    ],
+    "p4_riesgo_separacion": [
+      376,
+      693
+    ],
+    "p4_riesgo_jubilacion": [
+      450,
+      693
+    ],
+    "p4_riesgo_duelo": [
+      520,
+      692
+    ],
+    "p4_riesgo_desempleo": [
+      63,
+      678
+    ],
+    "p4_riesgo_crisis_economica": [
+      248,
+      678
+    ],
+    "p4_riesgo_muerte_inesperada": [
+      388,
+      678
+    ],
+    "p4_riesgo_migracion": [
+      490,
+      678
+    ],
+    "p4_riesgo_enfermedad_terminal": [
+      63,
+      664
+    ],
+    "p4_riesgo_accidente_discapacidad": [
+      340,
+      664
+    ],
+    "p4_riesgo_antecedentes_suicidio": [
+      63,
+      649
+    ],
+    "p4_riesgo_violencia": [
+      373,
+      650
+    ],
+    "p4_riesgo_abandono": [
+      63,
+      636
+    ],
+    "p4_riesgo_consumo_sustancias": [
+      222,
+      635
+    ],
+    "p4_riesgo_trastorno_mental": [
+      62,
+      622
+    ],
+    "p4_riesgo_ninguna": [
+      200,
+      622
+    ],
+    "p4_vinculo_tension": [
+      62,
+      564
+    ],
+    "p4_vinculo_decisiones": [
+      63,
+      549
+    ],
+    "p4_vinculo_conflictos": [
+      63,
+      536
+    ],
+    "p4_vinculo_comunicacion": [
+      62,
+      520
+    ],
+    "p4_vinculo_ninos": [
+      62,
+      506
+    ],
+    "p4_vinculo_adultos_mayores": [
+      62,
+      483
+    ],
+    "p4_red_protectoras": [
+      54,
+      449
+    ],
+    "p4_red_ampliables": [
+      54,
+      435
+    ],
+    "p4_red_ninguna": [
+      54,
+      421
+    ],
+    "p4_hogar_tratamiento_agua": [
+      62,
+      389
+    ],
+    "p4_hogar_ventilacion": [
+      62,
+      374
+    ],
+    "p4_hogar_evita_humo": [
+      62,
+      360
+    ],
+    "p4_hogar_residuos": [
+      63,
+      345
+    ],
+    "p4_hogar_limpieza": [
+      62,
+      324
+    ],
+    "p4_hogar_toldillos": [
+      63,
+      309
+    ],
+    "p4_hogar_limpieza_entorno": [
+      63,
+      294
+    ],
+    "p4_hogar_quimicos_seguros": [
+      62,
+      280
+    ]
+  },
+  "COORD_MIEMBRO": {
+    "p5_primer_nombre": [
+      136,
+      666
+    ],
+    "p5_segundo_nombre": [
+      419,
+      665
+    ],
+    "p5_primer_apellido": [
+      136,
+      650
+    ],
+    "p5_segundo_apellido": [
+      419,
+      649
+    ],
+    "p5_id_numero": [
+      170,
+      571
+    ],
+    "p5_fecha_nacimiento": [
+      429,
+      570
+    ],
+    "p5_nacionalidad": [
+      128,
+      554
+    ],
+    "p5_telefono_1": [
+      135,
+      453
+    ],
+    "p5_telefono_2": [
+      419,
+      454
+    ],
+    "p5_ocupacion": [
+      135,
+      378
+    ],
+    "p5_eapb": [
+      103,
+      296
+    ],
+    "p5_pueblo_etnico": [
+      252,
+      128
+    ],
+    "p5_identidad_otro_cual": [
+      159,
+      504
+    ],
+    "p5_orientacion_otro_cual": [
+      151,
+      472
+    ],
+    "p5_prot_otro_cual": [
+      141,
+      208
+    ],
+    "p5_id_tipo_as": [
+      254,
+      631
+    ],
+    "p5_id_tipo_cc": [
+      390,
+      631
+    ],
+    "p5_id_tipo_cd": [
+      63,
+      617
+    ],
+    "p5_id_tipo_ce": [
+      178,
+      617
+    ],
+    "p5_id_tipo_ms": [
+      302,
+      617
+    ],
+    "p5_id_tipo_nv": [
+      438,
+      617
+    ],
+    "p5_id_tipo_pe": [
+      63,
+      603
+    ],
+    "p5_id_tipo_pt": [
+      235,
+      603
+    ],
+    "p5_id_tipo_rc": [
+      402,
+      603
+    ],
+    "p5_id_tipo_ti": [
+      62,
+      589
+    ],
+    "p5_sexo_hombre": [
+      331,
+      553
+    ],
+    "p5_sexo_mujer": [
+      395,
+      553
+    ],
+    "p5_sexo_intersexual": [
+      449,
+      553
+    ],
+    "p5_genero_femenino": [
+      167,
+      535
+    ],
+    "p5_genero_masculino": [
+      268,
+      535
+    ],
+    "p5_identidad_femenino": [
+      178,
+      516
+    ],
+    "p5_identidad_masculino": [
+      246,
+      516
+    ],
+    "p5_identidad_transexual": [
+      316,
+      516
+    ],
+    "p5_identidad_transgenero": [
+      388,
+      516
+    ],
+    "p5_identidad_no_responde": [
+      467,
+      516
+    ],
+    "p5_identidad_otro": [
+      70,
+      503
+    ],
+    "p5_orientacion_hetero": [
+      206,
+      485
+    ],
+    "p5_orientacion_lesbiana": [
+      292,
+      485
+    ],
+    "p5_orientacion_gay": [
+      357,
+      485
+    ],
+    "p5_orientacion_bisexual": [
+      405,
+      485
+    ],
+    "p5_orientacion_no_responde": [
+      476,
+      485
+    ],
+    "p5_orientacion_otro": [
+      64,
+      471
+    ],
+    "p5_rol_resp_economico": [
+      209,
+      434
+    ],
+    "p5_rol_conyuge": [
+      376,
+      435
+    ],
+    "p5_rol_hijo": [
+      63,
+      421
+    ],
+    "p5_rol_hermano": [
+      120,
+      421
+    ],
+    "p5_rol_padre_madre": [
+      196,
+      421
+    ],
+    "p5_rol_otros": [
+      282,
+      421
+    ],
+    "p5_educacion_preescolar": [
+      150,
+      359
+    ],
+    "p5_educacion_primaria": [
+      222,
+      359
+    ],
+    "p5_educacion_secundaria": [
+      313,
+      359
+    ],
+    "p5_educacion_media": [
+      411,
+      359
+    ],
+    "p5_educacion_media_tecnica": [
+      63,
+      345
+    ],
+    "p5_educacion_normalista": [
+      226,
+      345
+    ],
+    "p5_educacion_tecnica_prof": [
+      299,
+      345
+    ],
+    "p5_educacion_tecnologica": [
+      403,
+      345
+    ],
+    "p5_educacion_profesional": [
+      482,
+      345
+    ],
+    "p5_educacion_especializacion": [
+      62,
+      331
+    ],
+    "p5_educacion_maestria": [
+      150,
+      331
+    ],
+    "p5_educacion_doctorado": [
+      214,
+      331
+    ],
+    "p5_educacion_ninguno": [
+      285,
+      331
+    ],
+    "p5_educacion_tecnica_lab": [
+      348,
+      331
+    ],
+    "p5_regimen_subsidiado": [
+      171,
+      313
+    ],
+    "p5_regimen_contributivo": [
+      246,
+      313
+    ],
+    "p5_regimen_especial": [
+      326,
+      313
+    ],
+    "p5_regimen_excepcion": [
+      394,
+      313
+    ],
+    "p5_regimen_no_afiliado": [
+      465,
+      313
+    ],
+    "p5_prot_ninos": [
+      53,
+      263
+    ],
+    "p5_prot_gestante": [
+      188,
+      264
+    ],
+    "p5_prot_adulto_mayor": [
+      256,
+      263
+    ],
+    "p5_prot_diversa": [
+      372,
+      263
+    ],
+    "p5_prot_campesino": [
+      53,
+      250
+    ],
+    "p5_prot_migrante": [
+      176,
+      250
+    ],
+    "p5_prot_madre_cabeza": [
+      247,
+      250
+    ],
+    "p5_prot_enf_huerfana": [
+      370,
+      250
+    ],
+    "p5_prot_conflicto": [
+      54,
+      235
+    ],
+    "p5_prot_violencia_genero": [
+      192,
+      236
+    ],
+    "p5_prot_violencia_interpersonal": [
+      392,
+      235
+    ],
+    "p5_prot_privada_libertad": [
+      53,
+      221
+    ],
+    "p5_prot_penal_adolescente": [
+      275,
+      221
+    ],
+    "p5_prot_otro": [
+      53,
+      207
+    ],
+    "p5_prot_ninguna": [
+      483,
+      207
+    ],
+    "p5_violencia_fisica": [
+      472,
+      190
+    ],
+    "p5_violencia_psicologica": [
+      54,
+      175
+    ],
+    "p5_violencia_negligencia": [
+      130,
+      175
+    ],
+    "p5_violencia_sexual": [
+      374,
+      175
+    ],
+    "p5_violencia_patrimonial": [
+      434,
+      175
+    ],
+    "p5_etnia_indigena": [
+      160,
+      158
+    ],
+    "p5_etnia_rrom": [
+      226,
+      158
+    ],
+    "p5_etnia_negro": [
+      314,
+      159
+    ],
+    "p5_etnia_afro": [
+      372,
+      159
+    ],
+    "p5_etnia_raizal": [
+      54,
+      145
+    ],
+    "p5_etnia_palenquero": [
+      211,
+      144
+    ],
+    "p5_etnia_ninguna": [
+      390,
+      144
+    ],
+    "p6_anc_proteger": [
+      64,
+      693
+    ],
+    "p6_anc_transicion": [
+      64,
+      680
+    ],
+    "p6_anc_tradicionales": [
+      64,
+      665
+    ],
+    "p6_anc_armonizacion": [
+      64,
+      649
+    ],
+    "p6_anc_partera": [
+      64,
+      634
+    ],
+    "p6_anc_cuidado_entorno": [
+      64,
+      620
+    ],
+    "p6_anc_ninguna": [
+      329,
+      620
+    ],
+    "p6_disc_fisica": [
+      260,
+      603
+    ],
+    "p6_disc_auditiva": [
+      315,
+      603
+    ],
+    "p6_disc_visual": [
+      381,
+      603
+    ],
+    "p6_disc_sordoceguera": [
+      439,
+      603
+    ],
+    "p6_disc_intelectual": [
+      64,
+      589
+    ],
+    "p6_disc_psicosocial": [
+      150,
+      589
+    ],
+    "p6_disc_multiple": [
+      257,
+      589
+    ],
+    "p6_disc_ninguna": [
+      322,
+      589
+    ],
+    "p6_cert_disc_si": [
+      330,
+      571
+    ],
+    "p6_cert_disc_no": [
+      426,
+      571
+    ],
+    "p6_cert_disc_no_aplica": [
+      499,
+      572
+    ],
+    "p6_intencion_reproductiva_si": [
+      225,
+      554
+    ],
+    "p6_intencion_reproductiva_no": [
+      271,
+      554
+    ],
+    "p6_gestacion_si": [
+      486,
+      554
+    ],
+    "p6_gestacion_no": [
+      538,
+      554
+    ],
+    "p6_rut_alimentos": [
+      64,
+      522
+    ],
+    "p6_rut_actividad": [
+      339,
+      522
+    ],
+    "p6_rut_higiene": [
+      64,
+      509
+    ],
+    "p6_rut_lavado": [
+      64,
+      493
+    ],
+    "p6_rut_duerme": [
+      64,
+      471
+    ],
+    "p6_rut_control": [
+      64,
+      456
+    ],
+    "p6_rut_ocio": [
+      64,
+      442
+    ],
+    "p6_rut_cultural": [
+      64,
+      427
+    ],
+    "p6_rut_ninguna": [
+      502,
+      427
+    ],
+    "p6_maint_pymes": [
+      64,
+      395
+    ],
+    "p6_maint_bucal": [
+      228,
+      395
+    ],
+    "p6_maint_lactancia": [
+      64,
+      382
+    ],
+    "p6_maint_fluor": [
+      242,
+      381
+    ],
+    "p6_maint_profilaxis": [
+      344,
+      381
+    ],
+    "p6_maint_vacunas": [
+      64,
+      367
+    ],
+    "p6_maint_fortificacion": [
+      241,
+      367
+    ],
+    "p6_maint_suplementos": [
+      64,
+      351
+    ],
+    "p6_maint_desparasitacion": [
+      232,
+      353
+    ],
+    "p6_maint_anemia": [
+      64,
+      338
+    ],
+    "p6_maint_asesoria": [
+      323,
+      338
+    ],
+    "p6_maint_sum_anticonceptivos": [
+      64,
+      323
+    ],
+    "p6_maint_cardiovascular": [
+      410,
+      323
+    ],
+    "p6_maint_treponemica": [
+      64,
+      309
+    ],
+    "p6_maint_vih": [
+      197,
+      309
+    ],
+    "p6_maint_hepatitis": [
+      64,
+      294
+    ],
+    "p6_maint_embarazo_prueba": [
+      64,
+      279
+    ],
+    "p6_maint_cuello_uterino": [
+      64,
+      265
+    ],
+    "p6_maint_colposcopia": [
+      334,
+      265
+    ],
+    "p6_maint_mama": [
+      64,
+      251
+    ],
+    "p6_maint_prostata": [
+      210,
+      251
+    ],
+    "p6_maint_colon": [
+      366,
+      251
+    ],
+    "p6_maint_educacion": [
+      63,
+      237
+    ],
+    "p6_maint_ninguna": [
+      196,
+      237
+    ],
+    "p6_mat_preconcepcional": [
+      64,
+      205
+    ],
+    "p6_mat_ive": [
+      340,
+      204
+    ],
+    "p6_mat_prenatal": [
+      64,
+      191
+    ],
+    "p6_mat_preparacion": [
+      340,
+      191
+    ],
+    "p6_mat_puerperio": [
+      64,
+      176
+    ],
+    "p6_mat_metodo_post_parto": [
+      202,
+      176
+    ],
+    "p6_mat_recien_nacido": [
+      64,
+      161
+    ],
+    "p6_mat_educacion": [
+      284,
+      161
+    ],
+    "p6_mat_ninguna": [
+      426,
+      161
+    ],
+    "p6_mot_no_afiliado": [
+      62,
+      127
+    ],
+    "p6_mot_desconocimiento_derecho": [
+      136,
+      127
+    ],
+    "p6_mot_desconocimiento_gratuito": [
+      352,
+      127
+    ],
+    "p6_mot_lejos": [
+      63,
+      115
+    ],
+    "p6_mot_no_personal": [
+      288,
+      113
+    ],
+    "p6_mot_tramites": [
+      63,
+      99
+    ],
+    "p6_mot_no_agenda": [
+      247,
+      99
+    ],
+    "p6_mot_no_sabe": [
+      414,
+      99
+    ],
+    "p6_mot_horario": [
+      63,
+      86
+    ],
+    "p6_mot_tiempos": [
+      218,
+      85
+    ],
+    "p6_mot_no_comodo": [
+      346,
+      85
+    ],
+    "p6_mot_enfermo": [
+      63,
+      72
+    ],
+    "p6_mot_falta_tiempo": [
+      274,
+      71
+    ],
+    "p6_mot_falta_adecuacion": [
+      64,
+      57
+    ],
+    "p6_mot_ninguna": [
+      262,
+      57
+    ],
+    "p7_peso": [
+      170,
+      635
+    ],
+    "p7_talla": [
+      170,
+      618
+    ],
+    "p7_circunferencia_cintura": [
+      542,
+      635
+    ],
+    "p7_imc": [
+      371,
+      618
+    ],
+    "p7_tension_sistolica": [
+      156,
+      479
+    ],
+    "p7_tension_diastolica": [
+      356,
+      479
+    ],
+    "p7_tension_no_aplica": [
+      474,
+      479
+    ],
+    "p7_der_conoce": [
+      64,
+      714
+    ],
+    "p7_der_info": [
+      64,
+      701
+    ],
+    "p7_der_lugares": [
+      64,
+      685
+    ],
+    "p7_der_resolver": [
+      63,
+      671
+    ],
+    "p7_lactancia_si": [
+      344,
+      652
+    ],
+    "p7_lactancia_no": [
+      434,
+      652
+    ],
+    "p7_lactancia_no_aplica": [
+      502,
+      652
+    ],
+    "p7_ant_obesidad": [
+      63,
+      578
+    ],
+    "p7_ant_sobrepeso": [
+      131,
+      578
+    ],
+    "p7_ant_riesgo_sobrepeso": [
+      204,
+      578
+    ],
+    "p7_ant_peso_adecuado": [
+      314,
+      578
+    ],
+    "p7_ant_riesgo_desnutricion": [
+      64,
+      565
+    ],
+    "p7_ant_desnutricion_moderada": [
+      396,
+      565
+    ],
+    "p7_ant_desnutricion_severa": [
+      63,
+      543
+    ],
+    "p7_ant_riesgo_delgadez": [
+      195,
+      543
+    ],
+    "p7_ant_delgadez": [
+      301,
+      543
+    ],
+    "p7_ant_bajo_peso_gestacional": [
+      368,
+      543
+    ],
+    "p7_ant_normal": [
+      530,
+      543
+    ],
+    "p7_desn_cabeza": [
+      416,
+      525
+    ],
+    "p7_desn_cara": [
+      478,
+      525
+    ],
+    "p7_desn_piel": [
+      529,
+      525
+    ],
+    "p7_desn_torax": [
+      63,
+      511
+    ],
+    "p7_desn_extremidades": [
+      162,
+      511
+    ],
+    "p7_desn_comportamiento": [
+      246,
+      511
+    ],
+    "p7_desn_edema": [
+      342,
+      511
+    ],
+    "p7_desn_ninguna": [
+      404,
+      511
+    ],
+    "p7_desn_no_aplica": [
+      469,
+      511
+    ],
+    "p7_ten_crisis": [
+      64,
+      448
+    ],
+    "p7_ten_alta_2": [
+      64,
+      435
+    ],
+    "p7_ten_alta_1": [
+      64,
+      420
+    ],
+    "p7_ten_elevada": [
+      63,
+      405
+    ],
+    "p7_ten_normal": [
+      64,
+      389
+    ],
+    "p7_ent_obstetrica": [
+      64,
+      358
+    ],
+    "p7_ent_cardiovascular": [
+      63,
+      345
+    ],
+    "p7_ent_diabetes": [
+      347,
+      345
+    ],
+    "p7_ent_cancer": [
+      415,
+      345
+    ],
+    "p7_ten_no_aplica": [
+      388,
+      390
+    ],
+    "p7_ent_epoc": [
+      474,
+      345
+    ],
+    "p7_ent_raras": [
+      63,
+      331
+    ],
+    "p7_ent_trastorno": [
+      216,
+      330
+    ],
+    "p7_ent_epilepsia": [
+      314,
+      330
+    ],
+    "p7_ent_secuelas": [
+      63,
+      317
+    ],
+    "p7_ent_ninguna": [
+      473,
+      316
+    ],
+    "p7_tra_infancia": [
+      64,
+      285
+    ],
+    "p7_tra_tuberculosis": [
+      469,
+      285
+    ],
+    "p7_tra_lepra": [
+      63,
+      271
+    ],
+    "p7_tra_rabia": [
+      121,
+      271
+    ],
+    "p7_tra_dengue": [
+      176,
+      270
+    ],
+    "p7_tra_chikungunya": [
+      239,
+      271
+    ],
+    "p7_tra_zika": [
+      321,
+      271
+    ],
+    "p7_tra_chagas": [
+      371,
+      271
+    ],
+    "p7_tra_visceral": [
+      432,
+      271
+    ],
+    "p7_tra_cutanea": [
+      64,
+      258
+    ],
+    "p7_tra_tungiasis": [
+      182,
+      257
+    ],
+    "p7_tra_alimentos": [
+      251,
+      257
+    ],
+    "p7_tra_era": [
+      63,
+      243
+    ],
+    "p7_tra_eda": [
+      234,
+      242
+    ],
+    "p7_tra_ninguna": [
+      396,
+      242
+    ],
+    "p7_end_geohelmintiasis": [
+      57,
+      211
+    ],
+    "p7_end_teniasis": [
+      151,
+      211
+    ],
+    "p7_end_tracoma": [
+      266,
+      211
+    ],
+    "p7_end_escabiosis": [
+      332,
+      211
+    ],
+    "p7_end_pian": [
+      404,
+      211
+    ],
+    "p7_end_malaria": [
+      455,
+      211
+    ],
+    "p7_end_ninguna": [
+      518,
+      211
+    ],
+    "p7_tratamiento_si": [
+      404,
+      191
+    ],
+    "p7_tratamiento_no": [
+      460,
+      191
+    ],
+    "p7_tratamiento_no_aplica": [
+      519,
+      191
+    ],
+    "p7_mot_no_afiliado": [
+      64,
+      154
+    ],
+    "p7_mot_lejos": [
+      168,
+      155
+    ],
+    "p7_mot_tramites": [
+      394,
+      155
+    ],
+    "p7_mot_no_agenda": [
+      64,
+      141
+    ],
+    "p7_mot_no_sabe": [
+      228,
+      141
+    ],
+    "p7_mot_no_pagar": [
+      370,
+      141
+    ],
+    "p7_mot_horarios": [
+      64,
+      127
+    ],
+    "p7_mot_tiempos": [
+      219,
+      127
+    ],
+    "p7_mot_no_comodo": [
+      349,
+      127
+    ],
+    "p7_mot_enfermo": [
+      64,
+      113
+    ],
+    "p7_mot_no_adherencia": [
+      275,
+      113
+    ],
+    "p7_mot_no_disponibilidad": [
+      64,
+      98
+    ],
+    "p7_mot_falta_tiempo": [
+      332,
+      98
+    ],
+    "p7_mot_falta_adecuacion": [
+      64,
+      83
+    ],
+    "p7_mot_no_aplica": [
+      280,
+      84
+    ],
+    "p8_puntaje_assist": [
+      425,
+      512
+    ],
+    "p8_puntaje_audit": [
+      217,
+      498
+    ],
+    "p8_puntaje_crafft": [
+      487,
+      498
+    ],
+    "p8_riesgo_convivencia": [
+      64,
+      706
+    ],
+    "p8_riesgo_nuevo_integrante": [
+      214,
+      706
+    ],
+    "p8_riesgo_ingreso_estudiar": [
+      362,
+      706
+    ],
+    "p8_riesgo_perdida_ano": [
+      462,
+      706
+    ],
+    "p8_riesgo_embarazo": [
+      64,
+      692
+    ],
+    "p8_riesgo_independencia": [
+      222,
+      691
+    ],
+    "p8_riesgo_separacion": [
+      439,
+      692
+    ],
+    "p8_riesgo_duelo": [
+      538,
+      692
+    ],
+    "p8_riesgo_desempleo": [
+      64,
+      678
+    ],
+    "p8_riesgo_crisis": [
+      245,
+      677
+    ],
+    "p8_riesgo_conflictos": [
+      382,
+      677
+    ],
+    "p8_riesgo_abandono": [
+      63,
+      663
+    ],
+    "p8_riesgo_no_cuenta_redes": [
+      196,
+      663
+    ],
+    "p8_riesgo_estigma": [
+      464,
+      663
+    ],
+    "p8_riesgo_conflictos_orientacion": [
+      63,
+      649
+    ],
+    "p8_riesgo_trastorno": [
+      274,
+      649
+    ],
+    "p8_riesgo_ninguna": [
+      522,
+      649
+    ],
+    "p8_triste_dos_semanas": [
+      63,
+      616
+    ],
+    "p8_perdida_interes": [
+      327,
+      616
+    ],
+    "p8_inquieto_nervioso": [
+      63,
+      602
+    ],
+    "p8_salud_mental_ninguno": [
+      413,
+      602
+    ],
+    "p8_salud_mental_no_aplica": [
+      478,
+      603
+    ],
+    "p8_autolesion_si": [
+      63,
+      571
+    ],
+    "p8_autolesion_ninguno": [
+      380,
+      571
+    ],
+    "p8_autolesion_no_aplica": [
+      506,
+      571
+    ],
+    "p8_consumo_si": [
+      63,
+      531
+    ],
+    "p8_consumo_no": [
+      350,
+      530
+    ],
+    "p8_consumo_no_aplica": [
+      478,
+      530
+    ],
+    "p8_limita_si": [
+      480,
+      482
+    ],
+    "p8_limita_no": [
+      542,
+      482
+    ]
+  },
+  "COORD_P9": {
+    "p9_cod_ebs": [
+      138,
+      674
+    ],
+    "p9_cod_vivienda": [
+      422,
+      673
+    ],
+    "p9_t1_tipo_0_cc": [
+      64,
+      619
+    ],
+    "p9_t1_tipo_1_cc": [
+      63,
+      577
+    ],
+    "p9_t1_tipo_2_cc": [
+      64,
+      534
+    ],
+    "p9_t1_tipo_3_cc": [
+      63,
+      492
+    ],
+    "p9_t1_tipo_0_de": [
+      64,
+      605
+    ],
+    "p9_t1_tipo_1_de": [
+      64,
+      563
+    ],
+    "p9_t1_tipo_2_de": [
+      64,
+      520
+    ],
+    "p9_t1_tipo_3_de": [
+      64,
+      479
+    ],
+    "p9_t1_tipo_0_pt": [
+      64,
+      591
+    ],
+    "p9_t1_tipo_1_pt": [
+      63,
+      548
+    ],
+    "p9_t1_tipo_2_pt": [
+      64,
+      506
+    ],
+    "p9_t1_tipo_3_pt": [
+      64,
+      463
+    ],
+    "p9_t1_num_0": [
+      102,
+      619
+    ],
+    "p9_t1_num_1": [
+      102,
+      577
+    ],
+    "p9_t1_num_2": [
+      101,
+      534
+    ],
+    "p9_t1_num_3": [
+      101,
+      492
+    ],
+    "p9_t1_accion_0": [
+      178,
+      620
+    ],
+    "p9_t1_accion_1": [
+      177,
+      578
+    ],
+    "p9_t1_accion_2": [
+      177,
+      535
+    ],
+    "p9_t1_accion_3": [
+      177,
+      493
+    ],
+    "p9_t1_resp_0_ensitio": [
+      457,
+      619
+    ],
+    "p9_t1_resp_1_ensitio": [
+      457,
+      577
+    ],
+    "p9_t1_resp_2_ensitio": [
+      457,
+      534
+    ],
+    "p9_t1_resp_3_ensitio": [
+      457,
+      492
+    ],
+    "p9_t1_resp_0_derivada": [
+      515,
+      619
+    ],
+    "p9_t1_resp_1_derivada": [
+      515,
+      577
+    ],
+    "p9_t1_resp_2_derivada": [
+      515,
+      534
+    ],
+    "p9_t1_resp_3_derivada": [
+      515,
+      492
+    ],
+    "p9_t2_tipo_0_cc": [
+      63,
+      407
+    ],
+    "p9_t2_tipo_1_cc": [
+      63,
+      365
+    ],
+    "p9_t2_tipo_2_cc": [
+      63,
+      319
+    ],
+    "p9_t2_tipo_3_cc": [
+      63,
+      273
+    ],
+    "p9_t2_tipo_0_de": [
+      62,
+      394
+    ],
+    "p9_t2_tipo_1_de": [
+      63,
+      350
+    ],
+    "p9_t2_tipo_2_de": [
+      63,
+      305
+    ],
+    "p9_t2_tipo_3_de": [
+      63,
+      259
+    ],
+    "p9_t2_tipo_0_pt": [
+      63,
+      378
+    ],
+    "p9_t2_tipo_1_pt": [
+      63,
+      335
+    ],
+    "p9_t2_tipo_2_pt": [
+      63,
+      291
+    ],
+    "p9_t2_tipo_3_pt": [
+      63,
+      245
+    ],
+    "p9_t2_num_0": [
+      102,
+      407
+    ],
+    "p9_t2_num_1": [
+      101,
+      365
+    ],
+    "p9_t2_num_2": [
+      100,
+      319
+    ],
+    "p9_t2_num_3": [
+      100,
+      273
+    ],
+    "p9_t2_fecha_0": [
+      178,
+      407
+    ],
+    "p9_t2_fecha_1": [
+      177,
+      365
+    ],
+    "p9_t2_fecha_2": [
+      176,
+      319
+    ],
+    "p9_t2_fecha_3": [
+      176,
+      273
+    ],
+    "p9_t2_seg1_fecha_0": [
+      267,
+      407
+    ],
+    "p9_t2_seg1_fecha_1": [
+      268,
+      365
+    ],
+    "p9_t2_seg1_fecha_2": [
+      267,
+      319
+    ],
+    "p9_t2_seg1_fecha_3": [
+      268,
+      273
+    ],
+    "p9_t2_seg1_est_0_c": [
+      356,
+      407
+    ],
+    "p9_t2_seg1_est_1_c": [
+      356,
+      365
+    ],
+    "p9_t2_seg1_est_2_c": [
+      356,
+      319
+    ],
+    "p9_t2_seg1_est_3_c": [
+      356,
+      274
+    ],
+    "p9_t2_seg1_est_0_cp": [
+      357,
+      394
+    ],
+    "p9_t2_seg1_est_1_cp": [
+      357,
+      351
+    ],
+    "p9_t2_seg1_est_2_cp": [
+      356,
+      306
+    ],
+    "p9_t2_seg1_est_3_cp": [
+      356,
+      261
+    ],
+    "p9_t2_seg1_est_0_nc": [
+      356,
+      379
+    ],
+    "p9_t2_seg1_est_1_nc": [
+      356,
+      337
+    ],
+    "p9_t2_seg1_est_2_nc": [
+      356,
+      291
+    ],
+    "p9_t2_seg1_est_3_nc": [
+      356,
+      245
+    ],
+    "p9_t2_seg2_fecha_0": [
+      420,
+      393
+    ],
+    "p9_t2_seg2_fecha_1": [
+      420,
+      351
+    ],
+    "p9_t2_seg2_fecha_2": [
+      420,
+      306
+    ],
+    "p9_t2_seg2_fecha_3": [
+      420,
+      260
+    ],
+    "p9_t2_seg2_est_0_c": [
+      508,
+      407
+    ],
+    "p9_t2_seg2_est_1_c": [
+      508,
+      365
+    ],
+    "p9_t2_seg2_est_2_c": [
+      508,
+      319
+    ],
+    "p9_t2_seg2_est_3_c": [
+      508,
+      273
+    ],
+    "p9_t2_seg2_est_0_cp": [
+      508,
+      393
+    ],
+    "p9_t2_seg2_est_1_cp": [
+      508,
+      351
+    ],
+    "p9_t2_seg2_est_2_cp": [
+      508,
+      305
+    ],
+    "p9_t2_seg2_est_3_cp": [
+      508,
+      260
+    ],
+    "p9_t2_seg2_est_0_nc": [
+      507,
+      379
+    ],
+    "p9_t2_seg2_est_1_nc": [
+      507,
+      337
+    ],
+    "p9_t2_seg2_est_2_nc": [
+      507,
+      291
+    ],
+    "p9_t2_seg2_est_3_nc": [
+      507,
+      245
+    ]
+  },
+  "COORD_P10": {
+    "p10_cod_ebs": [
+      138,
+      675
+    ],
+    "p10_cod_vivienda": [
+      330,
+      675
+    ],
+    "p10_cod_familia": [
+      512,
+      675
+    ],
+    "p10_t1_tipo_0_cc": [
+      64,
+      619
+    ],
+    "p10_t1_tipo_1_cc": [
+      63,
+      577
+    ],
+    "p10_t1_tipo_2_cc": [
+      64,
+      534
+    ],
+    "p10_t1_tipo_3_cc": [
+      63,
+      492
+    ],
+    "p10_t1_tipo_0_de": [
+      64,
+      605
+    ],
+    "p10_t1_tipo_1_de": [
+      64,
+      563
+    ],
+    "p10_t1_tipo_2_de": [
+      64,
+      520
+    ],
+    "p10_t1_tipo_3_de": [
+      64,
+      479
+    ],
+    "p10_t1_tipo_0_pt": [
+      64,
+      591
+    ],
+    "p10_t1_tipo_1_pt": [
+      63,
+      548
+    ],
+    "p10_t1_tipo_2_pt": [
+      64,
+      506
+    ],
+    "p10_t1_tipo_3_pt": [
+      64,
+      463
+    ],
+    "p10_t1_num_0": [
+      102,
+      619
+    ],
+    "p10_t1_num_1": [
+      102,
+      577
+    ],
+    "p10_t1_num_2": [
+      101,
+      534
+    ],
+    "p10_t1_num_3": [
+      101,
+      492
+    ],
+    "p10_t1_accion_0": [
+      178,
+      620
+    ],
+    "p10_t1_accion_1": [
+      177,
+      578
+    ],
+    "p10_t1_accion_2": [
+      177,
+      535
+    ],
+    "p10_t1_accion_3": [
+      177,
+      493
+    ],
+    "p10_t1_resp_0_ensitio": [
+      457,
+      619
+    ],
+    "p10_t1_resp_1_ensitio": [
+      457,
+      577
+    ],
+    "p10_t1_resp_2_ensitio": [
+      457,
+      534
+    ],
+    "p10_t1_resp_3_ensitio": [
+      457,
+      492
+    ],
+    "p10_t1_resp_0_derivada": [
+      515,
+      619
+    ],
+    "p10_t1_resp_1_derivada": [
+      515,
+      577
+    ],
+    "p10_t1_resp_2_derivada": [
+      515,
+      534
+    ],
+    "p10_t1_resp_3_derivada": [
+      515,
+      492
+    ],
+    "p10_t2_tipo_0_cc": [
+      63,
+      407
+    ],
+    "p10_t2_tipo_1_cc": [
+      63,
+      365
+    ],
+    "p10_t2_tipo_2_cc": [
+      63,
+      319
+    ],
+    "p10_t2_tipo_3_cc": [
+      63,
+      273
+    ],
+    "p10_t2_tipo_0_de": [
+      62,
+      394
+    ],
+    "p10_t2_tipo_1_de": [
+      63,
+      350
+    ],
+    "p10_t2_tipo_2_de": [
+      63,
+      305
+    ],
+    "p10_t2_tipo_3_de": [
+      63,
+      259
+    ],
+    "p10_t2_tipo_0_pt": [
+      63,
+      378
+    ],
+    "p10_t2_tipo_1_pt": [
+      63,
+      335
+    ],
+    "p10_t2_tipo_2_pt": [
+      63,
+      291
+    ],
+    "p10_t2_tipo_3_pt": [
+      63,
+      245
+    ],
+    "p10_t2_num_0": [
+      102,
+      407
+    ],
+    "p10_t2_num_1": [
+      101,
+      365
+    ],
+    "p10_t2_num_2": [
+      100,
+      319
+    ],
+    "p10_t2_num_3": [
+      100,
+      273
+    ],
+    "p10_t2_fecha_0": [
+      178,
+      407
+    ],
+    "p10_t2_fecha_1": [
+      177,
+      365
+    ],
+    "p10_t2_fecha_2": [
+      176,
+      319
+    ],
+    "p10_t2_fecha_3": [
+      176,
+      273
+    ],
+    "p10_t2_seg1_fecha_0": [
+      267,
+      407
+    ],
+    "p10_t2_seg1_fecha_1": [
+      268,
+      365
+    ],
+    "p10_t2_seg1_fecha_2": [
+      267,
+      319
+    ],
+    "p10_t2_seg1_fecha_3": [
+      268,
+      273
+    ],
+    "p10_t2_seg1_est_0_c": [
+      356,
+      407
+    ],
+    "p10_t2_seg1_est_1_c": [
+      356,
+      365
+    ],
+    "p10_t2_seg1_est_2_c": [
+      356,
+      319
+    ],
+    "p10_t2_seg1_est_3_c": [
+      356,
+      274
+    ],
+    "p10_t2_seg1_est_0_cp": [
+      357,
+      394
+    ],
+    "p10_t2_seg1_est_1_cp": [
+      357,
+      351
+    ],
+    "p10_t2_seg1_est_2_cp": [
+      356,
+      306
+    ],
+    "p10_t2_seg1_est_3_cp": [
+      356,
+      261
+    ],
+    "p10_t2_seg1_est_0_nc": [
+      356,
+      379
+    ],
+    "p10_t2_seg1_est_1_nc": [
+      356,
+      337
+    ],
+    "p10_t2_seg1_est_2_nc": [
+      356,
+      291
+    ],
+    "p10_t2_seg1_est_3_nc": [
+      356,
+      245
+    ],
+    "p10_t2_seg2_fecha_0": [
+      420,
+      407
+    ],
+    "p10_t2_seg2_fecha_1": [
+      420,
+      365
+    ],
+    "p10_t2_seg2_fecha_2": [
+      420,
+      319
+    ],
+    "p10_t2_seg2_fecha_3": [
+      420,
+      273
+    ],
+    "p10_t2_seg2_est_0_c": [
+      508,
+      407
+    ],
+    "p10_t2_seg2_est_1_c": [
+      508,
+      365
+    ],
+    "p10_t2_seg2_est_2_c": [
+      508,
+      319
+    ],
+    "p10_t2_seg2_est_3_c": [
+      508,
+      273
+    ],
+    "p10_t2_seg2_est_0_cp": [
+      508,
+      393
+    ],
+    "p10_t2_seg2_est_1_cp": [
+      508,
+      351
+    ],
+    "p10_t2_seg2_est_2_cp": [
+      508,
+      305
+    ],
+    "p10_t2_seg2_est_3_cp": [
+      508,
+      260
+    ],
+    "p10_t2_seg2_est_0_nc": [
+      507,
+      379
+    ],
+    "p10_t2_seg2_est_1_nc": [
+      507,
+      337
+    ],
+    "p10_t2_seg2_est_2_nc": [
+      507,
+      291
+    ],
+    "p10_t2_seg2_est_3_nc": [
+      507,
+      245
+    ]
+  },
+  "COORD_P11": {
+    "p11_cod_ebs": [
+      138,
+      708
+    ],
+    "p11_cod_vivienda": [
+      330,
+      708
+    ],
+    "p11_cod_familia": [
+      511,
+      708
+    ],
+    "p11_id_numero": [
+      176,
+      631
+    ],
+    "p11_id_tipo_as": [
+      300,
+      691
+    ],
+    "p11_id_tipo_cc": [
+      434,
+      691
+    ],
+    "p11_id_tipo_cd": [
+      63,
+      677
+    ],
+    "p11_id_tipo_ce": [
+      195,
+      677
+    ],
+    "p11_id_tipo_ms": [
+      333,
+      677
+    ],
+    "p11_id_tipo_nv": [
+      63,
+      663
+    ],
+    "p11_id_tipo_pe": [
+      231,
+      663
+    ],
+    "p11_id_tipo_pt": [
+      402,
+      663
+    ],
+    "p11_id_tipo_rc": [
+      63,
+      647
+    ],
+    "p11_id_tipo_ti": [
+      160,
+      648
+    ],
+    "p11_t1_tipo_0_cc": [
+      63,
+      577
+    ],
+    "p11_t1_tipo_0_de": [
+      63,
+      563
+    ],
+    "p11_t1_tipo_0_pt": [
+      64,
+      549
+    ],
+    "p11_t1_num_0": [
+      102,
+      577
+    ],
+    "p11_t1_accion_0": [
+      178,
+      576
+    ],
+    "p11_t1_resp_0_ensitio": [
+      457,
+      577
+    ],
+    "p11_t1_resp_0_derivada": [
+      515,
+      577
+    ],
+    "p11_t1_tipo_1_cc": [
+      64,
+      535
+    ],
+    "p11_t1_tipo_1_de": [
+      64,
+      521
+    ],
+    "p11_t1_tipo_1_pt": [
+      63,
+      506
+    ],
+    "p11_t1_num_1": [
+      101,
+      535
+    ],
+    "p11_t1_accion_1": [
+      178,
+      535
+    ],
+    "p11_t1_resp_1_ensitio": [
+      457,
+      535
+    ],
+    "p11_t1_resp_1_derivada": [
+      515,
+      535
+    ],
+    "p11_t1_tipo_2_cc": [
+      64,
+      492
+    ],
+    "p11_t1_tipo_2_de": [
+      64,
+      478
+    ],
+    "p11_t1_tipo_2_pt": [
+      63,
+      463
+    ],
+    "p11_t1_num_2": [
+      101,
+      493
+    ],
+    "p11_t1_accion_2": [
+      177,
+      491
+    ],
+    "p11_t1_resp_2_ensitio": [
+      457,
+      492
+    ],
+    "p11_t1_resp_2_derivada": [
+      515,
+      493
+    ],
+    "p11_t1_tipo_3_cc": [
+      64,
+      450
+    ],
+    "p11_t1_tipo_3_de": [
+      64,
+      436
+    ],
+    "p11_t1_tipo_3_pt": [
+      64,
+      421
+    ],
+    "p11_t1_num_3": [
+      101,
+      450
+    ],
+    "p11_t1_accion_3": [
+      178,
+      450
+    ],
+    "p11_t1_resp_3_ensitio": [
+      458,
+      450
+    ],
+    "p11_t1_resp_3_derivada": [
+      515,
+      450
+    ],
+    "p11_t2_tipo_0_cc": [
+      62,
+      365
+    ],
+    "p11_t2_tipo_1_cc": [
+      63,
+      323
+    ],
+    "p11_t2_tipo_2_cc": [
+      63,
+      277
+    ],
+    "p11_t2_tipo_3_cc": [
+      62,
+      231
+    ],
+    "p11_t2_tipo_0_de": [
+      63,
+      351
+    ],
+    "p11_t2_tipo_1_de": [
+      63,
+      309
+    ],
+    "p11_t2_tipo_2_de": [
+      63,
+      263
+    ],
+    "p11_t2_tipo_3_de": [
+      63,
+      217
+    ],
+    "p11_t2_tipo_0_pt": [
+      63,
+      337
+    ],
+    "p11_t2_tipo_1_pt": [
+      63,
+      294
+    ],
+    "p11_t2_tipo_2_pt": [
+      63,
+      249
+    ],
+    "p11_t2_tipo_3_pt": [
+      63,
+      203
+    ],
+    "p11_t2_num_0": [
+      101,
+      365
+    ],
+    "p11_t2_num_1": [
+      101,
+      323
+    ],
+    "p11_t2_num_2": [
+      101,
+      277
+    ],
+    "p11_t2_num_3": [
+      100,
+      232
+    ],
+    "p11_t2_fecha_0": [
+      178,
+      365
+    ],
+    "p11_t2_fecha_1": [
+      178,
+      323
+    ],
+    "p11_t2_fecha_2": [
+      178,
+      277
+    ],
+    "p11_t2_fecha_3": [
+      178,
+      232
+    ],
+    "p11_t2_seg1_fecha_0": [
+      270,
+      367
+    ],
+    "p11_t2_seg1_fecha_1": [
+      269,
+      323
+    ],
+    "p11_t2_seg1_fecha_2": [
+      269,
+      278
+    ],
+    "p11_t2_seg1_fecha_3": [
+      267,
+      233
+    ],
+    "p11_t2_seg1_est_0_c": [
+      356,
+      365
+    ],
+    "p11_t2_seg1_est_1_c": [
+      356,
+      323
+    ],
+    "p11_t2_seg1_est_2_c": [
+      356,
+      277
+    ],
+    "p11_t2_seg1_est_3_c": [
+      356,
+      232
+    ],
+    "p11_t2_seg1_est_0_cp": [
+      356,
+      352
+    ],
+    "p11_t2_seg1_est_1_cp": [
+      356,
+      309
+    ],
+    "p11_t2_seg1_est_2_cp": [
+      356,
+      264
+    ],
+    "p11_t2_seg1_est_3_cp": [
+      356,
+      218
+    ],
+    "p11_t2_seg1_est_0_nc": [
+      356,
+      337
+    ],
+    "p11_t2_seg1_est_1_nc": [
+      356,
+      295
+    ],
+    "p11_t2_seg1_est_2_nc": [
+      356,
+      249
+    ],
+    "p11_t2_seg1_est_3_nc": [
+      356,
+      203
+    ],
+    "p11_t2_seg2_fecha_0": [
+      421,
+      365
+    ],
+    "p11_t2_seg2_fecha_1": [
+      420,
+      323
+    ],
+    "p11_t2_seg2_fecha_2": [
+      421,
+      278
+    ],
+    "p11_t2_seg2_fecha_3": [
+      420,
+      232
+    ],
+    "p11_t2_seg2_est_0_c": [
+      508,
+      365
+    ],
+    "p11_t2_seg2_est_1_c": [
+      508,
+      323
+    ],
+    "p11_t2_seg2_est_2_c": [
+      508,
+      277
+    ],
+    "p11_t2_seg2_est_3_c": [
+      508,
+      232
+    ],
+    "p11_t2_seg2_est_0_cp": [
+      508,
+      352
+    ],
+    "p11_t2_seg2_est_1_cp": [
+      508,
+      309
+    ],
+    "p11_t2_seg2_est_2_cp": [
+      508,
+      264
+    ],
+    "p11_t2_seg2_est_3_cp": [
+      508,
+      219
+    ],
+    "p11_t2_seg2_est_0_nc": [
+      507,
+      337
+    ],
+    "p11_t2_seg2_est_1_nc": [
+      507,
+      295
+    ],
+    "p11_t2_seg2_est_2_nc": [
+      507,
+      249
+    ],
+    "p11_t2_seg2_est_3_nc": [
+      507,
+      203
+    ]
+  }
+}
