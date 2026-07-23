@@ -5,6 +5,8 @@ import base64
 import webview
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+from reportlab.platypus import Paragraph
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from pypdf import PdfReader, PdfWriter, Transformation, PageObject 
 
 # =========================================================================
@@ -25,6 +27,31 @@ def obtener_ruta_externa(relative_path):
     else:
         base_path = os.path.dirname(os.path.abspath(__file__))
     return os.path.join(base_path, relative_path)
+
+def dibujar_accion_ajustada(can, texto, x, y, ancho_maximo=265, alto_maximo=30, fuente="Helvetica-Bold", tamano=8):
+    """
+    Dibuja la acción/intervención ajustándose de forma exacta al recuadro de la tabla.
+    Aplica salto de línea automático si el texto supera el ancho máximo de la celda.
+    """
+    styles = getSampleStyleSheet()
+    
+    # Creamos un estilo compacto con un interlineado (leading) ajustado para las celdas
+    estilo_celda = ParagraphStyle(
+        'EstiloAccionTabla',
+        parent=styles['Normal'],
+        fontName=fuente,
+        fontSize=tamano,
+        leading=tamano + 1 # Interlineado estrecho para celdas de tabla
+    )
+    parrafo = Paragraph(texto, estilo_celda)
+    
+    # El método wrap calcula el espacio real que ocupará el párrafo
+    ancho_real, alto_real = parrafo.wrap(ancho_maximo, alto_maximo)
+    
+    # Dibujamos en el canvas ajustando el origen Y hacia el techo de la celda.
+    # Sumamos 8 puntos de compensación para alinear el techo del párrafo a la celda.
+    parrafo.drawOn(can, x, (y + 8) - alto_real)
+
 
 # (Aquí se mantienen intactas tus variables de AJUSTE_MANUAL_X y COORD_P1, COORD_P2, etc.)
 # ... [TUS COORDENADAS Y CONFIGURACIONES DE PÁGINAS VAN AQUÍ SIN CAMBIOS] ...
@@ -698,30 +725,37 @@ COORD_P9 = {
 "p9_t2_tipo_1_cc": (63, 365),
 "p9_t2_tipo_2_cc": (63, 319),
 "p9_t2_tipo_3_cc": (63, 273),
+
 "p9_t2_tipo_0_de": (62, 394),
 "p9_t2_tipo_1_de": (63, 350),
 "p9_t2_tipo_2_de": (63, 305),
 "p9_t2_tipo_3_de": (63, 259),
+
 "p9_t2_tipo_0_pt": (63, 378),
 "p9_t2_tipo_1_pt": (63, 335),
 "p9_t2_tipo_2_pt": (63, 291),
 "p9_t2_tipo_3_pt": (63, 245),
+
 "p9_t2_num_0": (102, 407),
 "p9_t2_num_1": (101, 365),
 "p9_t2_num_2": (100, 319),
 "p9_t2_num_3": (100, 273),
-"p9_t2_fecha_0": (178, 393),
-"p9_t2_fecha_1": (177, 351),
-"p9_t2_fecha_2": (176, 305),
-"p9_t2_fecha_3": (176, 259),
-"p9_t2_seg1_fecha_0": (267, 392),
-"p9_t2_seg1_fecha_1": (268, 349),
-"p9_t2_seg1_fecha_2": (267, 305),
-"p9_t2_seg1_fecha_3": (268, 259),
+
+"p9_t2_fecha_0": (178, 407),
+"p9_t2_fecha_1": (177, 365),
+"p9_t2_fecha_2": (176, 319),
+"p9_t2_fecha_3": (176, 273),
+
+"p9_t2_seg1_fecha_0": (267, 407),
+"p9_t2_seg1_fecha_1": (268, 365),
+"p9_t2_seg1_fecha_2": (267, 319),
+"p9_t2_seg1_fecha_3": (268, 273),
+
 "p9_t2_seg1_est_0_c": (356, 407),
 "p9_t2_seg1_est_1_c": (356, 365),
 "p9_t2_seg1_est_2_c": (356, 319),
 "p9_t2_seg1_est_3_c": (356, 274),
+
 "p9_t2_seg1_est_0_cp": (357, 394),
 "p9_t2_seg1_est_1_cp": (357, 351),
 "p9_t2_seg1_est_2_cp": (356, 306),
@@ -814,15 +848,15 @@ COORD_P10 = {
 "p10_t2_num_2": (100, 319),
 "p10_t2_num_3": (100, 273),
 
-"p10_t2_fecha_0": (178, 393),
-"p10_t2_fecha_1": (177, 351),
-"p10_t2_fecha_2": (176, 305),
-"p10_t2_fecha_3": (176, 259),
+"p10_t2_fecha_0": (178, 407),
+"p10_t2_fecha_1": (177, 365),
+"p10_t2_fecha_2": (176, 319),
+"p10_t2_fecha_3": (176, 273),
 
-"p10_t2_seg1_fecha_0": (267, 392),
-"p10_t2_seg1_fecha_1": (268, 349),
-"p10_t2_seg1_fecha_2": (267, 305),
-"p10_t2_seg1_fecha_3": (268, 259),
+"p10_t2_seg1_fecha_0": (267, 407),
+"p10_t2_seg1_fecha_1": (268, 365),
+"p10_t2_seg1_fecha_2": (267, 319),
+"p10_t2_seg1_fecha_3": (268, 273),
 
 "p10_t2_seg1_est_0_c": (356, 407),
 "p10_t2_seg1_est_1_c": (356, 365),
@@ -839,10 +873,10 @@ COORD_P10 = {
 "p10_t2_seg1_est_2_nc": (356, 291),
 "p10_t2_seg1_est_3_nc": (356, 245),
 
-"p10_t2_seg2_fecha_0": (420, 393),
-"p10_t2_seg2_fecha_1": (420, 351),
-"p10_t2_seg2_fecha_2": (420, 306),
-"p10_t2_seg2_fecha_3": (420, 260),
+"p10_t2_seg2_fecha_0": (420, 407),
+"p10_t2_seg2_fecha_1": (420, 365),
+"p10_t2_seg2_fecha_2": (420, 319),
+"p10_t2_seg2_fecha_3": (420, 273),
 
 "p10_t2_seg2_est_0_c": (508, 407),
 "p10_t2_seg2_est_1_c": (508, 365),
@@ -884,6 +918,7 @@ COORD_P11 = {
 "p11_t1_accion_0": (178, 576),
 "p11_t1_resp_0_ensitio": (457, 577),
 "p11_t1_resp_0_derivada": (515, 577),
+
 "p11_t1_tipo_1_cc": (64, 535),
 "p11_t1_tipo_1_de": (64, 521),
 "p11_t1_tipo_1_pt": (63, 506),
@@ -891,6 +926,7 @@ COORD_P11 = {
 "p11_t1_accion_1": (178, 535),
 "p11_t1_resp_1_ensitio": (457, 535),
 "p11_t1_resp_1_derivada": (515, 535),
+
 "p11_t1_tipo_2_cc": (64, 492),
 "p11_t1_tipo_2_de": (64, 478),
 "p11_t1_tipo_2_pt": (63, 463),
@@ -898,6 +934,7 @@ COORD_P11 = {
 "p11_t1_accion_2": (177, 491),
 "p11_t1_resp_2_ensitio": (457, 492),
 "p11_t1_resp_2_derivada": (515, 493),
+
 "p11_t1_tipo_3_cc": (64, 450),
 "p11_t1_tipo_3_de": (64, 436),
 "p11_t1_tipo_3_pt": (64, 421),
@@ -908,56 +945,92 @@ COORD_P11 = {
 
 
 "p11_t2_tipo_0_cc": (62, 365),
-"p11_t2_tipo_0_de": (63, 351),
-"p11_t2_tipo_0_pt": (63, 337),
-"p11_t2_num_0": (101, 365),
-"p11_t2_fecha_0": (178, 365),
-"p11_t2_seg1_fecha_0": (270, 367),
-"p11_t2_seg1_est_0_c": (356, 365),
-"p11_t2_seg1_est_0_cp": (356, 352),
-"p11_t2_seg1_est_0_nc": (356, 337),
-"p11_t2_seg2_fecha_0": (421, 365),
-"p11_t2_seg2_est_0_c": (508, 365),
-"p11_t2_seg2_est_0_cp": (508, 352),
-"p11_t2_seg2_est_0_nc": (507, 337),
 "p11_t2_tipo_1_cc": (63, 323),
-"p11_t2_tipo_1_de": (63, 309),
-"p11_t2_tipo_1_pt": (63, 294),
-"p11_t2_num_1": (101, 323),
-"p11_t2_fecha_1": (178, 323),
-"p11_t2_seg1_fecha_1": (269, 323),
-"p11_t2_seg1_est_1_c": (356, 323),
-"p11_t2_seg1_est_1_cp": (356, 309),
-"p11_t2_seg1_est_1_nc": (356, 295),
-"p11_t2_seg2_fecha_1": (420, 323),
-"p11_t2_seg2_est_1_c": (508, 323),
-"p11_t2_seg2_est_1_cp": (508, 309),
-"p11_t2_seg2_est_1_nc": (507, 295),
 "p11_t2_tipo_2_cc": (63, 277),
-"p11_t2_tipo_2_de": (63, 263),
-"p11_t2_tipo_2_pt": (63, 249),
-"p11_t2_num_2": (101, 277),
-"p11_t2_fecha_2": (178, 277),
-"p11_t2_seg1_fecha_2": (269, 278),
-"p11_t2_seg1_est_2_c": (356, 277),
-"p11_t2_seg1_est_2_cp": (356, 264),
-"p11_t2_seg1_est_2_nc": (356, 249),
-"p11_t2_seg2_fecha_2": (421, 278),
-"p11_t2_seg2_est_2_c": (508, 277),
-"p11_t2_seg2_est_2_cp": (508, 264),
-"p11_t2_seg2_est_2_nc": (507, 249),
 "p11_t2_tipo_3_cc": (62, 231),
+
+
+
+"p11_t2_tipo_0_de": (63, 351),
+"p11_t2_tipo_1_de": (63, 309),
+"p11_t2_tipo_2_de": (63, 263),
 "p11_t2_tipo_3_de": (63, 217),
+
+
+
+"p11_t2_tipo_0_pt": (63, 337),
+"p11_t2_tipo_1_pt": (63, 294),
+"p11_t2_tipo_2_pt": (63, 249),
 "p11_t2_tipo_3_pt": (63, 203),
+
+
+
+"p11_t2_num_0": (101, 365),
+"p11_t2_num_1": (101, 323),
+"p11_t2_num_2": (101, 277),
 "p11_t2_num_3": (100, 232),
+
+
+
+"p11_t2_fecha_0": (178, 365),
+"p11_t2_fecha_1": (178, 323),
+"p11_t2_fecha_2": (178, 277),
 "p11_t2_fecha_3": (178, 232),
+
+
+
+"p11_t2_seg1_fecha_0": (270, 367),
+"p11_t2_seg1_fecha_1": (269, 323),
+"p11_t2_seg1_fecha_2": (269, 278),
 "p11_t2_seg1_fecha_3": (267, 233),
+
+
+
+"p11_t2_seg1_est_0_c": (356, 365),
+"p11_t2_seg1_est_1_c": (356, 323),
+"p11_t2_seg1_est_2_c": (356, 277),
 "p11_t2_seg1_est_3_c": (356, 232),
+
+
+
+"p11_t2_seg1_est_0_cp": (356, 352),
+"p11_t2_seg1_est_1_cp": (356, 309),
+"p11_t2_seg1_est_2_cp": (356, 264),
 "p11_t2_seg1_est_3_cp": (356, 218),
+
+
+
+"p11_t2_seg1_est_0_nc": (356, 337),
+"p11_t2_seg1_est_1_nc": (356, 295),
+"p11_t2_seg1_est_2_nc": (356, 249),
 "p11_t2_seg1_est_3_nc": (356, 203),
+
+
+
+"p11_t2_seg2_fecha_0": (421, 365),
+"p11_t2_seg2_fecha_1": (420, 323),
+"p11_t2_seg2_fecha_2": (421, 278),
 "p11_t2_seg2_fecha_3": (420, 232),
+
+
+
+"p11_t2_seg2_est_0_c": (508, 365),
+"p11_t2_seg2_est_1_c": (508, 323),
+"p11_t2_seg2_est_2_c": (508, 277),
 "p11_t2_seg2_est_3_c": (508, 232),
+
+
+
+"p11_t2_seg2_est_0_cp": (508, 352),
+"p11_t2_seg2_est_1_cp": (508, 309),
+"p11_t2_seg2_est_2_cp": (508, 264),
 "p11_t2_seg2_est_3_cp": (508, 219),
+
+
+
+"p11_t2_seg2_est_0_nc": (507, 337),
+"p11_t2_seg2_est_1_nc": (507, 295),
+"p11_t2_seg2_est_2_nc": (507, 249),
 "p11_t2_seg2_est_3_nc": (507, 203),
 }
 
@@ -1453,7 +1526,9 @@ def generar_overlay_p9(datos, width, height):
         # Acción / Intervención
         accion = datos.get(f"p9_t1_accion_{i}")
         key_accion = f"p9_t1_accion_{i}"
-        if accion and key_accion in COORD_P9: can.drawString(*COORD_P9[key_accion], accion.upper())
+        if accion and key_accion in COORD_P9: 
+            x, y = COORD_P9[key_accion]
+            dibujar_accion_ajustada(can, accion.upper(), x, y)
         
         # Respuesta (En sitio / Derivada)
         resp = datos.get(f"p9_t1_resp_{i}")
@@ -1483,12 +1558,19 @@ def generar_overlay_p9(datos, width, height):
         # Fecha Concertada
         fecha = datos.get(f"p9_t2_fecha_{i}")
         key_fecha = f"p9_t2_fecha_{i}"
-        if fecha and key_fecha in COORD_P9: can.drawString(*COORD_P9[key_fecha], fecha)
+
+        if fecha and key_fecha in COORD_P9: 
+            x, y = COORD_P9[key_fecha]
+            dibujar_accion_ajustada(can, fecha, x, y, ancho_maximo=85)  # Ajusta el ancho máximo según sea necesario
+           
 
         # Seguimiento 1 (Fecha y Estado)
         seg1_fecha = datos.get(f"p9_t2_seg1_fecha_{i}")
         key_seg1_f = f"p9_t2_seg1_fecha_{i}"
-        if seg1_fecha and key_seg1_f in COORD_P9: can.drawString(*COORD_P9[key_seg1_f], seg1_fecha)
+
+        if seg1_fecha and key_seg1_f in COORD_P9: 
+            x, y = COORD_P9[key_seg1_f]
+            dibujar_accion_ajustada(can, seg1_fecha, x, y, ancho_maximo=80)  # Ajusta el ancho máximo según sea necesario
         
         seg1_est = datos.get(f"p9_t2_seg1_estado_{i}")
         if seg1_est:
@@ -1498,7 +1580,9 @@ def generar_overlay_p9(datos, width, height):
         # Seguimiento 2 (Fecha y Estado)
         seg2_fecha = datos.get(f"p9_t2_seg2_fecha_{i}")
         key_seg2_f = f"p9_t2_seg2_fecha_{i}"
-        if seg2_fecha and key_seg2_f in COORD_P9: can.drawString(*COORD_P9[key_seg2_f], seg2_fecha)
+        if seg2_fecha and key_seg2_f in COORD_P9:
+            x, y = COORD_P9[key_seg2_f]
+            dibujar_accion_ajustada(can, seg2_fecha, x, y, ancho_maximo=80)  # Ajusta el ancho máximo según sea necesario
         
         seg2_est = datos.get(f"p9_t2_seg2_estado_{i}")
         if seg2_est:
@@ -1540,7 +1624,9 @@ def generar_overlay_p10(datos, width, height):
         # Acción / Intervención
         accion = datos.get(f"p10_t1_accion_{i}")
         key_accion = f"p10_t1_accion_{i}"
-        if accion and key_accion in COORD_P10: can.drawString(*COORD_P10[key_accion], accion.upper())
+        if accion and key_accion in COORD_P10: 
+            x, y = COORD_P10[key_accion]
+            dibujar_accion_ajustada(can, accion.upper(), x, y)
         
         # Respuesta (En sitio / Derivada)
         resp = datos.get(f"p10_t1_resp_{i}")
@@ -1570,12 +1656,16 @@ def generar_overlay_p10(datos, width, height):
         # Fecha Concertada
         fecha = datos.get(f"p10_t2_fecha_{i}")
         key_fecha = f"p10_t2_fecha_{i}"
-        if fecha and key_fecha in COORD_P10: can.drawString(*COORD_P10[key_fecha], fecha)
+        if fecha and key_fecha in COORD_P10: 
+            x, y = COORD_P10[key_fecha]
+            dibujar_accion_ajustada(can, fecha, x, y, ancho_maximo=85)  # Ajusta el ancho máximo según sea necesario
 
         # Seguimiento 1 (Fecha y Estado)
         seg1_fecha = datos.get(f"p10_t2_seg1_fecha_{i}")
         key_seg1_f = f"p10_t2_seg1_fecha_{i}"
-        if seg1_fecha and key_seg1_f in COORD_P10: can.drawString(*COORD_P10[key_seg1_f], seg1_fecha)
+        if seg1_fecha and key_seg1_f in COORD_P10:
+            x, y = COORD_P10[key_seg1_f]
+            dibujar_accion_ajustada(can, seg1_fecha, x, y, ancho_maximo=80)  # Ajusta el ancho máximo según sea necesario
         
         seg1_est = datos.get(f"p10_t2_seg1_estado_{i}")
         if seg1_est:
@@ -1585,8 +1675,10 @@ def generar_overlay_p10(datos, width, height):
         # Seguimiento 2 (Fecha y Estado)
         seg2_fecha = datos.get(f"p10_t2_seg2_fecha_{i}")
         key_seg2_f = f"p10_t2_seg2_fecha_{i}"
-        if seg2_fecha and key_seg2_f in COORD_P10: can.drawString(*COORD_P10[key_seg2_f], seg2_fecha)
-        
+        if seg2_fecha and key_seg2_f in COORD_P10: 
+            x, y = COORD_P10[key_seg2_f]
+            dibujar_accion_ajustada(can, seg2_fecha, x, y, ancho_maximo=80)  # Ajusta el ancho máximo según sea necesario
+
         seg2_est = datos.get(f"p10_t2_seg2_estado_{i}")
         if seg2_est:
             key_seg2_est = f"p10_t2_seg2_est_{i}_{seg2_est.lower()}"
@@ -1633,7 +1725,8 @@ def generar_overlay_miembro_p11(idx, form, width, height):
         accion = form.get(f"p11_idx_{idx}_p11_t1_accion_{i}")
         key_accion = f"p11_t1_accion_{i}"
         if accion and key_accion in COORD_P11: 
-            can.drawString(*COORD_P11[key_accion], accion.upper())
+            x, y = COORD_P11[key_accion]
+            dibujar_accion_ajustada(can, accion.upper(), x, y)
         
         # Respuesta (En sitio o Derivada)
         resp = form.get(f"p11_idx_{idx}_p11_t1_resp_{i}")
@@ -1663,14 +1756,16 @@ def generar_overlay_miembro_p11(idx, form, width, height):
         fecha = form.get(f"p11_idx_{idx}_p11_t2_fecha_{i}")
         key_fecha = f"p11_t2_fecha_{i}"
         if fecha and key_fecha in COORD_P11: 
-            can.drawString(*COORD_P11[key_fecha], fecha)
+            x, y = COORD_P11[key_fecha]
+            dibujar_accion_ajustada(can, fecha, x, y, ancho_maximo=85)  # Ajusta el ancho máximo según sea necesario
 
         # Seguimiento 1 (Fecha y Estado)
         seg1_fecha = form.get(f"p11_idx_{idx}_p11_t2_seg1_fecha_{i}")
         key_seg1_f = f"p11_t2_seg1_fecha_{i}"
         if seg1_fecha and key_seg1_f in COORD_P11: 
-            can.drawString(*COORD_P11[key_seg1_f], seg1_fecha)
-        
+            x, y = COORD_P11[key_seg1_f]
+            dibujar_accion_ajustada(can, seg1_fecha, x, y, ancho_maximo=80)  # Ajusta el ancho máximo según sea necesario
+
         seg1_est = form.get(f"p11_idx_{idx}_p11_t2_seg1_estado_{i}")
         if seg1_est:
             key_seg1_est = f"p11_t2_seg1_est_{i}_{seg1_est.lower()}"
@@ -1681,8 +1776,9 @@ def generar_overlay_miembro_p11(idx, form, width, height):
         seg2_fecha = form.get(f"p11_idx_{idx}_p11_t2_seg2_fecha_{i}")
         key_seg2_f = f"p11_t2_seg2_fecha_{i}"
         if seg2_fecha and key_seg2_f in COORD_P11: 
-            can.drawString(*COORD_P11[key_seg2_f], seg2_fecha)
-        
+            x, y = COORD_P11[key_seg2_f]
+            dibujar_accion_ajustada(can, seg2_fecha, x, y, ancho_maximo=80)  # Ajusta el ancho máximo según sea necesario
+
         seg2_est = form.get(f"p11_idx_{idx}_p11_t2_seg2_estado_{i}")
         if seg2_est:
             key_seg2_est = f"p11_t2_seg2_est_{i}_{seg2_est.lower()}"
@@ -1700,21 +1796,21 @@ def generar_overlay_miembro_p11(idx, form, width, height):
 class APSApi:
 
     def generar_pdf(self, form_completo):
-
         """ Recibe el JSON con los datos del formulario directamente desde JS """
         try:
             # Recogemos la lista de índices activos
             member_indices = obtener_lista_segura(form_completo, 'member_indices[]')
             p11_indices = obtener_lista_segura(form_completo, 'p11_indices[]')
 
-            # Separación lógica
-            datos_p1 = {k: v for k, v in form_completo.items() if not k.startswith("p2_") and not k.startswith("p3_") and not k.startswith("p4_") and not k.startswith("m_") and not k.startswith("p9_") and not k.startswith("p11_")}
+            # Separación lógica de datos de las pestañas
+            datos_p1 = {k: v for k, v in form_completo.items() if not k.startswith("p2_") and not k.startswith("p3_") and not k.startswith("p4_") and not k.startswith("m_") and not k.startswith("p9_") and not k.startswith("p10_") and not k.startswith("p11_")}
             datos_p2 = {k: v for k, v in form_completo.items() if k.startswith("p2_")}
             datos_p3 = {k: v for k, v in form_completo.items() if k.startswith("p3_")}
             datos_p4 = {k: v for k, v in form_completo.items() if k.startswith("p4_")}
             datos_p9 = {k: v for k, v in form_completo.items() if k.startswith("p9_")}
             datos_p10 = {k: v for k, v in form_completo.items() if k.startswith("p10_")}
             datos_p11 = {k: v for k, v in form_completo.items() if k.startswith("p11_")}
+            
             # Listas de Checkboxes
             riesgos_p2 = obtener_lista_segura(form_completo, 'p2_riesgos[]')
             riesgos_p3 = obtener_lista_segura(form_completo, 'p3_entorno_riesgos[]')
@@ -1733,23 +1829,36 @@ class APSApi:
             else:
                 reader_base = clean_reader
                 
-            mapa_paginas = clasificar_paginas_pdf(reader_base)
+            # =============================================================
+            # --- NUEVA LÓGICA: DEDUCCIÓN MATEMÁTICA DE LA ESTRUCTURA ---
+            # =============================================================
+            total_paginas = len(reader_base.pages)
+            
+            # Contamos de forma segura cuántas páginas corresponden a la sección 6.3 (Página 11)
+            cant_p11_existentes = 0
+            for page in reader_base.pages:
+                try:
+                    text = page.extract_text()
+                    if text and "6.3 Cuidado de la persona" in text:
+                        cant_p11_existentes += 1
+                except:
+                    pass
+            
+            # Mediante fórmula deducimos exactamente la cantidad de integrantes (N) en el PDF base
+            # Total = 4 (Fijos) + 4N (Integrantes) + 2 (Pág 9-10) + M (Pág 11)
+            # L_restantes = Total - M = 4N + 6  =>  4N = L_restantes - 6
+            paginas_restantes = total_paginas - cant_p11_existentes
+            cant_existentes = max(0, (paginas_restantes - 6) // 4)
+            
             writer = PdfWriter()
-
-            # ... [TÚ LÓGICA DE FASE 1, FASE 2, FASE 3, FASE 4 SE MANTIENE EXACTAMENTE IGUAL] ...
-            # (El código procesa las páginas en `writer` de la misma manera que antes)
-
-            # En lugar de enviar un archivo para descargar, abrimos un diálogo nativo de guardado
-
 
             # =============================================================
             # FASE 1: PROCESAR Y AGREGAR PÁGINAS 1 A 4 (FIJAS)
             # =============================================================
             for idx in range(4):
-                key_pag = f"p{idx+1}"
-                if mapa_paginas[key_pag]:
-                    page_idx_real = mapa_paginas[key_pag][0]
-                    page = reader_base.pages[page_idx_real]
+                # Las páginas fijos siempre están en los índices 0, 1, 2, 3 en el PDF de entrada
+                if idx < total_paginas:
+                    page = reader_base.pages[idx]
                 else:
                     page = clean_reader.pages[idx]
                     
@@ -1780,40 +1889,33 @@ class APSApi:
                     desplazamiento_x += AJUSTE_MANUAL_X_P4
                     desplazamiento_y += AJUSTE_MANUAL_Y_P4
 
-                # Clonación y fusión segura mediante createBlankPage para evitar mutación
+                # Fusión directa sobre el fondo original para preservar datos
                 if overlay_packet:
                     overlay_reader = PdfReader(overlay_packet)
                     overlay_page = overlay_reader.pages[0]
                     if desplazamiento_x != 0 or desplazamiento_y != 0:
                         overlay_page.add_transformation(Transformation().translate(tx=desplazamiento_x, ty=desplazamiento_y))
                     
-                    # Creamos una hoja en blanco limpia del mismo tamaño
-                    nueva_pagina = PageObject.create_blank_page(width=width, height=height)
-                    nueva_pagina.merge_page(page)          # Estampamos la plantilla original de fondo
-                    nueva_pagina.merge_page(overlay_page)  # Estampamos el texto transparente de respuesta
-                    writer.add_page(nueva_pagina)
-                else:
-                    nueva_pagina = PageObject.create_blank_page(width=width, height=height)
-                    nueva_pagina.merge_page(page)
-                    writer.add_page(nueva_pagina)
-
-
+                    page.merge_page(overlay_page)
+                
+                writer.add_page(page)
 
             # =============================================================
-            # FASE 2: PROCESAR INTEGRANTES DINÁMICAMENTE (REPETIR PÁGINAS 5 A 8)
+            # FASE 2: PROCESAR INTEGRANTES DINÁMICAMENTE (PÁGINAS 5 A 8)
             # =============================================================
-            cant_existentes = len(mapa_paginas["p5"])
             cant_formulario = len(member_indices)
             total_integrantes = max(cant_existentes, cant_formulario)
 
             for i in range(total_integrantes):
                 if i < cant_existentes:
-                    p5_idx = mapa_paginas["p5"][i]
-                    p6_idx = mapa_paginas["p6"][i]
-                    p7_idx = mapa_paginas["p7"][i]
-                    p8_idx = mapa_paginas["p8"][i]
+                    # Mapeo matemático exacto de las páginas del familiar 'i'
+                    p5_idx = 4 + 4*i
+                    p6_idx = 4 + 4*i + 1
+                    p7_idx = 4 + 4*i + 2
+                    p8_idx = 4 + 4*i + 3
                     blank_pages = [reader_base.pages[p5_idx], reader_base.pages[p6_idx], reader_base.pages[p7_idx], reader_base.pages[p8_idx]]
                 else:
+                    # Cargamos la plantilla de respaldo limpia para el nuevo integrante
                     temp_reader = PdfReader(resource_path("plantilla_ministerio.pdf"))
                     blank_pages = [temp_reader.pages[4], temp_reader.pages[5], temp_reader.pages[6], temp_reader.pages[7]]
                 
@@ -1854,27 +1956,25 @@ class APSApi:
                         if desplazamiento_x != 0 or desplazamiento_y != 0:
                             overlay_page.add_transformation(Transformation().translate(tx=desplazamiento_x, ty=desplazamiento_y))
                         
-                        # Fusión mediante clonación en hoja limpia para evitar contaminación cruzada de datos
-                        nueva_pagina = PageObject.create_blank_page(width=width, height=height)
-                        nueva_pagina.merge_page(base_page)
-                        nueva_pagina.merge_page(overlay_page)
-                        writer.add_page(nueva_pagina)
+                        base_page.merge_page(overlay_page)
+                        writer.add_page(base_page)
                 else:
                     for base_page in blank_pages:
-                        nueva_pagina = PageObject.create_blank_page(width=width, height=height)
-                        nueva_pagina.merge_page(base_page)
-                        writer.add_page(nueva_pagina)
+                        writer.add_page(base_page)
 
             # =============================================================
             # FASE 3: COPIAR PÁGINAS FINALES 9 Y 10 (ESTÁTICAS)
             # =============================================================
-            for page_key, template_idx, adj_x, adj_y, data_dict, overlay_func in [
-                ("p9", 8, AJUSTE_MANUAL_X_P9, AJUSTE_MANUAL_Y_P9, datos_p9, generar_overlay_p9),
-                ("p10", 9, AJUSTE_MANUAL_X_P10, AJUSTE_MANUAL_Y_P10, datos_p10, generar_overlay_p10)
+            # En el PDF base, las páginas fijos 9 y 10 siempre van justo después de todos los integrantes
+            p9_idx_real = 4 + 4*cant_existentes
+            p10_idx_real = 4 + 4*cant_existentes + 1
+
+            for page_key, idx_real, template_idx, adj_x, adj_y, data_dict, overlay_func in [
+                ("p9", p9_idx_real, 8, AJUSTE_MANUAL_X_P9, AJUSTE_MANUAL_Y_P9, datos_p9, generar_overlay_p9),
+                ("p10", p10_idx_real, 9, AJUSTE_MANUAL_X_P10, AJUSTE_MANUAL_Y_P10, datos_p10, generar_overlay_p10)
             ]:
-                if mapa_paginas[page_key]:
-                    page_idx_real = mapa_paginas[page_key][0]
-                    page = reader_base.pages[page_idx_real]
+                if idx_real < total_paginas:
+                    page = reader_base.pages[idx_real]
                 else:
                     page = clean_reader.pages[template_idx]
                     
@@ -1894,25 +1994,20 @@ class APSApi:
                     if desplazamiento_x != 0 or desplazamiento_y != 0:
                         overlay_page.add_transformation(Transformation().translate(tx=desplazamiento_x, ty=desplazamiento_y))
                     
-                    nueva_pagina = PageObject.create_blank_page(width=width, height=height)
-                    nueva_pagina.merge_page(page)
-                    nueva_pagina.merge_page(overlay_page)
-                    writer.add_page(nueva_pagina)
-                else:
-                    nueva_pagina = PageObject.create_blank_page(width=width, height=height)
-                    nueva_pagina.merge_page(page)
-                    writer.add_page(nueva_pagina)
+                    page.merge_page(overlay_page)
+                    
+                writer.add_page(page)
 
             # =============================================================
             # FASE 4: PROCESAR DINÁMICAMENTE LA PÁGINA 11 (SOLO CASOS ATENDIDOS)
             # =============================================================
-            cant_planes_existentes = len(mapa_paginas["p11"])
             cant_planes_formulario = len(p11_indices)
-            total_planes = max(cant_planes_existentes, cant_planes_formulario)
+            total_planes = max(cant_p11_existentes, cant_planes_formulario)
 
             for i in range(total_planes):
-                if i < cant_planes_existentes:
-                    p11_idx_pdf = mapa_paginas["p11"][i]
+                if i < cant_p11_existentes:
+                    # Mapeo matemático de la página 11 de cada plan existente
+                    p11_idx_pdf = 4 + 4*cant_existentes + 2 + i
                     page_p11 = reader_base.pages[p11_idx_pdf]
                 else:
                     temp_reader = PdfReader(resource_path("plantilla_ministerio.pdf"))
@@ -1938,15 +2033,12 @@ class APSApi:
                     if desplazamiento_x != 0 or desplazamiento_y != 0:
                         overlay_page.add_transformation(Transformation().translate(tx=desplazamiento_x, ty=desplazamiento_y))
 
-                    # Fusión limpia mediante clonación
-                    nueva_pagina = PageObject.create_blank_page(width=width, height=height)
-                    nueva_pagina.merge_page(page_p11)
-                    nueva_pagina.merge_page(overlay_page)
-                    writer.add_page(nueva_pagina)
+                    page_p11.merge_page(overlay_page)
+                    writer.add_page(page_p11)
                 else:
-                    nueva_pagina = PageObject.create_blank_page(width=width, height=height)
-                    nueva_pagina.merge_page(page_p11)
-                    writer.add_page(nueva_pagina)
+                    writer.add_page(page_p11)
+
+            # ... [TU DIÁLOGO NATIVO DE GUARDADO DE PYWEBVIEW SE MANTIENE EXACTAMENTE IGUAL] ...
 
 
 
@@ -1978,10 +2070,10 @@ class APSApi:
 
 
     def importar_pdf(self):
-        """ Permite importar datos abriendo un explorador de archivos nativo """
+        """ Permite importar datos abriendo un explorador de archivos nativo y mapeando de forma dinámica todo el PDF """
         try:
             file_paths = webview.active_window().create_file_dialog(
-                webview.OPEN_DIALOG,  # <--- Corregido de webview.OPEN_FILE_DIALOG
+                webview.OPEN_DIALOG,
                 file_types=("Documentos PDF (*.pdf)",)
             )
             if not file_paths:
@@ -1994,65 +2086,92 @@ class APSApi:
             reader = PdfReader(io.BytesIO(pdf_bytes))
             datos_extraidos = {}
             
-            # ... [TU LÓGICA DE EXTRACCIÓN SE MANTIENE IGUAL] ...
-            # (Utiliza `reader` para extraer coordenadas de la misma forma)
+            # --- DEDUCCIÓN MATEMÁTICA DE LA ESTRUCTURA ---
+            total_paginas = len(reader.pages)
+            cant_p11_existentes = 0
+            for page in reader.pages:
+                try:
+                    text = page.extract_text()
+                    if text and "6.3 Cuidado de la persona" in text:
+                        cant_p11_existentes += 1
+                except:
+                    pass
             
-            # Mapeo de páginas fijas: Índice PDF -> (Diccionario, Margen X, Margen Y)
+            paginas_restantes = total_paginas - cant_p11_existentes
+            cant_existentes = max(0, (paginas_restantes - 6) // 4)
+
+            # Enviamos los índices que detectamos para que el JS sepa cuántos renderizar
+            datos_extraidos["member_indices[]"] = [str(i) for i in range(cant_existentes)]
+            datos_extraidos["p11_indices[]"] = [str(i) for i in range(cant_p11_existentes)]
+
+            # Mapeo Base Fijo: Índice PDF -> (Diccionario Coordenadas, Margen X, Margen Y, Prefijo)
             paginas_mapeo = {
-                0: (COORD_P1, AJUSTE_MANUAL_X_P1, AJUSTE_MANUAL_Y_P1),
-                1: (COORD_P2, AJUSTE_MANUAL_X_P2, AJUSTE_MANUAL_Y_P2),
-                2: (COORD_P3, AJUSTE_MANUAL_X_P3, AJUSTE_MANUAL_Y_P3),
-                3: (COORD_P4, AJUSTE_MANUAL_X_P4, AJUSTE_MANUAL_Y_P4),
-                8: (COORD_P9, AJUSTE_MANUAL_X_P9, AJUSTE_MANUAL_Y_P9)
+                0: (COORD_P1, AJUSTE_MANUAL_X_P1, AJUSTE_MANUAL_Y_P1, ""),
+                1: (COORD_P2, AJUSTE_MANUAL_X_P2, AJUSTE_MANUAL_Y_P2, ""),
+                2: (COORD_P3, AJUSTE_MANUAL_X_P3, AJUSTE_MANUAL_Y_P3, ""),
+                3: (COORD_P4, AJUSTE_MANUAL_X_P4, AJUSTE_MANUAL_Y_P4, ""),
+                4 + 4*cant_existentes: (COORD_P9, AJUSTE_MANUAL_X_P9, AJUSTE_MANUAL_Y_P9, ""),
+                4 + 4*cant_existentes + 1: (COORD_P10, AJUSTE_MANUAL_X_P10, AJUSTE_MANUAL_Y_P10, "")
             }
-            
-            for idx, (coord_dict, adj_x, adj_y) in paginas_mapeo.items():
+
+            # Añadir páginas de integrantes de forma dinámica (Páginas 5 a 8)
+            for i in range(cant_existentes):
+                p5_idx = 4 + 4*i
+                p6_idx = 4 + 4*i + 1
+                p7_idx = 4 + 4*i + 2
+                p8_idx = 4 + 4*i + 3
+                prefijo_m = f"m_{i}_"
+                paginas_mapeo[p5_idx] = (COORD_MIEMBRO, AJUSTE_MANUAL_X_P5, AJUSTE_MANUAL_Y_P5, prefijo_m)
+                paginas_mapeo[p6_idx] = (COORD_MIEMBRO, AJUSTE_MANUAL_X_P6, AJUSTE_MANUAL_Y_P6, prefijo_m)
+                paginas_mapeo[p7_idx] = (COORD_MIEMBRO, AJUSTE_MANUAL_X_P7, AJUSTE_MANUAL_Y_P7, prefijo_m)
+                paginas_mapeo[p8_idx] = (COORD_MIEMBRO, AJUSTE_MANUAL_X_P8, AJUSTE_MANUAL_Y_P8, prefijo_m)
+
+            # Añadir páginas de planes de cuidado de la persona de forma dinámica (Página 11)
+            for i in range(cant_p11_existentes):
+                p11_idx = 4 + 4*cant_existentes + 2 + i
+                prefijo_p11 = f"p11_idx_{i}_"
+                paginas_mapeo[p11_idx] = (COORD_P11, AJUSTE_MANUAL_X_P11, AJUSTE_MANUAL_Y_P11, prefijo_p11)
+
+            # Extracción del texto en coordenadas
+            for idx, (coord_dict, adj_x, adj_y, prefijo) in paginas_mapeo.items():
                 if idx >= len(reader.pages):
                     continue
                 page = reader.pages[idx]
                 
-                # Origen físico de la página en el PDF
                 x_offset = float(page.mediabox.left)
                 y_offset = float(page.mediabox.bottom)
                 
-                # Desfase total con el que se estampó el texto
                 tx = x_offset + adj_x
                 ty = y_offset + adj_y
                 
                 text_elements = []
-                
-                # Función visitor para extraer el texto y sus coordenadas en puntos nativos
                 def visitor_body(text, cm, tm, fontDict, fontSize):
                     t = text.strip()
                     if t:
-                        text_elements.append({
-                            "text": t,
-                            "x": tm[4],
-                            "y": tm[5]
-                        })
+                        text_elements.append({"text": t, "x": tm[4], "y": tm[5]})
                 
                 page.extract_text(visitor_text=visitor_body)
                 
-                # Buscar coincidencia matemática de coordenadas
                 for elem in text_elements:
                     for campo, (cx, cy) in coord_dict.items():
-                        # Coordenada teórica esperada en el documento final
                         target_x = cx + tx
                         target_y = cy + ty
                         
-                        # Tolerancia milimétrica (12 puntos en X, 5 puntos en Y)
                         if abs(elem["x"] - target_x) < 12 and abs(elem["y"] - target_y) < 5:
+                            # Recreamos la clave exacta que espera el HTML (ej: m_0_p5_primer_nombre)
+                            key_completa = f"{prefijo}{campo}"
+                            
                             if elem["text"].upper() == "X":
-                                datos_extraidos[campo] = "X"
+                                datos_extraidos[key_completa] = "X"
                             else:
-                                # Si es un campo de texto y pypdf lo dividió en fragmentos, los une de forma limpia
-                                prev = datos_extraidos.get(campo, "")
+                                prev = datos_extraidos.get(key_completa, "")
                                 if prev:
                                     if elem["text"] not in prev:
-                                        datos_extraidos[campo] = f"{prev} {elem['text']}".strip()
+                                        datos_extraidos[key_completa] = f"{prev} {elem['text']}".strip()
                                 else:
-                                    datos_extraidos[campo] = elem["text"]
+                                    datos_extraidos[key_completa] = elem["text"]
                             break
+                            
             return {"success": True, "datos": datos_extraidos}
             
         except Exception as e:

@@ -2007,7 +2007,7 @@
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-gray-500">139. Seguimiento 1</label>
-                        <input type="text" name="m___IDX___p11_t2_seg1_fecha_1" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
+                        <input type="text" name="p11_idx___IDX___p11_t2_seg1_fecha_1" placeholder="aaaa/mm/dd" class="w-full border p-1 rounded bg-white mb-1">
                         <select name="p11_idx___IDX___p11_t2_seg1_estado_1" class="w-full border p-0.5 rounded bg-white text-[10px]"><option value="">Estado...</option><option value="C">C. Cumple</option><option value="CP">CP. Cumple Parcial</option><option value="NC">NC. No Cumple</option></select>
                     </div>
                     <div>
@@ -2205,25 +2205,183 @@
                 if (response.success) {
                     const datos = response.datos;
                     
-                    // Recorremos los datos y rellenamos automáticamente los inputs de la vista
-                    for (const [key, val] of Object.entries(datos)) {
-                        const elements = document.getElementsByName(key);
-                        if (elements.length > 0) {
-                            const el = elements[0];
-                            if (el.type === 'radio') {
-                                // Marca el radio button correspondiente
-                                const radioElement = Array.from(elements).find(r => r.value.toUpperCase() === val.toUpperCase());
-                                if (radioElement) radioElement.checked = true;
-                            } else if (el.type === 'checkbox') {
-                                // En caso de que sea un check simple
-                                el.checked = (val === 'X');
-                            } else {
-                                // Campos de texto y selectores
-                                el.value = val;
+                    // 1. Limpiar los contenedores dinámicos existentes para iniciar carga limpia
+                    document.getElementById('miembrosContainer').innerHTML = "";
+                    document.getElementById('p11Container').innerHTML = "";
+                    miembroContador = 0;
+                    p11Contador = 0;
+
+                    // 2. Renderizar dinámicamente los integrantes familiares detectados
+                    const miembrosIndices = datos["member_indices[]"] || [];
+                    miembrosIndices.forEach(() => {
+                        agregarMiembro();
+                    });
+
+                    // 3. Renderizar dinámicamente los planes médicos detectados
+                    const planesIndices = datos["p11_indices[]"] || [];
+                    planesIndices.forEach(() => {
+                        agregarPlanP11();
+                    });
+
+                    // Mapeo inverso para Radios estáticos fijos de las páginas 1 a 4
+                    const radioMaps = {
+                        "tratamiento_si": { name: "tratamiento_datos", value: "SI" },
+                        "tratamiento_no": { name: "tratamiento_datos", value: "NO" },
+                        "situacion_fisica": { name: "situacion_vida", value: "Fisica" },
+                        "situacion_psico": { name: "situacion_vida", value: "Psicologica" },
+                        "situacion_emergencia": { name: "situacion_vida", value: "Emergencia" },
+                        "situacion_no_aplica": { name: "situacion_vida", value: "No_aplica" },
+                        "area_urbana": { name: "area_ubicacion", value: "Urbana" },
+                        "area_rural": { name: "area_ubicacion", value: "Rural" },
+                        "area_centro_poblado": { name: "area_ubicacion", value: "Centro_poblado" },
+                        "p2_id_tipo_cc": { name: "p2_id_tipo", value: "CC" },
+                        "p2_id_tipo_cd": { name: "p2_id_tipo", value: "CD" },
+                        "p2_id_tipo_ce": { name: "p2_id_tipo", value: "CE" },
+                        "p2_id_tipo_pt": { name: "p2_id_tipo", value: "PT" },
+                        "p2_entorno_hogar": { name: "p2_entorno", value: "Hogar" },
+                        "p2_entorno_comunitario": { name: "p2_entorno", value: "Comunitario" },
+                        "p2_entorno_institucional": { name: "p2_entorno", value: "Institucional" },
+                        "p2_entorno_educativo": { name: "p2_entorno", value: "Educativo" },
+                        "p2_entorno_laboral": { name: "p2_entorno", value: "Laboral" },
+                        "p2_jovenes_paz_si": { name: "p2_jovenes_paz", value: "Si" },
+                        "p2_jovenes_paz_no": { name: "p2_jovenes_paz", value: "No" },
+                        "p2_hacinamiento_si": { name: "p2_hacinamiento", value: "Si" },
+                        "p2_hacinamiento_no": { name: "p2_hacinamiento", value: "No" },
+                        "p2_estrato_bajo_bajo": { name: "p2_estrato", value: "Bajo-Bajo" },
+                        "p2_estrato_bajo": { name: "p2_estrato", value: "Bajo" },
+                        "p2_estrato_medio_bajo": { name: "p2_estrato", value: "Medio-Bajo" },
+                        "p2_estrato_medio": { name: "p2_estrato", value: "Medio" },
+                        "p2_estrato_medio_alto": { name: "p2_estrato", value: "Medio-Alto" },
+                        "p2_estrato_alto": { name: "p2_estrato", value: "Alto" },
+                        "p2_tipo_vivienda_casa": { name: "p2_tipo_vivienda", value: "Casa" },
+                        "p2_tipo_vivienda_apto": { name: "p2_tipo_vivienda", value: "Apartamento" },
+                        "p2_tipo_vivienda_cuarto": { name: "p2_tipo_vivienda", value: "Cuarto" },
+                        "p2_techo_concreto": { name: "p2_techo", value: "Concreto" },
+                        "p2_techo_barro": { name: "p2_techo", value: "Tejas_barro" },
+                        "p2_techo_zinc": { name: "p2_techo", value: "Zinc" },
+                        "p3_criaderos_si": { name: "p3_criaderos", value: "Si" },
+                        "p3_criaderos_no": { name: "p3_criaderos", value: "No" },
+                        "p3_criaderos_no_aplica": { name: "p3_criaderos", value: "No_aplica" },
+                        "p3_act_economica_si": { name: "p3_act_economica", value: "Si" },
+                        "p3_act_economica_no": { name: "p3_act_economica", value: "No" },
+                        "p3_carnet_si": { name: "p3_carnet", value: "Si" },
+                        "p3_carnet_no": { name: "p3_carnet", value: "No" },
+                        "p3_carnet_no_aplica": { name: "p3_carnet", value: "No_aplica" },
+                        "p4_red_protectoras": { name: "p4_red_apoyo", value: "Protectoras" },
+                        "p4_red_ampliables": { name: "p4_red_apoyo", value: "Ampliables" },
+                        "p4_red_ninguna": { name: "p4_red_apoyo", value: "Ninguna" }
+                    };
+
+                    // Prefijos de arrays de checkboxes dinámicos
+                    const arrayPrefixes = {
+                        "p2_riesgo_": "p2_riesgos[]",
+                        "p3_ent_": "p3_entorno_riesgos[]",
+                        "p3_ani_": "p3_animales[]",
+                        "p4_riesgo_": "p4_riesgos[]",
+                        "p4_vinculo_": "p4_vinculos[]",
+                        "p4_hogar_": "p4_hogar[]"
+                    };
+
+                    // 4. Inyección de datos
+                    for (let [key, val] of Object.entries(datos)) {
+                        if (key === "member_indices[]" || key === "p11_indices[]") continue;
+
+                        // Comprobar si pertenece a un radio fijo mapeado
+                        if (val === "X" && radioMaps[key]) {
+                            const rMap = radioMaps[key];
+                            const rEl = document.querySelector(`input[name="${rMap.name}"][value="${rMap.value}"]`);
+                            if (rEl) rEl.checked = true;
+                            continue;
+                        }
+
+                        // Comprobar si pertenece a un checkbox de array fijo mapeado
+                        let matchedArray = false;
+                        if (val === "X") {
+                            for (const [prefix, arrayName] of Object.entries(arrayPrefixes)) {
+                                if (key.startsWith(prefix)) {
+                                    const valHtml = key.replace(prefix, "");
+                                    const checkEl = Array.from(document.querySelectorAll(`input[name="${arrayName}"]`)).find(
+                                        el => el.value.toLowerCase() === valHtml.toLowerCase()
+                                    );
+                                    if (checkEl) checkEl.checked = true;
+                                    matchedArray = true;
+                                    break;
+                                }
                             }
                         }
+                        if (matchedArray) continue;
+
+                        // Comprobar si es un radio/selectbox dinámico de un integrante o de un plan médico
+                        let matchedDynamicRadio = false;
+                        if (val === "X") {
+                            // Radios de integrantes (m_0_p5_id_tipo_cc)
+                            const matchM = key.match(/^m_(\d+)_(p[5678]_[a-zA-Z0-9_]+)_(.+)$/);
+                            if (matchM) {
+                                const mIdx = matchM[1];
+                                const baseName = matchM[2];
+                                const optVal = matchM[3];
+                                const targetName = `m_${mIdx}_${baseName}`;
+                                
+                                const selectEl = document.querySelector(`select[name="${targetName}"]`);
+                                if (selectEl) {
+                                    selectEl.value = optVal.charAt(0).toUpperCase() + optVal.slice(1); // ej: "si" -> "Si" o "CC"
+                                } else {
+                                    const radioEl = Array.from(document.querySelectorAll(`input[name="${targetName}"]`)).find(
+                                        r => r.value.toLowerCase() === optVal.toLowerCase()
+                                    );
+                                    if (radioEl) radioEl.checked = true;
+                                }
+                                matchedDynamicRadio = true;
+                            }
+
+                            // Radios de planes médicos (p11_idx_0_p11_id_tipo_cc)
+                            const matchP11 = key.match(/^p11_idx_(\d+)_(p11_id_tipo|p11_t1_resp_\d|p11_t2_seg1_estado_\d|p11_t2_seg2_estado_\d)_(.+)$/);
+                            if (matchP11) {
+                                const p11Idx = matchP11[1];
+                                const baseName = matchP11[2];
+                                const optVal = matchP11[3];
+                                const targetName = `p11_idx_${p11Idx}_${baseName}`;
+                                
+                                const selectEl = document.querySelector(`select[name="${targetName}"]`);
+                                if (selectEl) {
+                                    selectEl.value = optVal.toUpperCase();
+                                } else {
+                                    const radioEl = Array.from(document.querySelectorAll(`input[name="${targetName}"]`)).find(
+                                        r => r.value.toLowerCase() === optVal.toLowerCase()
+                                    );
+                                    if (radioEl) radioEl.checked = true;
+                                }
+                                matchedDynamicRadio = true;
+                            }
+                        }
+                        if (matchedDynamicRadio) continue;
+
+                        // Comprobar si es un checkbox dinámico de integrante (m_0_p5_prot_ninos)
+                        let matchedDynamicCheck = false;
+                        if (val === "X") {
+                            const matchCheckM = key.match(/^m_(\d+)_(p[5678]_[a-zA-Z0-9]+)_(.+)$/);
+                            if (matchCheckM) {
+                                const mIdx = matchCheckM[1];
+                                const baseGroup = matchCheckM[2]; 
+                                const optVal = matchCheckM[3];   
+                                const targetName = `m_${mIdx}_${baseGroup}[]`;
+                                
+                                const checkEl = Array.from(document.querySelectorAll(`input[name="${targetName}"]`)).find(
+                                    el => el.value.toLowerCase() === optVal.toLowerCase()
+                                );
+                                if (checkEl) checkEl.checked = true;
+                                matchedDynamicCheck = true;
+                            }
+                        }
+                        if (matchedDynamicCheck) continue;
+
+                        // Campos de texto estándar y selectores fijos
+                        const textInput = document.querySelector(`input[name="${key}"], select[name="${key}"], textarea[name="${key}"]`);
+                        if (textInput && textInput.type !== 'radio' && textInput.type !== 'checkbox') {
+                            textInput.value = val;
+                        }
                     }
-                    alert("Datos importados con éxito desde el PDF.");
+                    alert("Ficha importada y pre-completada con éxito de forma dinámica.");
                 } else {
                     alert("No se pudo importar: " + response.error);
                 }
